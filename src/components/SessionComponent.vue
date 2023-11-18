@@ -1,15 +1,11 @@
 <template>
-  <div style="border: 1px solid red;">
-    11111111111111
-    <br>
-    111111111111
+  <div style="border: 1px solid red;width: 20%;float: left;height: 100%">
+    111111111111111111
   </div>
 </template>
 
 <script>
-export default {
-  name: "HeaderComponent"
-}
+
 </script>
 
 <style scoped>

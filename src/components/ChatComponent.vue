@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid red;">
+  <div style="border: 1px solid red;width: 16%">
     11111111111111
     <br>
     111111111111

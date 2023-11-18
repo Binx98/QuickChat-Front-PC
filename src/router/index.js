@@ -7,7 +7,7 @@ const routes = [
     {
         path: '/',
         name: 'index',
-        component: () => import('../views/ChatIndex.vue')
+        component: () => import('../views')
     },
 ]
 
