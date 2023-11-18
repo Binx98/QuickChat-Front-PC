@@ -8,6 +8,7 @@
     <!--   2.左侧会话列表   -->
     <SessionComponent/>
     <!--   3.中间聊天框   -->
+    <ChatWindowComponent/>
     <!--   4.右侧用户信息、群列表、视频通话|边看边聊   -->
   </div>
 </template>
@@ -16,12 +17,14 @@
 import HeaderComponent from "@/components/HeaderComponent";
 import FunctionComponent from "@/components/FunctionComponent";
 import SessionComponent from "@/components/SessionComponent";
+import ChatWindowComponent from "@/components/ChatWindowComponent";
 
 export default {
   components: {
     HeaderComponent,
     FunctionComponent,
-    SessionComponent
+    SessionComponent,
+    ChatWindowComponent
   }
 }
 </script>
@@ -29,8 +32,8 @@ export default {
 <style scoped>
 .main {
   border: 1px solid red;
-  width: 76%;
-  height: 88%;
+  width: 64%;
+  height: 84%;
   margin: auto;
   overflow: hidden;
   position: absolute;

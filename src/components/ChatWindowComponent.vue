@@ -1,11 +1,10 @@
 <template>
-  <div style="border: 1px solid red;height: 100%;width: 6.4%;float: left;">
+  <div style="border: 1px solid red;width: 100%;height: 100%;float: left">
 
   </div>
 </template>
 
 <script>
-
 </script>
 
 <style scoped>
