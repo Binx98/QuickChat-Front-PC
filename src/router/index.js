@@ -6,14 +6,9 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        name: 'home',
-        component: Chat.vue
+        name: 'index',
+        component: () => import('../views/ChatIndex.vue')
     },
-    {
-        path: '/about',
-        name: 'about',
-        component: () => import('../views/AboutView.vue')
-    }
 ]
 
 const router = new VueRouter({
