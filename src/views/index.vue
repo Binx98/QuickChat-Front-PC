@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .main {
   border: 1px solid red;
-  width: 64%;
+  width: 70%;
   height: 84%;
   margin: auto;
   overflow: hidden;
