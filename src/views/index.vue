@@ -6,7 +6,7 @@
     <!--   1.左侧会话列表   -->
     <SessionComponent/>
     <!--   2.中间聊天框   -->
-    <ChatWindowComponent/>
+    <WindowComponent/>
     <!--   3.右侧用户信息、群列表   -->
   </div>
 </template>
@@ -14,13 +14,13 @@
 <script>
 import HeaderComponent from "@/components/HeaderComponent";
 import SessionComponent from "@/components/SessionComponent";
-import ChatWindowComponent from "@/components/WindowComponent";
+import WindowComponent from "@/components/WindowComponent";
 
 export default {
   components: {
     HeaderComponent,
     SessionComponent,
-    ChatWindowComponent
+    WindowComponent
   }
 }
 </script>
@@ -31,7 +31,7 @@ export default {
   width: 70%;
   height: 84%;
   margin: auto;
-  overflow: hidden;
+  overflow: clip;
   position: absolute;
   top: 0;
   left: 0;
