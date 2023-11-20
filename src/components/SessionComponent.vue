@@ -1,6 +1,8 @@
 <template>
-  <div style="border: 1px solid red;width: 21.2%;float: left;height: 100%">
-    111111111111111111
+  <div style="border: 1px solid red;width: 18%;float: left;height: 100%">
+    <!--  会话列表  -->
+
+    <!--  底部菜单  -->
   </div>
 </template>
 

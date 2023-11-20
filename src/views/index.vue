@@ -3,26 +3,22 @@
   <div class="main">
     <!--   0.上边栏   -->
     <HeaderComponent/>
-    <!--   1.左侧功能栏   -->
-    <FunctionComponent/>
-    <!--   2.左侧会话列表   -->
+    <!--   1.左侧会话列表   -->
     <SessionComponent/>
-    <!--   3.中间聊天框   -->
+    <!--   2.中间聊天框   -->
     <ChatWindowComponent/>
-    <!--   4.右侧用户信息、群列表、视频通话|边看边聊   -->
+    <!--   3.右侧用户信息、群列表   -->
   </div>
 </template>
 
 <script>
 import HeaderComponent from "@/components/HeaderComponent";
-import FunctionComponent from "@/components/FunctionComponent";
 import SessionComponent from "@/components/SessionComponent";
-import ChatWindowComponent from "@/components/ChatWindowComponent";
+import ChatWindowComponent from "@/components/WindowComponent";
 
 export default {
   components: {
     HeaderComponent,
-    FunctionComponent,
     SessionComponent,
     ChatWindowComponent
   }
