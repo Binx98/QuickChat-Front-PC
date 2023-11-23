@@ -1,60 +1,65 @@
 <template>
   <div class="main">
-    <div style="background-color: #292A2D;width: 100%;height: 100%;border-radius: 20px;border: 1px solid yellow;">
+    <div style="background-color: #292A2D;width: 100%;height: 100%;border-radius: 16px;border: 1px solid yellow;">
       <el-row :gutter="12" style="border: 1px solid red;height: 100%">
         <!--  0.导航栏 -->
-        <el-col :span="24" style="border: 1px solid red;height: 8%">
-          <div class="friend-item"
-               style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
-            <el-avatar style="float: left;" shape="square" :size="55"/>
-            <div style="float: left;font-size: 15px">1111111</div>
-            <span style="float: right;font-size: 13px">2222222</span>
-          </div>
+        <el-col :span="4" style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
+          <el-image/>
+        </el-col>
+        <el-col :span="15" style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
+          <el-input style="width: 50%"/>
+        </el-col>
+        <el-col :span="1" style="border: 1px solid red;height: 10%;">
+          <div style="float: left">LOGO</div>
+          <span style="float: right">
+            徐志斌
+          </span>
+        </el-col>
+        <el-col :span="4" style="border: 1px solid red;height: 10%;">
+          <span style="float: right">
+            徐志斌
+          </span>
+          <el-avatar :size="54" style="float: right"/>
         </el-col>
 
         <!--  1.会话列表 -->
-        <el-col :span="4" style="border: 1px solid red;height: 92%;overflow: auto">
+        <el-col :span="4" style="border: 1px solid red;height: 90%;overflow: auto">
+          <!--  底部导航 -->
           <div class="friend-item"
-               style="background-color: #323335;border-radius: 10px;display: flex;">
+               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
             <el-avatar style="float: left;" shape="square" :size="55"/>
-            <div style="float: left;font-size: 15px">1111111</div>
-            <span style="float: right;font-size: 13px">2222222</span>
           </div>
           <div class="friend-item"
-               style="background-color: #323335;border-radius: 10px;display: flex;">
+               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
             <el-avatar style="float: left;" shape="square" :size="55"/>
-            <div style="float: left;font-size: 15px">1111111</div>
-            <span style="float: right;font-size: 13px">2222222</span>
           </div>
           <div class="friend-item"
-               style="background-color: #323335;border-radius: 10px;display: flex;">
+               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
             <el-avatar style="float: left;" shape="square" :size="55"/>
-            <div style="float: left;font-size: 15px">1111111</div>
-            <span style="float: right;font-size: 13px">2222222</span>
           </div>
           <div class="friend-item"
-               style="background-color: #323335;border-radius: 10px;display: flex;">
+               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
             <el-avatar style="float: left;" shape="square" :size="55"/>
-            <div style="float: left;font-size: 15px">1111111</div>
-            <span style="float: right;font-size: 13px">2222222</span>
           </div>
           <div class="friend-item"
-               style="background-color: #323335;border-radius: 10px;display: flex;">
+               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
             <el-avatar style="float: left;" shape="square" :size="55"/>
-            <div style="float: left;font-size: 15px">1111111</div>
-            <span style="float: right;font-size: 13px">2222222</span>
+          </div>
+          <div class="friend-item"
+               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
           </div>
         </el-col>
 
         <!--  2、聊天窗口  -->
-        <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 92%;overflow: auto;border: 1px solid red">
+        <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
           <!--  2.1、上边栏  -->
-          <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red">
-            <el-avatar :size="46" shape="square" style="margin-right: 1%;cursor:pointer;"/>
-            <div style="font-size: 17px;color: antiquewhite"></div>
+          <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red;height: 10%">
+            <el-avatar :size="48" shape="square" style="margin-right: 1%;cursor:pointer;"/>
+            <div style="border: 1px solid red">徐志摩</div>
           </div>
           <!--  2.2、窗口  -->
-          <div style="border: 1px solid red;height: 82%">
+          <div style="border: 1px solid red;height: 80%;overflow: auto">
             <!--  接收信息  -->
             <div style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
               <span style="margin-right: 6px">
@@ -65,6 +70,125 @@
                   11111111111
                 </div>
               </div>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 70%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 70%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                  2222222222222222222222222222222222222222222222
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end;">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
+            </div>
+            <!--  主动发送  -->
+            <div
+                style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+              <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                  2222222222222222222222222222222222222222222222
+                </div>
+              </div>
+              <span style="margin-left: 6px">
+                <el-avatar shape="square" style="cursor:pointer;"/>
+              </span>
             </div>
             <!--  主动发送  -->
             <div
@@ -81,15 +205,23 @@
             </div>
           </div>
           <!-- 输入框 -->
-          <div>
-            <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text" style="border: 1px solid red"/>
+          <div style="margin-top: 1%">
+            <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text"/>
           </div>
         </el-col>
 
         <!--  3.用户信息、功能框架 -->
-        <el-col :span="5" style="height: 92%;overflow: auto;border: 1px solid red">
-          <!--  用户信息、群聊列表  -->
-          <div style="background-color: #323335;border-radius: 10px;height: 36%">
+        <el-col :span="5" style="height: 90%;overflow: auto;border: 1px solid red">
+          <!--  用户概览、群聊概览（视频通话）  -->
+          <div style="background-color: #323335;border-radius: 10px;height: 32%">
+            用户信息
+          </div>
+          <!--  联系方式、群聊列表  -->
+          <div style="background-color: #323335;border-radius: 10px;height: 32%;margin-top: 1%">
+            用户信息
+          </div>
+          <!--  动态、群聊列表  -->
+          <div style="background-color: #323335;border-radius: 10px;height: 34%;margin-top: 1%">
             用户信息
           </div>
         </el-col>
@@ -100,8 +232,8 @@
 
 <style scoped>
 .main {
-  width: 69%;
-  height: 80%;
+  width: 72%;
+  height: 88%;
   margin: auto;
   position: absolute;
   top: 0;
