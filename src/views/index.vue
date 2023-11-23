@@ -1,11 +1,20 @@
 <template>
   <div class="main">
     <div style="background-color: #292A2D;width: 100%;height: 100%;border-radius: 20px;opacity: 0.86">
-      <el-row :gutter="14">
+      <el-row :gutter="12">
+        <!--  0.导航栏 -->
+        <el-col :span="24">
+          <div class="friend-item" style="background-color: #323335;border-radius: 10px;">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px"></div>
+            <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px"></span>
+            <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999"></div>
+          </div>
+        </el-col>
+
         <!--  1.会话列表 -->
-        <el-col :span="4" style="margin-top: 26px;margin-left: 1%">
-          <div class="friend-item"
-               style="background-color: #323335;margin-top: 5px;margin-bottom: 5px;border-radius: 10px;">
+        <el-col :span="4">
+          <div class="friend-item" style="background-color: #323335;margin-bottom: 5px;border-radius: 10px;">
             <el-avatar style="float: left;" shape="square" :size="55"/>
             <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px"></div>
             <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px"></span>
@@ -14,11 +23,10 @@
         </el-col>
 
         <!--  2.聊天窗口  -->
-        <el-col :span="14" style="background-color: #323335;border-radius: 10px;margin-top: 30px">
+        <el-col :span="15" style="background-color: #323335;border-radius: 10px">
           <!--  上边栏  -->
           <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;">
-            <el-avatar :size="46" shape="square"
-                       style="margin-right: 1%;cursor:pointer;"/>
+            <el-avatar :size="46" shape="square" style="margin-right: 1%;cursor:pointer;"/>
             <div style="font-size: 17px;color: antiquewhite"></div>
           </div>
           <!--  聊天内容展示  -->
@@ -84,7 +92,7 @@
         </el-col>
 
         <!--  3.用户信息、功能框架 -->
-        <el-col :span="5" style="margin-top: 30px">
+        <el-col :span="5">
           <!--  用户信息、群聊列表  -->
           <div style="height: 340px;background-color: #323335;border-radius: 10px">
             用户信息
@@ -112,7 +120,7 @@ export default {
 <style scoped>
 .main {
   width: 68%;
-  height: 75%;
+  height: 78%;
   margin: auto;
   position: absolute;
   top: 0;
