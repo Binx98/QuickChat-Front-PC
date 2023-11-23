@@ -1,9 +1,9 @@
 <template>
   <div class="main">
     <div style="background-color: #292A2D;width: 100%;height: 100%;border-radius: 20px;border: 1px solid yellow;">
-      <el-row :gutter="12" >
+      <el-row :gutter="12" style="border: 1px solid red;height: 100%">
         <!--  0.导航栏 -->
-        <el-col :span="24">
+        <el-col :span="24" style="border: 1px solid red;height: 8%">
           <div class="friend-item"
                style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
             <el-avatar style="float: left;" shape="square" :size="55"/>
@@ -11,11 +11,45 @@
             <span style="float: right;font-size: 13px">2222222</span>
           </div>
         </el-col>
-      </el-row>
 
-      <el-row :gutter="12" style="height: 100%; border: 1px solid red">
         <!--  1.会话列表 -->
-        <el-col :span="4" style="border: 1px solid red">
+        <el-col :span="4" style="border: 1px solid red;height: 92%;overflow: auto">
+          <div class="friend-item"
+               style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="float: left;font-size: 15px">1111111</div>
+            <span style="float: right;font-size: 13px">2222222</span>
+          </div>
+          <div class="friend-item"
+               style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="float: left;font-size: 15px">1111111</div>
+            <span style="float: right;font-size: 13px">2222222</span>
+          </div>
+          <div class="friend-item"
+               style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="float: left;font-size: 15px">1111111</div>
+            <span style="float: right;font-size: 13px">2222222</span>
+          </div>
+          <div class="friend-item"
+               style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="float: left;font-size: 15px">1111111</div>
+            <span style="float: right;font-size: 13px">2222222</span>
+          </div>
+          <div class="friend-item"
+               style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="float: left;font-size: 15px">1111111</div>
+            <span style="float: right;font-size: 13px">2222222</span>
+          </div>
+          <div class="friend-item"
+               style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
+            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="float: left;font-size: 15px">1111111</div>
+            <span style="float: right;font-size: 13px">2222222</span>
+          </div>
           <div class="friend-item"
                style="background-color: #323335;border-radius: 10px;display: flex; align-items: center;">
             <el-avatar style="float: left;" shape="square" :size="55"/>
@@ -25,14 +59,14 @@
         </el-col>
 
         <!--  2.聊天窗口  -->
-        <el-col :span="15" style="background-color: #323335;border-radius: 10px;">
+        <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 92%;overflow: auto;border: 1px solid red">
           <!--  上边栏  -->
-          <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;border: 1px solid red">
+          <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red">
             <el-avatar :size="46" shape="square" style="margin-right: 1%;cursor:pointer;"/>
             <div style="font-size: 17px;color: antiquewhite"></div>
           </div>
           <!--  内容窗口  -->
-          <div style="border: 1px solid red; overflow: auto;">
+          <div style="border: 1px solid red;">
             <!--  接收信息  -->
             <div style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
               <span style="margin-right: 6px">
@@ -65,9 +99,9 @@
         </el-col>
 
         <!--  3.用户信息、功能框架 -->
-        <el-col :span="5">
+        <el-col :span="5" style="height: 92%;overflow: auto;border: 1px solid red">
           <!--  用户信息、群聊列表  -->
-          <div style="background-color: #323335;border-radius: 10px;height: 200px">
+          <div style="background-color: #323335;border-radius: 10px">
             用户信息
           </div>
         </el-col>
@@ -96,9 +130,7 @@
 
 .friend-item {
   color: antiquewhite;
-  height: 55px;
   cursor: pointer;
-  margin-top: 2px;
 }
 
 .friend-item:hover {
