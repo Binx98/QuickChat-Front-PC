@@ -54,7 +54,7 @@
         <!--  2、聊天窗口  -->
         <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
           <!--  2.1、上边栏  -->
-          <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red;height: 10%">
+          <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red;height: 9%">
             <el-avatar :size="48" shape="square" style="margin-right: 1%;cursor:pointer;"/>
             <div style="border: 1px solid red">徐志摩</div>
           </div>
