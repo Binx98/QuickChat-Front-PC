@@ -5,7 +5,7 @@
         <!--  0.导航栏 -->
         <el-col :span="4"
                 style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
-          <el-image :src="this.logoUrl" style="width: 100%; height: 100%; object-fit: cover;"/>
+          <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="width: 100%; height: 100%; object-fit: cover;"/>
         </el-col>
         <el-col :span="15"
                 style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
@@ -32,6 +32,14 @@
           <div class="friend-item"
                style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
             <el-avatar style="float: left;" shape="square" :size="55"/>
+            <div style="flex-grow: 2;">
+              <div style="color: white; font-size: 16px;">昵称</div>
+              <div style="color: grey; font-size: 14px;">最后一条消息内容</div>
+            </div>
+            <div style="margin-left: 10px; text-align: right;">
+              <div style="color: grey; font-size: 14px;">时间</div>
+              <div style="background-color: red; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;">未读数</div>
+            </div>
           </div>
           <div class="friend-item"
                style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
@@ -170,24 +178,24 @@
             </div>
           </div>
           <!-- 输入框 -->
-          <div style="margin-top: 1%;border: 1px solid yellow">
+          <div style="margin-top: 1%;border: 1px solid yellow;height: 9%">
             <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text"/>
           </div>
         </el-col>
 
         <!--  3.用户信息、功能框架 -->
         <el-col :span="5" style="height: 90%;overflow: auto;border: 1px solid red">
-          <!--  用户概览、群聊概览（视频通话）  -->
+          <!--  会话概览、视频通话  -->
           <div style="background-color: #323335;border-radius: 10px;height: 32%">
-            用户信息
+            会话概览、视频通话
           </div>
-          <!--  联系方式、群聊列表  -->
+          <!--  联系方式  -->
           <div style="background-color: #323335;border-radius: 10px;height: 32%;margin-top: 1%">
-            用户信息
+            联系方式
           </div>
-          <!--  动态、群聊列表  -->
+          <!--  动态  -->
           <div style="background-color: #323335;border-radius: 10px;height: 34%;margin-top: 1%">
-            用户信息
+            动态信息
           </div>
         </el-col>
       </el-row>
@@ -199,24 +207,27 @@
 export default {
   data() {
     return {
-      // LOGO
-      logoUrl: require('@/assets/logo/logo2_transparent.png'),
       // 用户登录信息
       loginUser: {
-
+        avatar: '',
+        nickName: '',
       },
-      // 会话用户信息
+      // 当前会话用户信息
       sessionUser: {
         avatar: '',
         nickName: '',
         gender: '',
         email: '',
         phone: '',
-      }
+      },
       // 会话列表
-      // 聊天信息
+      sessionList: [],
+      // 聊天信息（k:account_id, v:聊天信息列表）
+      chatMsgList: [],
     }
   },
+
+  methods: {},
 }
 </script>
 
