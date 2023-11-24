@@ -5,25 +5,19 @@
         <!--  0.导航栏 -->
         <el-col :span="4"
                 style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
-          <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="width: 100%; height: 100%; object-fit: cover;"/>
+          <el-image :src="require('@/assets/logo/logo2_transparent.png')"
+                    style="width: 100%; height: 100%; object-fit: cover;"/>
         </el-col>
         <el-col :span="15"
                 style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
           <el-input style="width: 50%"/>
         </el-col>
-        <el-col :span="1" style="border: 1px solid red;height: 10%;">
-          <span style="float: right">
-            徐志斌
-          </span>
+        <el-col :span="2" style="border: 1px solid red;height: 10%;">
+          搞几个icon：喇叭、换主题、音乐
         </el-col>
-        <el-col :span="4"
+        <el-col :span="2"
                 style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
           <el-avatar :size="58" style=""/>
-          <div style="">
-            徐志斌
-            <br>
-            <span style="padding-left: 10px">在线</span>
-          </div>
         </el-col>
 
         <!--  1.会话列表 -->
@@ -38,7 +32,10 @@
             </div>
             <div style="margin-left: 10px; text-align: right;">
               <div style="color: grey; font-size: 14px;">时间</div>
-              <div style="background-color: red; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;">未读数</div>
+              <div
+                  style="background-color: red; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;">
+                99
+              </div>
             </div>
           </div>
           <div class="friend-item"
