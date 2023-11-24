@@ -8,11 +8,11 @@
           <el-image :src="require('@/assets/logo/logo2_transparent.png')"
                     style="width: 100%; height: 100%; object-fit: cover;"/>
         </el-col>
-        <el-col :span="15"
+        <el-col :span="16"
                 style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
           <el-input style="width: 50%"/>
         </el-col>
-        <el-col :span="2" style="border: 1px solid red;height: 10%;">
+        <el-col :span="1" style="border: 1px solid red;height: 10%;">
           搞几个icon：喇叭、换主题、音乐
         </el-col>
         <el-col :span="2"
@@ -22,46 +22,25 @@
 
         <!--  1.会话列表 -->
         <el-col :span="4" style="border: 1px solid red;height: 90%;overflow: auto">
-          <!--  底部导航 -->
           <div class="friend-item"
                style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
-            <el-avatar style="float: left;" shape="square" :size="55"/>
+            <el-avatar shape="square" :size="55"/>
             <div style="flex-grow: 2;">
               <div style="color: white; font-size: 16px;">昵称</div>
               <div style="color: grey; font-size: 14px;">最后一条消息内容</div>
             </div>
             <div style="margin-left: 10px; text-align: right;">
-              <div style="color: grey; font-size: 14px;">时间</div>
+              <div style="color: grey; font-size: 12px;">2023-11-24</div>
               <div
                   style="background-color: red; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px;">
                 99
               </div>
             </div>
           </div>
-          <div class="friend-item"
-               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
-            <el-avatar style="float: left;" shape="square" :size="55"/>
-          </div>
-          <div class="friend-item"
-               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
-            <el-avatar style="float: left;" shape="square" :size="55"/>
-          </div>
-          <div class="friend-item"
-               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
-            <el-avatar style="float: left;" shape="square" :size="55"/>
-          </div>
-          <div class="friend-item"
-               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
-            <el-avatar style="float: left;" shape="square" :size="55"/>
-          </div>
-          <div class="friend-item"
-               style="background-color: #323335;border-radius: 6px;display: flex;margin-bottom: 2px">
-            <el-avatar style="float: left;" shape="square" :size="55"/>
-          </div>
         </el-col>
 
         <!--  2、聊天窗口  -->
-        <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
+        <el-col :span="16" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
           <!--  2.1、上边栏  -->
           <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red;height: 9%">
             <el-avatar :size="48" shape="square" style="margin-right: 1%;cursor:pointer;"/>
@@ -175,13 +154,13 @@
             </div>
           </div>
           <!-- 输入框 -->
-          <div style="margin-top: 1%;border: 1px solid yellow;height: 9%">
+          <div style="margin-top: 1%;border: 1px solid yellow;height: 8%">
             <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text"/>
           </div>
         </el-col>
 
         <!--  3.用户信息、功能框架 -->
-        <el-col :span="5" style="height: 90%;overflow: auto;border: 1px solid red">
+        <el-col :span="4" style="height: 90%;overflow: auto;border: 1px solid red">
           <!--  会话概览、视频通话  -->
           <div style="background-color: #323335;border-radius: 10px;height: 32%">
             会话概览、视频通话
