@@ -209,7 +209,7 @@ export default {
 
 <style scoped>
 .main {
-  width: 72%;
+  width: 78%;
   height: 88%;
   margin: auto;
   position: absolute;
