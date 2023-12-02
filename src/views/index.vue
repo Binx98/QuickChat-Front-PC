@@ -1,22 +1,22 @@
 <template>
   <div class="main">
-    <div style="background-color: #292A2D;width: 100%;height: 100%;border-radius: 16px;">
-      <el-row :gutter="12" style="border: 1px solid red;height: 100%">
+    <div style="background-color: #232427;width: 100%;height: 100%;border-radius: 16px;">
+      <el-row :gutter="12" style=" height: 100%">
         <!--  0.导航栏 -->
         <el-col :span="5"
-                style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
+                style="height: 10%;display: flex; justify-content: center; align-items: center;">
           <el-image :src="require('@/assets/logo/logo2_transparent.png')"
                     style="width: 100%; height: 100%; object-fit: cover;"/>
         </el-col>
         <el-col :span="15"
-                style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
+                style=" height: 10%;display: flex; justify-content: center; align-items: center;">
           <el-input style="width: 50%"/>
         </el-col>
-        <el-col :span="1" style="border: 1px solid red;height: 10%;">
+        <el-col :span="1" style=" height: 10%;">
           搞几个icon：喇叭、换主题、音乐
         </el-col>
         <el-col :span="2"
-                style="border: 1px solid red;height: 10%;display: flex; justify-content: center; align-items: center;">
+                style=" height: 10%;display: flex; justify-content: center; align-items: center;">
           <el-avatar :size="58" style="cursor: pointer"/>
         </el-col>
 
@@ -39,12 +39,12 @@
         <!--  2、聊天窗口  -->
         <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
           <!--  2.1、上边栏  -->
-          <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red;height: 9%">
+          <div style="display: flex; align-items: center;padding-left: 1%; height: 9%">
             <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
             <div style="border: 1px solid red">徐志摩</div>
           </div>
           <!--  2.2、窗口  -->
-          <div style="border: 1px solid red;height: 80%;overflow: auto;">
+          <div style="height: 80%;overflow: auto;">
             <!--  接收信息  -->
             <div style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
               <span style="margin-right: 6px">
@@ -71,8 +71,8 @@
             </div>
           </div>
           <!-- 输入框 -->
-          <div style="margin-top: 1%;border: 1px solid yellow;height: 8%;">
-            <span>语音</span>
+          <div style="margin-top: 1%;height: 8%;">
+            <span>语音、</span>
             <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text" style="width: 70%"/>
             <span>表情、</span>
             <span>截图、</span>
@@ -82,7 +82,7 @@
         </el-col>
 
         <!--  3.用户信息、功能框架 -->
-        <el-col :span="4" style="height: 90%;overflow: auto;border: 1px solid red">
+        <el-col :span="4" style="height: 90%;overflow: auto;">
           <!--  会话概览、视频通话  -->
           <div style="background-color: #323335;border-radius: 10px;height: 32%">
             会话概览、视频通话
@@ -137,8 +137,8 @@ export default {
 
 <style scoped>
 .main {
-  width: 78%;
-  height: 88%;
+  width: 80%;
+  height: 90%;
   margin: auto;
   position: absolute;
   top: 0;
