@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div style="background-color: #292A2D;width: 100%;height: 100%;border-radius: 16px;border: 1px solid yellow;">
+    <div style="background-color: #292A2D;width: 100%;height: 100%;border-radius: 16px;">
       <el-row :gutter="12" style="border: 1px solid red;height: 100%">
         <!--  0.导航栏 -->
         <el-col :span="5"
@@ -22,18 +22,13 @@
 
         <!--  1.会话列表 -->
         <el-col :span="5" style="border: 1px solid red;height: 90%;">
-          <div class="friend-item"
-               style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;width: 100%;">
-            <el-avatar shape="square" :size="55"/>
-            <div style="width: 50%">
-              <div style="border: 1px solid red;height: 50%;">昵称</div>
+          <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;width: 100%;">
+            <div>
+              <el-avatar shape="square" :size="50"/>
             </div>
-            <div style="width: 30%">
-              <div style="border: 1px solid red;height: 50%">时间</div>
-            </div>
-            <div style="width: 8%">
-              <div style="border: 1px solid red;height: 100%">未读</div>
-            </div>
+            <div style="border: 1px solid red;height: 50%;width: 50%">昵称</div>
+            <div style="border: 1px solid red;height: 50%;width: 40%">时间</div>
+            <div style="border: 1px solid red;width: 6%">未读</div>
           </div>
         </el-col>
 
@@ -101,6 +96,12 @@
 export default {
   data() {
     return {
+      formLabelAlign: {
+        name: '',
+        region: '',
+        type: ''
+      },
+
       // 用户登录信息
       loginUser: {
         avatar: '',
