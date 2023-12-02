@@ -21,14 +21,18 @@
         </el-col>
 
         <!--  1.会话列表 -->
-        <el-col :span="5" style="border: 1px solid red;height: 90%;">
-          <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;width: 100%;">
+        <el-col :span="5" style="height: 90%;">
+          <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;">
             <div>
-              <el-avatar shape="square" :size="50"/>
+              <el-avatar shape="square" :size="48"/>
             </div>
-            <div style="border: 1px solid red;height: 50%;width: 50%">昵称</div>
-            <div style="border: 1px solid red;height: 50%;width: 40%">时间</div>
-            <div style="border: 1px solid red;width: 6%">未读</div>
+            <div style="width: 50%">
+              <div style="font-size: 13px;margin-bottom: 2%;color: antiquewhite">QuickChat官方</div>
+              <div style="font-size: 13px;color: antiquewhite">你好啊！</div>
+            </div>
+            <div>
+              <div style="font-size: 12px;color: antiquewhite">2023-12-02</div>
+            </div>
           </div>
         </el-col>
 
