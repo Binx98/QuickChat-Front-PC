@@ -25,13 +25,14 @@
           <div class="friend-item"
                style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;width: 100%;">
             <el-avatar shape="square" :size="55"/>
-            <div style="width: 40%">
-              <div style="border: 1px solid red;height: 45%;">昵称</div>
-              <div style="border: 1px solid red;height: 55%;">聊息</div>
+            <div style="width: 50%">
+              <div style="border: 1px solid red;height: 50%;">昵称</div>
             </div>
             <div style="width: 30%">
-              <div style="border: 1px solid red;height: 45%">信息</div>
-              <div style="border: 1px solid red;height: 55%;width: 60%">聊天</div>
+              <div style="border: 1px solid red;height: 50%">时间</div>
+            </div>
+            <div style="width: 8%">
+              <div style="border: 1px solid red;height: 100%">未读</div>
             </div>
           </div>
         </el-col>
@@ -40,7 +41,7 @@
         <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
           <!--  2.1、上边栏  -->
           <div style="display: flex; align-items: center;padding-left: 1%;border: 1px solid red;height: 9%">
-            <el-avatar :size="48" shape="square" style="margin-right: 1%;cursor:pointer;"/>
+            <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
             <div style="border: 1px solid red">徐志摩</div>
           </div>
           <!--  2.2、窗口  -->
