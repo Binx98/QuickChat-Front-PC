@@ -72,7 +72,12 @@
           </div>
           <!-- 输入框 -->
           <div style="margin-top: 1%;border: 1px solid yellow;height: 8%;">
-            <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text"/>
+            <span>语音</span>
+            <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text" style="width: 70%"/>
+            <span>表情、</span>
+            <span>截图、</span>
+            <span>文件、</span>
+            <span>发送</span>
           </div>
         </el-col>
 
