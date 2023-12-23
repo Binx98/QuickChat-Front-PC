@@ -37,7 +37,7 @@
                 <div style="font-size: 13px;color: antiquewhite">你好啊！</div>
               </div>
               <div>
-                <div style="font-size: 12px;color: #12cec2">2023-12-02</div>
+                <div style="font-size: 12px;color: antiquewhite">2023-12-02</div>
               </div>
             </div>
           </el-col>
