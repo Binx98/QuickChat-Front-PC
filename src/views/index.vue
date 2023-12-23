@@ -7,7 +7,7 @@
         <el-col :span="5"
                 style="height: 10%;display: flex; justify-content: center; align-items: center;">
           <el-image :src="require('@/assets/logo/logo2_transparent.png')"
-                    style="height: 15vh; object-fit: cover;"/>
+                    style="height: 16vh; object-fit: cover;"/>
         </el-col>
         <el-col :span="15"
                 style=" height: 10%;display: flex; justify-content: center; align-items: center;">
