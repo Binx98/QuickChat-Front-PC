@@ -4,23 +4,46 @@
     <div style="width: 34vw;height: 72vh;text-align: center;background-color: #232427;opacity: 0.9;border-radius: 20px">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%">
+        <!--  账号密码输入框  -->
         <el-input class="input-cls" placeholder="请输入账号"/>
         <el-input class="input-cls" placeholder="请输入密码"/>
-        <el-input class="input-cls" placeholder="请输入验证码"/>
+        <!--  验证码输入框  -->
+        <div style="display: flex; justify-content: center;margin-bottom: 2%">
+          <el-input
+              style="border-radius: 10px;opacity: 0.6;margin-right: 1%;width: 13vw;height: 5.4vh;"
+              placeholder="请输入验证码"/>
+          <img :src="captchaUrl" @click="captcha()" style="border-radius: 4px;opacity: 0.72;width:4.6vw;height: 5.4vh;"/>
+        </div>
+        <!--  记住密码、忘记密码  -->
+        <div style="font-size: 14px;margin-bottom: 2%">
+          <span style="color: darkgrey;margin-right: 7vw">
+            记住密码
+            <el-switch
+                v-model="rememberPwd"
+                active-color="#12CEC2FF"
+                inactive-color="">
+            </el-switch>
+          </span>
+          <span style="color: darkgrey;cursor: pointer">忘记密码？</span>
+        </div>
+        <!--  登录按钮  -->
         <el-button type="primary" size="medium" round
                    style="background-color: #12CEC2FF;width: 18vw;height: 6vh;margin-bottom: 2%;">
           登录
         </el-button>
       </div>
-
+      <!--   去注册账号   -->
       <div style="margin-top: 3%;">
         <div style="font-size: 14px">
-          <span style="color: darkgrey;margin-right: 6vw">忘记密码</span>
           <span style="color: darkgrey">没有账号？</span>
-          <span style="color: #12CEC2FF">去注册></span>
+          <span style="color: #12CEC2FF;cursor: pointer">去注册></span>
         </div>
       </div>
     </div>
+
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------------------->
 
     <!--  注册表单  -->
     <div style="width: 34vw;height: 84vh;text-align: center;background-color: #232427;opacity: 0.9;border-radius: 20px">
@@ -30,7 +53,7 @@
         <el-input class="input-cls" placeholder="请输入密码"/>
         <el-input class="input-cls" placeholder="请再次输入密码"/>
         <el-input class="input-cls" placeholder="请输入邮箱"/>
-        <el-input class="input-cls" placeholder="输入邮箱验证码"/>
+        <el-input class="input-cls" placeholder="请输入验证码"/>
         <el-button type="primary" size="medium" round
                    style="background-color: #12CEC2FF;width: 18vw;height: 6vh;margin-bottom: 2%;">
           注册
@@ -52,7 +75,21 @@ export default {
     return {
       showRegisterFlag: true,
       rememberPwd: false,
+      captchaUrl: '',
     }
+  },
+
+  created() {
+    this.captcha()
+  },
+
+  methods: {
+    /**
+     * 生成验证码
+     */
+    captcha() {
+      this.captchaUrl = 'http://localhost:8888/api/user/captcha' + '?' + Math.random()
+    },
   }
 }
 </script>
