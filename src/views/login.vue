@@ -11,7 +11,11 @@
                    style="background-color: #12CEC2FF;width: 18vw;height: 6vh;margin-bottom: 2%;">
           登录
         </el-button>
+      </div>
+
+      <div style="margin-top: 3%;">
         <div style="font-size: 14px">
+          <span style="color: darkgrey;margin-right: 6vw">忘记密码</span>
           <span style="color: darkgrey">没有账号？</span>
           <span style="color: #12CEC2FF">去注册></span>
         </div>
@@ -25,7 +29,6 @@
         <el-input class="input-cls" placeholder="请输入账号"/>
         <el-input class="input-cls" placeholder="请输入密码"/>
         <el-input class="input-cls" placeholder="请再次输入密码"/>
-        <el-input class="input-cls" placeholder="请输入验证码"/>
         <el-input class="input-cls" placeholder="请输入邮箱"/>
         <el-input class="input-cls" placeholder="输入邮箱验证码"/>
         <el-button type="primary" size="medium" round
@@ -48,6 +51,7 @@ export default {
   data() {
     return {
       showRegisterFlag: true,
+      rememberPwd: false,
     }
   }
 }
@@ -55,9 +59,10 @@ export default {
 
 <style scoped>
 .input-cls {
+  border-radius: 10px;
   opacity: 0.6;
   margin-bottom: 2%;
   width: 18vw;
-  height: 5vh
+  height: 5.4vh
 }
 </style>
