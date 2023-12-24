@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <!-------------------------------------------------登录表单---------------------------------------------------------->
-    <div class="form-container" v-if="showRegisterFlag == false" style="height: 72vh">
+    <div class="form-container" style="height: 72vh;margin-top: 5%;" v-if="showRegisterFlag == false">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%">
         <!--  账号密码输入框  -->
@@ -34,7 +34,7 @@
     </div>
 
     <!-------------------------------------------------注册表单---------------------------------------------------------->
-    <div v-if="showRegisterFlag == true" class="form-container" style="height: 88vh">
+    <div class="form-container" style="height: 88vh;margin-top: 2.2%;" v-if="showRegisterFlag == true">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%">
         <el-input class="input-cls" placeholder="请输入账号"/>
@@ -115,7 +115,6 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-top: 6%;
 }
 
 .captcha-cls {
@@ -145,6 +144,6 @@ export default {
   opacity: 0.6;
   margin-bottom: 2%;
   width: 18vw;
-  height: 5.4vh
+  height: 5.2vh
 }
 </style>
