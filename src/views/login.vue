@@ -34,15 +34,19 @@
     </div>
 
     <!-------------------------------------------------注册表单---------------------------------------------------------->
-    <div class="form-container" style="height: 88vh;margin-top: 2.2%;" v-if="showRegisterFlag == true">
+    <div class="form-container" style="height: 84vh;margin-top: 3.2%;" v-if="showRegisterFlag == false">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%">
         <el-input class="input-cls" placeholder="请输入账号"/>
         <el-input class="input-cls" placeholder="请输入密码"/>
         <el-input class="input-cls" placeholder="请再次输入密码"/>
-        <el-input class="input-cls" placeholder="请输入昵称"/>
-        <el-input class="input-cls" placeholder="请输入性别"/>
-        <el-input class="input-cls" placeholder="请输入邮箱"/>
+        <div style="display: flex; justify-content: center;">
+          <el-input style="border-radius: 10px;opacity: 0.6;margin-bottom: 2%;margin-right:1%;width: 12vw;height: 6.2vh"
+                    placeholder="请输入邮箱"/>
+          <el-button style="width: 5.6vw;height: 5.2vh;margin-bottom: 2%;background-color: #12CEC2FF;" type="primary">
+            发送验证
+          </el-button>
+        </div>
         <el-input class="input-cls" placeholder="请输入验证码"/>
         <el-button class="btn-cls" type="primary" size="medium" round>
           注册
@@ -121,7 +125,7 @@ export default {
   border-radius: 4px;
   opacity: 0.72;
   width: 4.6vw;
-  height: 5.4vh;
+  height: 5.2vh;
 }
 
 .btn-cls {
@@ -144,6 +148,6 @@ export default {
   opacity: 0.6;
   margin-bottom: 2%;
   width: 18vw;
-  height: 5.2vh
+  height: 6.2vh
 }
 </style>
