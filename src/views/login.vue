@@ -41,9 +41,11 @@
         <el-input class="input-cls" placeholder="请输入密码"/>
         <el-input class="input-cls" placeholder="请再次输入密码"/>
         <div style="display: flex; justify-content: center;">
-          <el-input style="border-radius: 10px;opacity: 0.6;margin-bottom: 2%;margin-right:1%;width: 11.6vw;height: 6.2vh"
-                    placeholder="请输入邮箱"/>
-          <el-button style="height: 5.2vh;margin-bottom: 2%;background-color: #12CEC2FF;" type="primary">
+          <el-input
+              style="border-radius: 10px;opacity: 0.6;margin-bottom: 2%;margin-right:1%;width: 11.6vw;height: 6.2vh"
+              placeholder="请输入邮箱"/>
+          <el-button style="height: 5.2vh;margin-bottom: 2%;background-color: #12CEC2FF;" type="primary"
+                     @click="sendEmail()">
             发送验证
           </el-button>
         </div>
@@ -64,6 +66,8 @@
 
 
 <script>
+import userApi from '@/api/user'
+
 export default {
   name: "login",
   data() {
@@ -108,6 +112,15 @@ export default {
      */
     clickGoLogin() {
       this.showRegisterFlag = false;
+    },
+
+    /**
+     * 发送邮件
+     */
+    sendEmail() {
+      userApi.sendEmail().then(res => {
+        this.$message.success("验证码发送成功，请查看您的邮箱");
+      })
     }
   }
 }
