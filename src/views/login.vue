@@ -34,7 +34,7 @@
     </div>
 
     <!-------------------------------------------------注册表单---------------------------------------------------------->
-    <div class="form-container" style="height: 84vh;margin-top: 3.2%;" v-if="showRegisterFlag == false">
+    <div class="form-container" style="height: 84vh;margin-top: 3.2%;" v-if="showRegisterFlag == true">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%">
         <el-input class="input-cls" placeholder="请输入账号" v-model="registerForm.accountId"/>
@@ -42,11 +42,12 @@
         <el-input class="input-cls" type="password" placeholder="请再次输入密码" v-model="registerForm.password2"/>
         <div style="display: flex; justify-content: center;">
           <el-input
-              style="border-radius: 10px;opacity: 0.6;margin-bottom: 2%;margin-right:1%;width: 11.6vw;height: 6.2vh"
+              style="border-radius: 10px;opacity: 0.6;margin-bottom: 2%;margin-right:1%;width: 11.3vw;height: 6.2vh"
               placeholder="请输入邮箱" v-model="registerForm.toEmail"/>
-          <el-button style="height: 5.2vh;margin-bottom: 2%;background-color: #12CEC2FF;" type="primary"
-                     @click="sendEmail()">
-            发送验证
+          <el-button :disabled="disable" :class="{ codeGeting:isGeting }" @click="countDown()"
+                     style="height: 5.2vh;margin-bottom: 2%;background-color: #12CEC2FF;"
+                     type="primary">
+            {{ sendButtonMsg }}
           </el-button>
         </div>
         <el-input class="input-cls" placeholder="请输入验证码" v-model="registerForm.emailCode"/>
@@ -59,8 +60,6 @@
         </div>
       </div>
     </div>
-
-    <!---------------------------------------------------找回密码-------------------------------------------------------->
   </div>
 </template>
 
@@ -73,6 +72,11 @@ export default {
     return {
       showRegisterFlag: false,
       captchaUrl: '',
+
+      sendButtonMsg: '获取验证码',
+      isGeting: false,
+      count: 60,
+      disable: false,
 
       // 登录表单
       loginForm: {
@@ -123,12 +127,19 @@ export default {
      * 发送邮件
      */
     sendEmail() {
+      let email = this.registerForm.toEmail;
+      if (email == null || email == '') {
+        this.$message.error("你还没输入邮箱呢，你想让我发给谁啊？")
+        return;
+      }
       let param = {
         type: 1,
-        toEmail: this.registerForm.toEmail,
+        toEmail: email,
       }
       userApi.sendEmail(param).then(res => {
         this.$message.success("验证码发送成功，请查看您的邮箱");
+      }).catch(e => {
+        this.$message.error("邮件发送失败，请刷新重试");
       })
     },
 
@@ -137,12 +148,32 @@ export default {
      */
     register() {
       userApi.register(this.registerForm).then(res => {
-
+        this.$message.success("注册成功")
+        this.clickGoLogin()
       }).catch(e => {
         this.$message.error(e.data.msg)
       })
+    },
+
+    /**
+     * 发送倒计时
+     */
+    countDown() {
+      let countDown = setInterval(() => {
+        if (this.count < 1) {
+          this.isGeting = false
+          this.disable = false
+          this.sendButtonMsg = '获取验证码'
+          this.count = 6
+          clearInterval(countDown)
+        } else {
+          this.isGeting = true
+          this.disable = true
+          this.sendButtonMsg = this.count-- + 's后重发'
+        }
+      }, 1000);
     }
-  }
+  },
 }
 </script>
 
@@ -182,5 +213,10 @@ export default {
   margin-bottom: 2%;
   width: 18vw;
   height: 6.2vh
+}
+
+.codeGeting{
+  background: #cdcdcd;
+  border-color: #cdcdcd;
 }
 </style>
