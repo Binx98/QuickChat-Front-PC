@@ -11,4 +11,15 @@ export default {
             data: data
         })
     },
+
+    /**
+     * 注册账号
+     */
+    register(data) {
+        return axios({
+            url: `/user/register`,
+            method: 'post',
+            data: data
+        })
+    },
 }
