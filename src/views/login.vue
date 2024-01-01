@@ -70,27 +70,7 @@ export default {
      */
     clickGoRegister() {
       this.loginForm = '';
-      this.showRegisterFlag = true;
-    },
-
-    /**
-     * 发送邮件
-     */
-    sendEmail() {
-      let email = this.registerForm.toEmail;
-      if (email == null || email == '') {
-        this.$message.error("你还没输入邮箱呢，你想让我发给谁啊？")
-        return;
-      }
-      let param = {
-        type: 1,
-        toEmail: email,
-      }
-      userApi.sendEmail(param).then(res => {
-        this.$message.success("验证码发送成功，请查看您的邮箱");
-      }).catch(e => {
-        this.$message.error("邮件发送失败，请刷新重试");
-      })
+      this.$router.push('/register')
     },
 
     /**
