@@ -63,13 +63,6 @@ export default {
     },
 
     /**
-     * 登录
-     */
-    login() {
-
-    },
-
-    /**
      * 发送邮件
      */
     sendEmail() {
@@ -107,6 +100,18 @@ export default {
           this.sendButtonMsg = '重新发送(' + this.count-- + 's)'
         }
       }, 1000);
+    },
+
+    /**
+     * 注册账号
+     */
+    register() {
+      userApi.register(this.registerForm).then(res => {
+        this.$message.success("注册成功")
+        this.clickGoLogin()
+      }).catch(e => {
+        this.$message.error(e.data.msg)
+      })
     },
   }
 }

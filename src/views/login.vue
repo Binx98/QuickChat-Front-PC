@@ -4,12 +4,12 @@
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%">
         <!--  账号密码输入框  -->
-        <el-input class="input-cls" placeholder="请输入账号"/>
-        <el-input class="input-cls" placeholder="请输入密码"/>
+        <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
+        <el-input class="input-cls" placeholder="请输入密码" v-model="loginForm.password"/>
         <!--  验证码输入框  -->
         <div style="display: flex; justify-content: center;margin-bottom: 2%">
           <el-input style="border-radius: 10px;opacity: 0.6;margin-right: 1%;width: 13vw;height: 5.4vh;"
-                    placeholder="请输入验证码"/>
+                    placeholder="请输入验证码" v-model="loginForm.verifyCode"/>
           <img class="captcha-cls" :src="captchaUrl" @click="captcha()"/>
         </div>
         <!--  记住密码、忘记密码  -->
@@ -21,7 +21,7 @@
           <span style="color: darkgrey;cursor: pointer">忘记密码？</span>
         </div>
         <!--  登录按钮  -->
-        <el-button class="btn-cls" type="primary" size="medium" round>
+        <el-button class="btn-cls" type="primary" size="medium" round @click="login()">
           登录
         </el-button>
       </div>
@@ -74,12 +74,12 @@ export default {
     },
 
     /**
-     * 注册账号
+     * 登录
      */
-    register() {
-      userApi.register(this.registerForm).then(res => {
-        this.$message.success("注册成功")
-        this.clickGoLogin()
+    login() {
+      userApi.login(this.loginForm).then(res => {
+        localStorage.setItem("token", res.data.data)
+        this.$router.push('/')
       }).catch(e => {
         this.$message.error(e.data.msg)
       })

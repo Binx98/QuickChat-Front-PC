@@ -22,4 +22,15 @@ export default {
             data: data
         })
     },
+
+    /**
+     * 登录
+     */
+    login(data) {
+        return axios({
+            url: `/user/login`,
+            method: 'post',
+            data: data
+        })
+    }
 }
