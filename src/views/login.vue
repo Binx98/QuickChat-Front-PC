@@ -54,7 +54,7 @@ export default {
   },
 
   created() {
-    this.captcha()
+    this.captcha();
   },
 
   methods: {
@@ -62,7 +62,7 @@ export default {
      * 生成验证码
      */
     captcha() {
-      this.captchaUrl = 'http://localhost:8888/api/user/captcha' + '?' + Math.random()
+      this.captchaUrl = process.env.VUE_APP_BASE_API + '/user/captcha' + '?' + Math.random()
     },
 
     /**

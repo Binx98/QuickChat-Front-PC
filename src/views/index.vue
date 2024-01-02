@@ -104,6 +104,8 @@
 </template>
 
 <script>
+import userApi from '@/api/user'
+
 export default {
   data() {
     return {
@@ -133,7 +135,27 @@ export default {
     }
   },
 
-  methods: {},
+  created() {
+    this.getByToken();
+  },
+
+  methods: {
+    /**
+     * 根据 token 获取用户信息
+     */
+    getByToken() {
+      let token = localStorage.getItem("token");
+      if (token == '' || token == null) {
+        this.$router.push('/login')
+      }
+      userApi.getByToken().then(res => {
+        this.loginUser = res.data.data;
+      }).catch(e => {
+        localStorage.removeItem("token");
+        this.$router.push('/login')
+      })
+    }
+  },
 }
 </script>
 

@@ -5,6 +5,12 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/',
+        name: 'index',
+        component: () => import('../views/index')
+    },
+
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/login')
@@ -14,12 +20,6 @@ const routes = [
         path: '/register',
         name: 'register',
         component: () => import('../views/register')
-    },
-
-    {
-        path: '/index',
-        name: 'index',
-        component: () => import('../views/index')
     },
 ]
 
