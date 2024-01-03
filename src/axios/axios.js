@@ -18,9 +18,9 @@ const service = axios.create({
  */
 service.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('quick_token')
+        const token = localStorage.getItem('token')
         if (token) {
-            config.headers['quick_token'] = token
+            config.headers['token'] = token
         }
         return config
     }

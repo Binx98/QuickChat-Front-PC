@@ -36,6 +36,7 @@
 
 <script>
 import userApi from '@/api/user'
+import cookie from 'js-cookie'
 
 export default {
   name: "login",
@@ -77,6 +78,8 @@ export default {
      * 登录
      */
     login() {
+      let res = cookie.get('captcha_key');
+      console.log(res)
       userApi.login(this.loginForm).then(res => {
         localStorage.setItem("token", res.data.data)
         this.$router.push('/')

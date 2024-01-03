@@ -1,4 +1,5 @@
 import axios from '@/axios/axios'
+import cookie from 'js-cookie'
 
 export default {
     /**
@@ -30,7 +31,10 @@ export default {
         return axios({
             url: `/user/login`,
             method: 'post',
-            data: data
+            data: data,
+            headers: {
+                'captcha_key': cookie.get('captcha_key')
+            }
         })
     }
 }
