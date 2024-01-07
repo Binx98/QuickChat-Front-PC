@@ -1,18 +1,17 @@
 <template>
-  <!--  会话窗口整体  -->
   <div class="main">
-    <div style="background-color: #232427;width: 100%;height: 100%;border-radius: 16px;">
-      <el-row :gutter="12" style=" height: 100%">
-        <!--  0.导航栏 -->
+    <div class="window">
+      <el-row :gutter="12" style="height: 100%">
+        <!-- 导航栏 -->
         <Header/>
 
-        <!--  1.会话列表 -->
+        <!-- 会话列表 -->
         <Session/>
 
-        <!--  2、聊天窗口  -->
+        <!-- 聊天窗口 -->
         <Window/>
 
-        <!--  3.用户信息、功能框架 -->
+        <!-- 用户信息、功能框架 -->
         <Right/>
       </el-row>
     </div>
@@ -20,11 +19,10 @@
 </template>
 
 <script>
-import Header from "@/component/Header";
-import Session from "@/component/Session";
-import Window from "@/component/Window";
-import Right from "@/component/Right";
-
+import Header from "@/component/index/Header";
+import Session from "@/component/index/Session";
+import Window from "@/component/index/Window";
+import Right from "@/component/index/Right";
 import userApi from '@/api/user'
 
 export default {
@@ -99,6 +97,13 @@ export default {
   right: 0;
   bottom: 0;
   opacity: 0.86;
+}
+
+.window {
+  background-color: #232427;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
 }
 
 .chat-footer el-input {

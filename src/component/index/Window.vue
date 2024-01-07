@@ -51,8 +51,14 @@
 </template>
 
 <script>
+import EmojiPicker from 'vue-emoji-picker'
+
 export default {
   name: "Window",
+
+  components: {
+    EmojiPicker
+  },
 
   data() {
     return {
