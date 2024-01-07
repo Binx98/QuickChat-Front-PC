@@ -22,7 +22,7 @@
 import Header from "@/component/index/header/Header";
 import Session from "@/component/index/session/Session";
 import Window from "@/component/index/window/Window";
-import Right from "@/component/index/right/Right";
+import Right from "@/component/index/right/InfoDynamic";
 import userApi from '@/api/user'
 
 export default {
@@ -92,14 +92,14 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.86;
+  opacity: 0.9;
 }
 
 .window {
   background-color: #232427;
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .chat-footer el-input {

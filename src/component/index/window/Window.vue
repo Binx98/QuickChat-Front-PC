@@ -24,8 +24,7 @@
         <!--  主动发送  -->
         <div
             style="float: right;width: 70%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
-          <div
-              style="margin-left: 1.6%;background-color: #12CEC2FF;border-radius: 10px;display: inline-block;">
+          <div style="margin-left: 1.6%;background-color: #12CEC2FF;border-radius: 10px;display: inline-block;">
             <div style="padding: 15px;font-size: 14px;word-break: break-all">
               2222222222222222222222222222222222222222222222
             </div>
@@ -53,6 +52,7 @@
 
 
 import Emoji from "@/component/index/window/Emoji";
+
 export default {
   name: "Window",
 

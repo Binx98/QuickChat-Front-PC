@@ -17,7 +17,9 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+  }
 }
 </script>
 
