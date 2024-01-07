@@ -75,7 +75,7 @@
           <!-- 输入框 -->
           <div style="margin-top: 1%;height: 8%;">
             <span>语音、</span>
-            <el-input id="chat-input-id" placeholder="请开始你的表演......" type="text" style="width: 70%"/>
+            <el-input id="chat-input" placeholder="请开始你的表演......" type="text" style="width: 70%"/>
             <span>表情、</span>
             <span>截图、</span>
             <span>文件、</span>
@@ -109,19 +109,15 @@ import userApi from '@/api/user'
 export default {
   data() {
     return {
-      formLabelAlign: {
-        name: '',
-        region: '',
-        type: ''
-      },
-
       // 用户登录信息
       loginUser: {
         avatar: '',
         nickName: '',
       },
+
       // 会话列表
       sessionList: [],
+
       // 用户信息（当前会话）
       sessionUser: {
         avatar: '',
@@ -130,8 +126,11 @@ export default {
         email: '',
         phone: '',
       },
+
       // 聊天信息（当前会话）
       chatMsgList: [],
+
+      // 
     }
   },
 
@@ -177,7 +176,7 @@ export default {
   margin-right: 10px;
 }
 
-#chat-input-id {
+#chat-input {
   border-radius: 20px;
   font-size: 14px;
   white-space: pre-wrap;

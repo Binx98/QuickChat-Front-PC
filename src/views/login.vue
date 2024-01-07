@@ -5,7 +5,7 @@
       <div style="margin-top: -10%;margin-bottom: 3.2%">
         <!--  账号密码输入框  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
-        <el-input class="input-cls" placeholder="请输入密码" v-model="loginForm.password"/>
+        <el-input class="input-cls" placeholder="请输入密码" v-model="loginForm.passWord"/>
         <!--  验证码输入框  -->
         <div style="display: flex; justify-content: center;margin-bottom: 2%">
           <el-input style="border-radius: 10px;opacity: 0.6;margin-right: 1%;width: 13vw;height: 5.4vh;"
@@ -36,7 +36,6 @@
 
 <script>
 import userApi from '@/api/user'
-import cookie from 'js-cookie'
 
 export default {
   name: "login",
@@ -47,7 +46,7 @@ export default {
       // 登录表单
       loginForm: {
         accountId: '',
-        password: '',
+        passWord: '',
         verifyCode: '',
         rememberPwd: false,
       },
@@ -78,13 +77,13 @@ export default {
      * 登录
      */
     login() {
-      let res = cookie.get('captcha_key');
-      console.log(res)
       userApi.login(this.loginForm).then(res => {
         localStorage.setItem("token", res.data.data)
         this.$router.push('/')
       }).catch(e => {
-        this.$message.error(e.data.msg)
+        this.$message.error(e.data.msg);
+        this.loginForm.verifyCode = '';
+        this.captcha();
       })
     },
   },
