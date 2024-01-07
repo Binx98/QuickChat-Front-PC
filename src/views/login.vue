@@ -78,6 +78,7 @@ export default {
      */
     login() {
       userApi.login(this.loginForm).then(res => {
+        this.$message.success('登录成功')
         localStorage.setItem("token", res.data.data)
         this.$router.push('/')
       }).catch(e => {
