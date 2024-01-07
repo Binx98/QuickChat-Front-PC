@@ -36,5 +36,18 @@ export default {
                 'captcha_key': cookie.get('captcha_key')
             }
         })
-    }
+    },
+
+    /**
+     * 根据 token 查询用户信息
+     */
+    getByToken() {
+        return axios({
+            url: `/user/getByToken`,
+            method: 'get',
+            headers: {
+                'token': localStorage.getItem('token')
+            }
+        })
+    },
 }

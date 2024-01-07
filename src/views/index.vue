@@ -4,84 +4,13 @@
     <div style="background-color: #232427;width: 100%;height: 100%;border-radius: 16px;">
       <el-row :gutter="12" style=" height: 100%">
         <!--  0.导航栏 -->
-        <el-col :span="5"
-                style="height: 10%;display: flex; justify-content: center; align-items: center;">
-          <el-image :src="require('@/assets/logo/logo2_transparent.png')"
-                    style="height: 16vh; object-fit: cover;"/>
-        </el-col>
-        <el-col :span="15"
-                style=" height: 10%;display: flex; justify-content: center; align-items: center;">
-          <el-input style="width: 50%"/>
-        </el-col>
-        <el-col :span="1" style=" height: 10%;">
-          搞几个icon：喇叭、换主题、音乐
-        </el-col>
-        <el-col :span="2"
-                style=" height: 10%;display: flex; justify-content: center; align-items: center;">
-          <el-avatar :size="58" style="cursor: pointer"/>
-        </el-col>
+        <Header/>
 
         <!--  1.会话列表 -->
-        <el-col :span="5" style="height: 90%;">
-          <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;">
-            <div>
-              <el-avatar shape="square" :size="48"/>
-            </div>
-            <div style="width: 50%">
-              <div style="font-size: 13px;margin-bottom: 2%;color: antiquewhite">QuickChat官方</div>
-              <div style="font-size: 13px;color: antiquewhite">你好啊！</div>
-            </div>
-            <div>
-              <div style="font-size: 12px;color: antiquewhite">2023-12-02</div>
-            </div>
-          </div>
-        </el-col>
+        <Session/>
 
         <!--  2、聊天窗口  -->
-        <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
-          <!--  2.1、上边栏  -->
-          <div style="display: flex; align-items: center;padding-left: 1%; height: 9%">
-            <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
-            <div style="border: 1px solid #16334a">徐志摩</div>
-          </div>
-          <!--  2.2、窗口  -->
-          <div style="height: 80%;overflow: auto;">
-            <!--  接收信息  -->
-            <div style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
-              <span style="margin-right: 6px">
-                <el-avatar shape="square" style="cursor:pointer"/>
-              </span>
-              <div style="background-color: floralwhite;border-radius: 10px;">
-                <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                  11111111111
-                </div>
-              </div>
-            </div>
-
-            <!--  主动发送  -->
-            <div
-                style="float: right;width: 70%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
-              <div
-                  style="margin-left: 1.6%;background-color: #12CEC2FF;border-radius: 10px;display: inline-block;">
-                <div style="padding: 15px;font-size: 14px;word-break: break-all">
-                  2222222222222222222222222222222222222222222222
-                </div>
-              </div>
-              <span style="margin-left: 6px">
-                <el-avatar shape="square" style="cursor:pointer;"/>
-              </span>
-            </div>
-          </div>
-          <!-- 输入框 -->
-          <div style="margin-top: 1%;height: 8%;">
-            <span>语音、</span>
-            <el-input id="chat-input" placeholder="请开始你的表演......" type="text" style="width: 70%"/>
-            <span>表情、</span>
-            <span>截图、</span>
-            <span>文件、</span>
-            <span>发送</span>
-          </div>
-        </el-col>
+        <Window/>
 
         <!--  3.用户信息、功能框架 -->
         <el-col :span="4" style="height: 90%;overflow: auto;">
@@ -105,8 +34,16 @@
 
 <script>
 import userApi from '@/api/user'
+import Header from "@/component/Header";
+import Session from "@/component/Session";
+import Window from "@/component/Window";
 
 export default {
+  components: {
+    Window,
+    Session,
+    Header
+  },
   data() {
     return {
       // 用户登录信息
@@ -130,7 +67,7 @@ export default {
       // 聊天信息（当前会话）
       chatMsgList: [],
 
-      // 
+      //
     }
   },
 
@@ -147,9 +84,13 @@ export default {
       if (token == '' || token == null) {
         this.$router.push('/login')
       }
+      console.log(11111111111)
       userApi.getByToken().then(res => {
         this.loginUser = res.data.data;
+        console.log(2222222222222)
       }).catch(e => {
+        console.log(333333333333333)
+        console.log(e)
         localStorage.removeItem("token");
         this.$router.push('/login')
       })
@@ -174,13 +115,5 @@ export default {
 .chat-footer el-input {
   flex: 1;
   margin-right: 10px;
-}
-
-#chat-input {
-  border-radius: 20px;
-  font-size: 14px;
-  white-space: pre-wrap;
-  overflow-y: auto;
-  resize: vertical;
 }
 </style>
