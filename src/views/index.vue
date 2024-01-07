@@ -13,37 +13,28 @@
         <Window/>
 
         <!--  3.用户信息、功能框架 -->
-        <el-col :span="4" style="height: 90%;overflow: auto;">
-          <!--  会话概览、视频通话  -->
-          <div style="background-color: #323335;border-radius: 10px;height: 32%">
-            会话概览、视频通话
-          </div>
-          <!--  联系方式  -->
-          <div style="background-color: #323335;border-radius: 10px;height: 32%;margin-top: 1%">
-            联系方式
-          </div>
-          <!--  动态  -->
-          <div style="background-color: #323335;border-radius: 10px;height: 34%;margin-top: 1%">
-            动态信息
-          </div>
-        </el-col>
+        <Right/>
       </el-row>
     </div>
   </div>
 </template>
 
 <script>
-import userApi from '@/api/user'
 import Header from "@/component/Header";
 import Session from "@/component/Session";
 import Window from "@/component/Window";
+import Right from "@/component/Right";
+
+import userApi from '@/api/user'
 
 export default {
   components: {
+    Right,
     Window,
     Session,
     Header
   },
+
   data() {
     return {
       // 用户登录信息
@@ -51,9 +42,6 @@ export default {
         avatar: '',
         nickName: '',
       },
-
-      // 会话列表
-      sessionList: [],
 
       // 用户信息（当前会话）
       sessionUser: {
@@ -64,10 +52,11 @@ export default {
         phone: '',
       },
 
+      // 会话列表
+      sessionList: [],
+
       // 聊天信息（当前会话）
       chatMsgList: [],
-
-      //
     }
   },
 

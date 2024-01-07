@@ -1,13 +1,15 @@
 <template>
   <span>
     <el-col :span="15" style="background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
-      <!--  2.1、上边栏  -->
+      <!--  上边栏  -->
       <div style="display: flex; align-items: center;padding-left: 1%; height: 9%">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
         <div style="border: 1px solid #16334a">徐志摩</div>
       </div>
-      <!--  2.2、窗口  -->
+
+      <!--  窗口  -->
       <div style="height: 80%;overflow: auto;">
+
         <!--  接收信息  -->
         <div style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
               <span style="margin-right: 6px">
@@ -30,14 +32,15 @@
             </div>
           </div>
           <span style="margin-left: 6px">
-                <el-avatar shape="square" style="cursor:pointer;"/>
-              </span>
+            <el-avatar shape="square" style="cursor:pointer;"/>
+          </span>
         </div>
       </div>
+
       <!-- 输入框 -->
-      <div style="margin-top: 1%;height: 8%;">
+      <div style="margin-top: 1%;height: 8%;width: 48vw">
         <span>语音、</span>
-        <el-input id="chat-input" placeholder="请开始你的表演......" type="text" style="width: 70%"/>
+        <el-input id="chat-input" placeholder="请开始你的表演......" type="text" style="width: 70%" v-model="chatMsg"/>
         <span>表情、</span>
         <span>截图、</span>
         <span>文件、</span>
@@ -49,7 +52,13 @@
 
 <script>
 export default {
-  name: "Window"
+  name: "Window",
+
+  data() {
+    return {
+      chatMsg: '',
+    }
+  },
 }
 </script>
 
