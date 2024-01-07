@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col :span="5" style="height: 90%;">
-      <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;">
+      <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;cursor:pointer;">
         <div>
           <el-avatar shape="square" :size="48"/>
         </div>

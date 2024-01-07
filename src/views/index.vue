@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import Header from "@/component/index/Header";
-import Session from "@/component/index/Session";
-import Window from "@/component/index/Window";
-import Right from "@/component/index/Right";
+import Header from "@/component/index/header/Header";
+import Session from "@/component/index/session/Session";
+import Window from "@/component/index/window/Window";
+import Right from "@/component/index/right/Right";
 import userApi from '@/api/user'
 
 export default {
@@ -71,13 +71,9 @@ export default {
       if (token == '' || token == null) {
         this.$router.push('/login')
       }
-      console.log(11111111111)
       userApi.getByToken().then(res => {
         this.loginUser = res.data.data;
-        console.log(2222222222222)
       }).catch(e => {
-        console.log(333333333333333)
-        console.log(e)
         localStorage.removeItem("token");
         this.$router.push('/login')
       })
