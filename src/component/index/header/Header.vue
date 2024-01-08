@@ -19,6 +19,14 @@
 export default {
   name: "Header",
   methods: {
+    /**
+     * 退出登录
+     */
+    logout() {
+      localStorage.removeItem('token')
+      this.$message.success('退出成功')
+      this.$router.push('/login')
+    }
   }
 }
 </script>

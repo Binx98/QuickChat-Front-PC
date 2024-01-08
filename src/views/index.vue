@@ -23,7 +23,10 @@ import Header from "@/component/index/header/Header";
 import Session from "@/component/index/session/Session";
 import Window from "@/component/index/window/Window";
 import Right from "@/component/index/right/InfoDynamic";
+
 import userApi from '@/api/user'
+import sessionApi from '@/api/session'
+import chatMsgApi from "@/api/chatmsg";
 
 export default {
   components: {
@@ -60,6 +63,8 @@ export default {
 
   created() {
     this.getByToken();
+    this.getSessionList();
+    this.getChatMsgList();
   },
 
   methods: {
@@ -76,6 +81,28 @@ export default {
       }).catch(e => {
         localStorage.removeItem("token");
         this.$router.push('/login')
+      })
+    },
+
+    /**
+     * 查询会话列表
+     */
+    getSessionList() {
+      sessionApi.getSessionList().then(res => {
+        this.sessionList = res.data.data;
+      }).catch(e => {
+        this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
+      })
+    },
+
+    /**
+     * 查询会话聊天列表
+     */
+    getChatMsgList() {
+      chatMsgApi.getChatMsgList().then(res => {
+
+      }).catch(e => {
+        this.$message.error('聊天记录信息加载失败，请刷新页面重试！')
       })
     }
   },
