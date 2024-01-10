@@ -64,7 +64,6 @@ export default {
   created() {
     this.getByToken();
     this.getSessionList();
-    this.getChatMsgList();
   },
 
   methods: {
@@ -90,6 +89,7 @@ export default {
     getSessionList() {
       sessionApi.getSessionList().then(res => {
         this.sessionList = res.data.data;
+        this.getChatMsgList();
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
       })
@@ -100,7 +100,7 @@ export default {
      */
     getChatMsgList() {
       chatMsgApi.getChatMsgList().then(res => {
-
+        this.chatMsgList = res.data.data;
       }).catch(e => {
         this.$message.error('聊天记录信息加载失败，请刷新页面重试！')
       })
