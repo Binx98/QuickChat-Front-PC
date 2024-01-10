@@ -54,25 +54,28 @@ export default {
       },
 
       // 会话列表
-      sessionList: [],
+      sessionList: [
+          "1"
+      ],
 
       // 聊天信息（当前会话）
       chatMsgList: [],
     }
   },
 
-  created() {
-    this.getByToken();
-    this.getSessionList();
+  async created() {
+    await this.getByToken();
+    await this.getSessionList();
+    await this.getChatMsgList();
   },
 
   methods: {
     /**
      * 根据 token 获取用户信息
      */
-    getByToken() {
+    async getByToken() {
       let token = localStorage.getItem("token");
-      if (token == '' || token == null) {
+      if (token === '' || token === null) {
         this.$router.push('/login')
       }
       userApi.getByToken().then(res => {
@@ -86,10 +89,11 @@ export default {
     /**
      * 查询会话列表
      */
-    getSessionList() {
+    async getSessionList() {
       sessionApi.getSessionList().then(res => {
+        console.log(res.data.data)
         this.sessionList = res.data.data;
-        this.getChatMsgList();
+        return this.sessionList;
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
       })
@@ -98,8 +102,8 @@ export default {
     /**
      * 查询会话聊天列表
      */
-    getChatMsgList() {
-      chatMsgApi.getChatMsgList().then(res => {
+    async getChatMsgList() {
+      chatMsgApi.getChatMsgList(this.sessionList).then(res => {
         this.chatMsgList = res.data.data;
       }).catch(e => {
         this.$message.error('聊天记录信息加载失败，请刷新页面重试！')
