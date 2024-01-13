@@ -1,7 +1,17 @@
 <template>
   <div class="main">
     <div class="window">
-      <el-row :gutter="12" style="height: 100%">
+      <el-row :gutter="10" style="height: 100%">
+        <!-- 侧边导航栏 -->
+        <el-col :span="2" style="width: 5vw">
+          <div style="border: 1px solid red">
+            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
+            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
+            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
+            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
+          </div>
+        </el-col>
+
         <!-- 导航栏 -->
         <Header/>
 
@@ -55,7 +65,7 @@ export default {
 
       // 会话列表
       sessionList: [
-          "1"
+        "1"
       ],
 
       // 聊天信息（当前会话）
@@ -115,7 +125,7 @@ export default {
 
 <style scoped>
 .main {
-  width: 80%;
+  width: 82%;
   height: 93%;
   margin: auto;
   position: absolute;

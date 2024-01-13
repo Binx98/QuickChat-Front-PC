@@ -6,7 +6,7 @@ export default {
      */
     getChatMsgList(data) {
         return axios({
-            url: `/chat/msg/list/${1}/${10}`,
+            url: `/chat/msg/list`,
             method: 'post',
             data: data
         })
