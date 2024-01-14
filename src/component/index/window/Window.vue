@@ -1,6 +1,6 @@
 <template>
   <span>
-    <el-col class="window-cls">
+    <el-col :span="15" class="window-cls">
       <!--  上边栏  -->
       <div style="display: flex; align-items: center;padding-left: 1%; height: 9%">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
@@ -94,7 +94,6 @@ export default {
 }
 
 .window-cls {
-  width: 49.2vw;
   background-color: $window-item-color;
   border-radius: 10px;
   height: 90%;

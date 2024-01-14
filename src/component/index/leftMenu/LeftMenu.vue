@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-col style="width: 5.2vw">
+    <el-col :span="1">
       <div class="colorStyle">
         <div>11111</div>
       </div>

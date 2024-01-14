@@ -1,13 +1,13 @@
 <template>
   <span>
-    <el-col class="col" style="width: 15vw">
+    <el-col :span="5" class="col">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
     </el-col>
     <el-col class="col" style="width: 48vw">
       <el-input style="width: 50%"/>
     </el-col>
     <el-col style="width: 10vw">
-      搞几个icon：喇叭、换主题、音乐
+      搞几个
     </el-col>
   </span>
 </template>

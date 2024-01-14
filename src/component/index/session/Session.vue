@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-col style="height: 90%;width: 14.5vw">
+    <el-col :span="5" style="height: 90%">
       <div class="session-cls">
         <div>
           <el-avatar shape="square" :size="48"/>
