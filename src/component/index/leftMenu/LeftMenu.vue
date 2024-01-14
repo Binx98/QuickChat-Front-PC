@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col style="width: 5.2vw">
-      <div style="height: 93vh;background-color: #141417">
+      <div class="colorStyle">
         <div>11111</div>
       </div>
     </el-col>
@@ -14,6 +14,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.colorStyle {
+  height: 93vh;
+  background-color: $leo-theme-color
+}
 </style>
