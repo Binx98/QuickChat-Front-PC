@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col style="height: 90%;width: 14.5vw">
-      <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;cursor:pointer;">
+      <div class="session-cls">
         <div>
           <el-avatar shape="square" :size="48"/>
         </div>
@@ -23,6 +23,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.session-cls {
+  background-color: $window-item-color;
+  border-radius: 6px;
+  margin-bottom: 2px;
+  display: flex;
+  cursor: pointer;
+}
 </style>

@@ -14,11 +14,11 @@
         </div>
         <!--  记住密码、忘记密码  -->
         <div style="font-size: 14px;margin-bottom: 2%">
-          <span style="color: darkgrey;margin-right: 7vw">
+          <span class="form-font" style="margin-right: 7vw">
             记住密码
             <el-switch v-model="loginForm.rememberPwd" active-color="#12CEC2FF"/>
           </span>
-          <span style="color: darkgrey;cursor: pointer">忘记密码？</span>
+          <span class="form-font" style="cursor: pointer">忘记密码？</span>
         </div>
         <!--  登录按钮  -->
         <el-button class="btn-cls" type="primary" size="medium" round @click="login()">
@@ -27,8 +27,8 @@
       </div>
       <!--   去注册   -->
       <div style="font-size: 14px">
-        <span style="color: darkgrey">没有账号？</span>
-        <span style="color: #12CEC2FF;cursor: pointer" @click="clickGoRegister()">去注册></span>
+        <span class="form-font">没有账号？</span>
+        <span class="go-register" @click="clickGoRegister()">去注册></span>
       </div>
     </div>
   </div>
@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .main {
   display: flex;
   justify-content: center;
@@ -107,7 +107,7 @@ export default {
 }
 
 .btn-cls {
-  background-color: #12CEC2FF;
+  background-color: $logo-color;
   width: 18vw;
   height: 6vh;
   margin-bottom: 2%;
@@ -116,7 +116,7 @@ export default {
 .form-container {
   width: 35vw;
   text-align: center;
-  background-color: #232427;
+  background-color: $window-bottom-color;
   opacity: 0.9;
   border-radius: 20px
 }
@@ -127,5 +127,14 @@ export default {
   margin-bottom: 2%;
   width: 18vw;
   height: 6.2vh
+}
+
+.go-register {
+  color: $logo-color;
+  cursor: pointer
+}
+
+.form-font {
+  color: $form-font-color
 }
 </style>

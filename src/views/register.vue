@@ -11,7 +11,7 @@
               style="border-radius: 10px;opacity: 0.6;margin-bottom: 2%;margin-right:1%;width: 11.3vw;height: 6.2vh"
               placeholder="请输入邮箱" v-model="registerForm.toEmail"/>
           <el-button :disabled="disable" @click="sendEmail()"
-                     style="height: 5.2vh;margin-bottom: 2%;background-color: #12CEC2FF;"
+                     class="send-btn"
                      type="primary">
             {{ sendButtonMsg }}
           </el-button>
@@ -21,8 +21,8 @@
           注册
         </el-button>
         <div style="font-size: 14px">
-          <span style="color: darkgrey">已有账号？</span>
-          <span style="color: #12CEC2FF; cursor:pointer;" @click="clickGoLogin()">去登录></span>
+          <span class="form-font">已有账号？</span>
+          <span class="go-login" @click="clickGoLogin()">去登录></span>
         </div>
       </div>
     </div>
@@ -117,7 +117,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .main {
   display: flex;
   justify-content: center;
@@ -126,7 +126,7 @@ export default {
 }
 
 .btn-cls {
-  background-color: #12CEC2FF;
+  background-color: $logo-color;
   width: 18vw;
   height: 6vh;
   margin-bottom: 2%;
@@ -135,7 +135,7 @@ export default {
 .form-container {
   width: 35vw;
   text-align: center;
-  background-color: #232427;
+  background-color: $window-bottom-color;
   opacity: 0.9;
   border-radius: 20px
 }
@@ -146,5 +146,20 @@ export default {
   margin-bottom: 2%;
   width: 18vw;
   height: 6.2vh
+}
+
+.send-btn {
+  height: 5.2vh;
+  margin-bottom: 2%;
+  background-color: $logo-color;
+}
+
+.go-login {
+  color: $logo-color;
+  cursor: pointer;
+}
+
+.form-font {
+  color: $form-font-color
 }
 </style>

@@ -2,15 +2,15 @@
   <span>
     <el-col style="height: 90.5%;overflow: auto;width: 13.5vw">
       <!--  会话概览、视频通话  -->
-      <div style="background-color: #323335;border-radius: 10px;height: 32%">
+      <div class="div-cls" style="height: 32%">
         会话概览、视频通话
       </div>
       <!--  联系方式  -->
-      <div style="background-color: #323335;border-radius: 10px;height: 32%;margin-top: 2%">
+      <div class="div-cls" style="border-radius: 10px;height: 32%;margin-top: 2%">
         联系方式
       </div>
       <!--  动态  -->
-      <div style="background-color: #323335;border-radius: 10px;height: 34%;margin-top: 2%">
+      <div class="div-cls" style="border-radius: 10px;height: 34%;margin-top: 2%">
         动态信息
       </div>
     </el-col>
@@ -23,6 +23,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.div-cls {
+  background-color: $window-item-color;
+  border-radius: 10px;
+}
 </style>

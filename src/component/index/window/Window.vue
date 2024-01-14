@@ -1,10 +1,10 @@
 <template>
   <span>
-    <el-col style="width: 49.2vw;background-color: #323335;border-radius: 10px;height: 90%;overflow: auto;">
+    <el-col class="window-cls">
       <!--  上边栏  -->
       <div style="display: flex; align-items: center;padding-left: 1%; height: 9%">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
-        <div style="border: 1px solid #16334a">徐志摩</div>
+        <div>徐志摩</div>
       </div>
 
       <!--  窗口  -->
@@ -24,7 +24,7 @@
         <!--  主动发送  -->
         <div
             style="float: right;width: 70%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
-          <div style="margin-left: 1.6%;background-color: #12CEC2FF;border-radius: 10px;display: inline-block;">
+          <div class="send-div-cls">
             <div style="padding: 15px;font-size: 14px;word-break: break-all">
               2222222222222222222222222222222222222222222222
             </div>
@@ -84,12 +84,27 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #chat-input {
   border-radius: 20px;
   font-size: 14px;
   white-space: pre-wrap;
   overflow-y: auto;
   resize: vertical;
+}
+
+.window-cls {
+  width: 49.2vw;
+  background-color: $window-item-color;
+  border-radius: 10px;
+  height: 90%;
+  overflow: auto;
+}
+
+.send-div-cls {
+  margin-left: 1.6%;
+  background-color: #12CEC2FF;
+  border-radius: 10px;
+  display: inline-block;
 }
 </style>

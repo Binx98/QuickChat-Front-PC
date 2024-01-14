@@ -118,7 +118,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .main {
   width: 82%;
   height: 93%;
@@ -132,7 +132,7 @@ export default {
 }
 
 .window {
-  background-color: #232427;
+  background-color: $window-bottom-color;
   width: 100%;
   height: 100%;
   border-radius: 10px;
