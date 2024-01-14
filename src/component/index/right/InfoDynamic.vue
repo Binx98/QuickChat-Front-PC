@@ -1,6 +1,6 @@
 <template>
   <span>
-    <el-col :span="3" style="height: 90%;overflow: auto;">
+    <el-col :span="3" style="height: 90%;overflow: auto;width: 12vw">
       <!--  会话概览、视频通话  -->
       <div class="div-cls" style="height: 32%">
         会话概览、视频通话

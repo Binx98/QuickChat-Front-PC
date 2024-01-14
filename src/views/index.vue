@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="window">
-      <el-row :gutter="10" style="height: 100%">
+      <el-row :gutter="8" style="height: 100%">
         <!-- 侧边导航栏 -->
         <LeftMenu/>
 
