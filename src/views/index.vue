@@ -1,16 +1,9 @@
 <template>
   <div class="main">
     <div class="window">
-      <el-row :gutter="10" style="height: 100%">
+      <el-row :gutter="8" style="height: 100%">
         <!-- 侧边导航栏 -->
-        <el-col :span="2" style="width: 5vw">
-          <div style="border: 1px solid red">
-            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
-            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
-            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
-            <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
-          </div>
-        </el-col>
+        <LeftMenu/>
 
         <!-- 导航栏 -->
         <Header/>
@@ -29,6 +22,7 @@
 </template>
 
 <script>
+import LeftMenu from "@/component/index/leftMenu/LeftMenu";
 import Header from "@/component/index/header/Header";
 import Session from "@/component/index/session/Session";
 import Window from "@/component/index/window/Window";
@@ -40,6 +34,7 @@ import chatMsgApi from "@/api/chatmsg";
 
 export default {
   components: {
+    LeftMenu,
     Right,
     Window,
     Session,

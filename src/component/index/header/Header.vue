@@ -1,16 +1,13 @@
 <template>
   <span>
-    <el-col :span="6" class="col">
+    <el-col class="col" style="width: 15vw">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
     </el-col>
-    <el-col :span="15" class="col">
+    <el-col class="col" style="width: 48vw">
       <el-input style="width: 50%"/>
     </el-col>
-    <el-col :span="1" style=" height: 10%;">
+    <el-col style="width: 10vw">
       搞几个icon：喇叭、换主题、音乐
-    </el-col>
-    <el-col :span="2" class="col">
-      <el-avatar :size="58" style="cursor: pointer"/>
     </el-col>
   </span>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-col :span="4" style="height: 90%;">
+    <el-col style="height: 90%;width: 14.5vw">
       <div style="background-color: #323335;border-radius: 6px;margin-bottom: 2px;display: flex;cursor:pointer;">
         <div>
           <el-avatar shape="square" :size="48"/>
