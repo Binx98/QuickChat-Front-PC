@@ -2,7 +2,7 @@
   <div>
     <el-col :span="1" style="width: 5vw">
       <div class="colorStyle">
-        <div>11111</div>
+        <el-avatar :size="52" style="cursor: pointer"/>
       </div>
     </el-col>
   </div>
@@ -10,7 +10,23 @@
 
 <script>
 export default {
-  name: "LeftMenu"
+  name: "LeftMenu",
+
+  props: [
+    'userInfo'
+  ],
+
+  data() {
+    return {
+      loginUser: this.userInfo
+    }
+  },
+
+  created() {
+    console.log(this.userInfo)
+  },
+
+  methods: {}
 }
 </script>
 
