@@ -3,6 +3,7 @@
     <el-col :span="1" style="width: 5vw">
       <div class="colorStyle">
         <el-avatar :size="52" style="cursor: pointer"/>
+<!--        {{this.loginUser}}-->
       </div>
     </el-col>
   </div>
@@ -11,19 +12,15 @@
 <script>
 export default {
   name: "LeftMenu",
-
-  props: [
-    'userInfo'
-  ],
+  props: ['loginUser'],
 
   data() {
     return {
-      loginUser: this.userInfo
     }
   },
 
   created() {
-    console.log(this.userInfo)
+
   },
 
   methods: {}

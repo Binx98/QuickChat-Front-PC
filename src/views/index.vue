@@ -3,13 +3,13 @@
     <div class="window">
       <el-row shape="square" :gutter="8" style="height: 100%">
         <!-- 侧边导航栏 -->
-        <LeftMenu v-if="loginUser != null" :userInfo="loginUser"/>
+        <LeftMenu :loginUser="loginUser"/>
 
         <!-- 导航栏 -->
         <Header/>
 
         <!-- 会话列表 -->
-        <Session/>
+        <Session :sessionList="sessionList"/>
 
         <!-- 聊天窗口 -->
         <Window/>

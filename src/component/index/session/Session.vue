@@ -1,16 +1,16 @@
 <template>
   <div>
     <el-col :span="4" style="height: 90%">
-      <div class="session-cls">
+      <div class="session-cls" v-for="item in sessionList">
         <div>
           <el-avatar shape="square" :size="48"/>
         </div>
         <div style="width: 50%">
-          <div style="font-size: 13px;margin-bottom: 2%;color: antiquewhite">QuickChat官方</div>
-          <div style="font-size: 13px;color: antiquewhite">你好啊！</div>
+          <div style="font-size: 12px;margin-bottom: 2%;color: antiquewhite">{{ item.name }}</div>
+          <div style="font-size: 12px;color: antiquewhite">你好啊！</div>
         </div>
         <div>
-          <div style="font-size: 12px;color: antiquewhite">2023-12-02</div>
+          <div style="font-size: 12px;color: antiquewhite">{{ item.lastReadTime }}</div>
         </div>
       </div>
     </el-col>
@@ -19,7 +19,8 @@
 
 <script>
 export default {
-  name: "Session"
+  name: "Session",
+  props: ['sessionList']
 }
 </script>
 
