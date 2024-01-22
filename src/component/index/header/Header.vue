@@ -1,6 +1,6 @@
 <template>
   <span>
-    <el-col :span="6" class="col">
+    <el-col :span="4" class="col">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
     </el-col>
     <el-col :span="15" class="col">
