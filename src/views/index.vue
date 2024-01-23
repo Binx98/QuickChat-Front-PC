@@ -12,7 +12,7 @@
         <Session :sessionList="sessionList"/>
 
         <!-- 聊天窗口 -->
-        <Window/>
+        <Window :chatMsgList="chatMsgList"/>
 
         <!-- 用户信息、功能框架 -->
         <Right/>
@@ -68,7 +68,7 @@ export default {
         "1"
       ],
 
-      // 聊天信息（当前会话）
+      // 聊天信息
       chatMsgList: [],
     }
   },
@@ -78,6 +78,30 @@ export default {
   },
 
   methods: {
+    /**
+     * WebSocket客户端初始化
+     */
+    initWebSocket() {
+      let ws = new WebSocket('ws://localhost:10086');
+
+      // 建立连接
+      ws.onopen = evt => {
+        console.log("客户端WebSocket建立连接：" + this.loginUser.accountId);
+        ws.send("Hello WebSockets!");
+      };
+
+      // 获取Channel消息
+      ws.onmessage = evt => {
+        console.log("Received Message: " + evt.data);
+        ws.close();
+      };
+
+      // 关闭连接
+      ws.onclose = evt => {
+        console.log("Connection closed.");
+      };
+    },
+
     /**
      * 根据 token 获取用户信息
      */
@@ -90,6 +114,7 @@ export default {
         this.loginUser = res.data.data;
         this.getSessionList();
         this.getChatMsgList();
+        this.initWebSocket();
       }).catch(e => {
         localStorage.removeItem("token");
         this.$router.push('/login')

@@ -8,25 +8,24 @@
       </div>
 
       <!--  窗口  -->
-      <div style="height: 80%;overflow: auto;">
+      <div style="height: 80%;overflow: auto;" v-for="item in chatMsgList">
         <!--  接收信息  -->
-        <div style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
+        <div class="receive-item">
           <span style="margin-right: 6px">
             <el-avatar shape="square" style="cursor:pointer"/>
           </span>
           <div style="background-color: floralwhite;border-radius: 10px;">
             <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-              11111111111
+              {{ item.content }}
             </div>
           </div>
         </div>
 
         <!--  主动发送  -->
-        <div
-            style="float: right;width: 70%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+        <div class="send-item">
           <div class="send-div-cls">
             <div style="padding: 15px;font-size: 14px;word-break: break-all">
-              2222222222222222222222222222222222222222222222
+              {{ item.content }}
             </div>
           </div>
           <span style="margin-left: 6px">
@@ -55,6 +54,8 @@ import Emoji from "@/component/index/window/Emoji";
 
 export default {
   name: "Window",
+
+  props: ['chatMsgList'],
 
   components: {
     Emoji
@@ -105,5 +106,23 @@ export default {
   background-color: #12CEC2FF;
   border-radius: 10px;
   display: inline-block;
+}
+
+.receive-item {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin-left: 1%;
+  margin-top: 1%;
+}
+
+.send-item {
+  float: right;
+  width: 70%;
+  margin-right: 1%;
+  margin-top: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end
 }
 </style>
