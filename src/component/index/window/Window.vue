@@ -61,6 +61,10 @@ export default {
     Emoji
   },
 
+  created() {
+    console.log(this.chatMsgList)
+  },
+
   data() {
     return {
       chatMsg: '',

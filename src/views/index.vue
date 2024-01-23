@@ -65,7 +65,7 @@ export default {
 
       // 会话列表
       sessionList: [
-        "1"
+        "wenshuangxin"
       ],
 
       // 聊天信息
