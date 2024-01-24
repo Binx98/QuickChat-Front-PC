@@ -4,33 +4,35 @@
       <!--  上边栏  -->
       <div style="display: flex; align-items: center;padding-left: 1%; height: 9%">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
-        <div>徐志摩</div>
+        <div></div>
       </div>
 
       <!--  窗口  -->
-      <div style="height: 80%;overflow: auto;" v-for="item in chatMsgList">
-        <!--  接收信息  -->
-        <div class="receive-item">
-          <span style="margin-right: 6px">
-            <el-avatar shape="square" style="cursor:pointer"/>
-          </span>
-          <div style="background-color: floralwhite;border-radius: 10px;">
-            <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-              {{ item.content }}
+      <div style="height: 80%;overflow: auto;">
+        <div v-for="item in chatMsgList[relationId]">
+          <!--  接收信息  -->
+          <div class="receive-item" v-if="item.accountId === 'wenshuangxin'">
+            <span style="margin-right: 6px">
+              <el-avatar shape="square" style="cursor:pointer"/>
+            </span>
+            <div style="background-color: floralwhite;border-radius: 10px;">
+              <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                {{ item.content }}
+              </div>
             </div>
           </div>
-        </div>
 
-        <!--  主动发送  -->
-        <div class="send-item">
-          <div class="send-div-cls">
-            <div style="padding: 15px;font-size: 14px;word-break: break-all">
-              {{ item.content }}
+          <!--  主动发送  -->
+          <div class="send-item" v-if="item.accountId === 'xuzhibin'">
+            <div class="send-div-cls">
+              <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                {{ item.content }}
+              </div>
             </div>
+            <span style="margin-left: 6px">
+              <el-avatar shape="square" style="cursor:pointer;"/>
+            </span>
           </div>
-          <span style="margin-left: 6px">
-            <el-avatar shape="square" style="cursor:pointer;"/>
-          </span>
         </div>
       </div>
 
@@ -70,6 +72,7 @@ export default {
       chatMsg: '',
       input: '',
       search: '',
+      relationId: 'wenshuangxin:xuzhibin',
     }
   },
 
