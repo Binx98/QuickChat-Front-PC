@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col :span="4" style="height: 90%">
-      <div class="session-cls" v-for="item in sessionList">
+      <div class="session-cls" v-for="item in sessionList" @click="chooseSession()">
         <div>
           <el-avatar shape="square" :size="48"/>
         </div>
@@ -20,7 +20,12 @@
 <script>
 export default {
   name: "Session",
-  props: ['sessionList']
+  props: ['sessionList'],
+  methods: {
+    chooseSession() {
+      console.log('选中会话')
+    }
+  }
 }
 </script>
 
@@ -31,5 +36,9 @@ export default {
   margin-bottom: 2px;
   display: flex;
   cursor: pointer;
+}
+
+.session-cls:hover {
+  background-color: $logo-color;
 }
 </style>

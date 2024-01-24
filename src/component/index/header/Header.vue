@@ -1,12 +1,14 @@
 <template>
   <span>
     <el-col :span="4" class="col">
-      <el-image :src="require('@/assets/logo/logo2_transparent.png')" class="logo"/>
+      <div style="border: 1px solid red">
+        <el-image class="logo" :src="require('@/assets/logo/logo2_transparent.4cb48f1f(1).png')"/>
+      </div>
     </el-col>
     <el-col :span="15" class="col">
       <el-input style="width: 50%"/>
     </el-col>
-  <el-col :span="1" style=" height: 10%;">
+    <el-col :span="1" style=" height: 10%;">
       搞几个icon：喇叭、换主题、音乐
     </el-col>
   </span>
@@ -37,8 +39,7 @@ export default {
 }
 
 .logo {
-  height: 16vh;
-  object-fit: cover;
+  height: 10vh;
   cursor: pointer;
 }
 </style>
