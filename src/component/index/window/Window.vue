@@ -2,9 +2,9 @@
   <span>
     <el-col :span="15" class="window-cls">
       <!--  上边栏  -->
-      <div style="display: flex; align-items: center;padding-left: 1%; height: 9%">
+      <div class="head-bar">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
-        <div></div>
+        <div>徐志摩</div>
       </div>
 
       <!--  窗口  -->
@@ -37,7 +37,7 @@
       </div>
 
       <!-- 输入框 -->
-      <div style="margin-top: 1%;height: 8%;width: 48vw">
+      <div class="input-cls">
         <span>语音、</span>
         <el-input id="chat-input" placeholder="请开始你的表演......" type="text" style="width: 70%" v-model="chatMsg"/>
         <Emoji/>
@@ -131,5 +131,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-end
+}
+
+.head-bar {
+  display: flex;
+  align-items: center;
+  padding-left: 1%;
+  height: 9%;
+  border: solid $window-line-color;
+  border-width: 0 0 1px 0;
+}
+
+.input-cls {
+  margin-top: 1%;
+  height: 8%;
+  width: 51vw;
+  border: solid $window-line-color;
+  border-width: 1px 0 0 0;
 }
 </style>
