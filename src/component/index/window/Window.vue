@@ -79,16 +79,17 @@ export default {
     }
   },
 
-  method: {
+  methods: {
     /**
-     * 发送消息
+     * 发送文字、Emoji信息
      */
     sendMsg() {
-      chatMsgApi.sendMsg()
-    },
+      this.chatMsg.msgType = '1';
+      chatMsgApi.sendMsg(this.chatMsg).then(res => {
+        // 查询当前会话信息
+      }).catch(e => {
 
-    append(emoji) {
-      this.input += emoji
+      })
     },
   },
 }
@@ -141,7 +142,7 @@ export default {
   padding-left: 1%;
   height: 9%;
   border: solid $window-line-color;
-  border-width: 0 0 1px 0;
+  border-width: 0 0 2px 0;
 }
 
 .input-cls {
@@ -149,6 +150,6 @@ export default {
   height: 8%;
   width: 51vw;
   border: solid $window-line-color;
-  border-width: 1px 0 0 0;
+  border-width: 2px 0 0 0;
 }
 </style>
