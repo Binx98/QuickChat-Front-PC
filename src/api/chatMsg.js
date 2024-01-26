@@ -10,5 +10,16 @@ export default {
             method: 'post',
             data: data
         })
+    },
+
+    /**
+     * 发送消息
+     */
+    sendMsg(data) {
+        return axios({
+            url: `/chat/msg/send`,
+            method: 'post',
+            data: data
+        })
     }
 }

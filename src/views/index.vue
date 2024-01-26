@@ -30,7 +30,7 @@ import Right from "@/component/index/right/InfoDynamic";
 
 import userApi from '@/api/user'
 import sessionApi from '@/api/session'
-import chatMsgApi from "@/api/chatmsg";
+import chatMsgApi from "@/api/chatMsg";
 
 export default {
   components: {

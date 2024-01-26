@@ -43,16 +43,15 @@
         <Emoji/>
         <span>截图、</span>
         <span>文件、</span>
-        <span>发送</span>
+        <span @click="sendMsg()">发送</span>
       </div>
     </el-col>
   </span>
 </template>
 
 <script>
-
-
 import Emoji from "@/component/index/window/Emoji";
+import chatMsgApi from "@/api/chatMsg";
 
 export default {
   name: "Window",
@@ -69,7 +68,11 @@ export default {
 
   data() {
     return {
-      chatMsg: '',
+      chatMsg: {
+        toId: '',
+        msgType: '',
+        content: '',
+      },
       input: '',
       search: '',
       relationId: 'wenshuangxin:xuzhibin',
@@ -77,16 +80,15 @@ export default {
   },
 
   method: {
+    /**
+     * 发送消息
+     */
+    sendMsg() {
+      chatMsgApi.sendMsg()
+    },
+
     append(emoji) {
       this.input += emoji
-    },
-  },
-
-  directives: {
-    focus: {
-      inserted(el) {
-        el.focus()
-      },
     },
   },
 }
