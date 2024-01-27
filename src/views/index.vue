@@ -12,7 +12,7 @@
         <Session :sessionList="sessionList"/>
 
         <!-- 聊天窗口 -->
-        <Window :chatMsgList="chatMsgList"/>
+        <Window :chatMsgList="chatMsgList" :loginUser="loginUser"/>
 
         <!-- 用户信息、功能框架 -->
         <Right/>

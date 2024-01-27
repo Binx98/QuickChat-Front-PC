@@ -39,7 +39,8 @@
       <!-- 输入框 -->
       <div class="input-cls">
         <span>语音、</span>
-        <el-input id="chat-input" placeholder="请开始你的表演......" type="text" style="width: 70%" v-model="chatMsg"/>
+        <el-input id="chat-input" placeholder="请开始你的表演......" style="width: 70%;"
+                  type="text" v-model="chatMsg.content"/>
         <Emoji/>
         <span>截图、</span>
         <span>文件、</span>
@@ -56,7 +57,10 @@ import chatMsgApi from "@/api/chatMsg";
 export default {
   name: "Window",
 
-  props: ['chatMsgList'],
+  props: [
+    'chatMsgList',
+    'loginUser'
+  ],
 
   components: {
     Emoji
@@ -69,6 +73,7 @@ export default {
   data() {
     return {
       chatMsg: {
+        fromId: this.loginUser.accountId,
         toId: '',
         msgType: '',
         content: '',
@@ -81,14 +86,16 @@ export default {
 
   methods: {
     /**
-     * 发送文字、Emoji信息
+     * 发送按钮：针对文字 + emoji
      */
     sendMsg() {
+      this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         // 查询当前会话信息
+        console.log(res)
       }).catch(e => {
-
+        this.$message.error(e.data.msg)
       })
     },
   },
