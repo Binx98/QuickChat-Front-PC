@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import LeftMenu from "@/component/index/leftMenu/LeftMenu";
-import Header from "@/component/index/header/Header";
-import Session from "@/component/index/session/Session";
-import Window from "@/component/index/window/Window";
-import Right from "@/component/index/right/InfoDynamic";
+import LeftMenu from "@/component/leftMenu/LeftMenu";
+import Header from "@/component/header/Header";
+import Session from "@/component/session/Session";
+import Window from "@/component/window/Window";
+import Right from "@/component/right/InfoDynamic";
 
 import userApi from '@/api/user'
 import sessionApi from '@/api/session'
@@ -73,7 +73,6 @@ export default {
 
   created() {
     this.getByToken()
-    this.getSessionList()
   },
 
   methods: {
@@ -111,6 +110,7 @@ export default {
       }
       userApi.getByToken().then(res => {
         this.loginUser = res.data.data;
+        this.getSessionList();
         this.initWebSocket();
       }).catch(e => {
         localStorage.removeItem("token");

@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import Emoji from "@/component/index/window/Emoji";
+import Emoji from "@/component/window/Emoji";
 import chatMsgApi from "@/api/chatMsg";
 
 export default {
@@ -95,7 +95,7 @@ export default {
         // 查询当前会话信息
         console.log(res)
       }).catch(e => {
-        this.$message.error(e.data.msg)
+        this.$message.error('服务端功能异常，发送消息失败！')
       })
     },
   },
