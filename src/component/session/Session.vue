@@ -6,11 +6,11 @@
           <el-avatar shape="square" :size="48"/>
         </div>
         <div style="width: 50%">
-          <div style="font-size: 12px;margin-bottom: 2%;color: antiquewhite">{{ item.name }}</div>
+          <div style="font-size: 12px;margin-bottom: 2%;color: antiquewhite">{{ item.sessionName }}</div>
           <div style="font-size: 12px;color: antiquewhite">你好啊！</div>
         </div>
         <div>
-          <div style="font-size: 12px;color: antiquewhite">{{ item.lastReadTime }}</div>
+          <div style="font-size: 12px;color: antiquewhite">{{ item.updateTime }}</div>
         </div>
       </div>
     </el-col>

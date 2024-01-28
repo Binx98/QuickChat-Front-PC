@@ -4,7 +4,7 @@
       <!--  上边栏  -->
       <div class="head-bar">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
-        <div>徐志摩</div>
+        <div>{{ curSession.sessionName }}</div>
       </div>
 
       <!--  窗口  -->
@@ -71,7 +71,6 @@ export default {
     // 接收 Session 同级传值：选中会话
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
-      console.log(this.curSession)
     })
   },
 
@@ -98,7 +97,6 @@ export default {
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
-        // 查询当前会话信息
         console.log(res)
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
@@ -122,6 +120,23 @@ export default {
   border-radius: 10px;
   height: 90%;
   overflow: auto;
+}
+
+// 滚动条样式
+.window-cls::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.window-cls::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #9e9e9e;
+}
+
+.window-cls::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #ededed;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
 .send-div-cls {
