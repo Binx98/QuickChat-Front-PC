@@ -2,7 +2,7 @@
   <div>
     <el-col :span="1" style="width: 5vw">
       <div class="colorStyle">
-        <el-avatar :size="46" shape="square" style="cursor: pointer"/>
+        <el-avatar :size="48" shape="square" style="cursor: pointer"/>
 <!--        {{this.loginUser}}-->
       </div>
     </el-col>
