@@ -9,9 +9,9 @@
 
       <!--  窗口  -->
       <div style="height: 80%;overflow: auto;">
-        <div v-for="item in chatMsgList[relationId]">
+        <div v-for="item in chatMsgList[curSession.relationId]">
           <!--  接收信息  -->
-          <div class="receive-item" v-if="item.accountId === 'wenshuangxin'">
+          <div class="receive-item" v-if="item.accountId === curSession.toId">
             <span style="margin-right: 6px">
               <el-avatar shape="square" style="cursor:pointer"/>
             </span>
@@ -23,7 +23,7 @@
           </div>
 
           <!--  主动发送  -->
-          <div class="send-item" v-if="item.accountId === 'xuzhibin'">
+          <div class="send-item" v-if="item.accountId === curSession.fromId">
             <div class="send-div-cls">
               <div style="padding: 15px;font-size: 14px;word-break: break-all">
                 {{ item.content }}
@@ -69,10 +69,10 @@ export default {
 
   created() {
     // 接收 Session 同级传值：选中会话
-    EventBus.$on('relationId', data => {
-      console.log(data)
+    EventBus.$on('sessionInfo', sessionInfo => {
+      this.curSession = sessionInfo;
+      console.log(this.curSession)
     })
-    console.log(this.chatMsgList)
   },
 
   data() {
@@ -83,9 +83,7 @@ export default {
         msgType: '',
         content: '',
       },
-      input: '',
-      search: '',
-      relationId: 'wenshuangxin:xuzhibin',
+      curSession: '',
     }
   },
 

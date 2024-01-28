@@ -26,14 +26,12 @@ export default {
 
   data() {
     return {
-      curSession: '',
     }
   },
 
   methods: {
     chooseSession(item) {
-      this.curSession = item.relationId;
-      EventBus.$emit('relationId', this.curSession)
+      EventBus.$emit('sessionInfo', item)
     }
   }
 }
