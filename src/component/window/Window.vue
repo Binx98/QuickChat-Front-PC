@@ -53,6 +53,7 @@
 <script>
 import Emoji from "@/component/window/Emoji";
 import chatMsgApi from "@/api/chatMsg";
+import EventBus from "@/component/js/event-bus";
 
 export default {
   name: "Window",
@@ -67,6 +68,10 @@ export default {
   },
 
   created() {
+    // 接收 Session 同级传值：选中会话
+    EventBus.$on('relationId', data => {
+      console.log(data)
+    })
     console.log(this.chatMsgList)
   },
 
@@ -89,6 +94,9 @@ export default {
      * 发送按钮：针对文字 + emoji
      */
     sendMsg() {
+      if (this.chatMsg.content === '') {
+        return;
+      }
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {

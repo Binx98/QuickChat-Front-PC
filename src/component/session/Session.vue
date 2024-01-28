@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col :span="4" style="height: 90%">
-      <div class="session-cls" v-for="item in sessionList" @click="chooseSession()">
+      <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <div>
           <el-avatar shape="square" :size="48"/>
         </div>
@@ -18,12 +18,22 @@
 </template>
 
 <script>
+import EventBus from "@/component/js/event-bus";
+
 export default {
   name: "Session",
   props: ['sessionList'],
+
+  data() {
+    return {
+      curSession: '',
+    }
+  },
+
   methods: {
-    chooseSession() {
-      console.log('选中会话')
+    chooseSession(item) {
+      this.curSession = item.relationId;
+      EventBus.$emit('relationId', this.curSession)
     }
   }
 }
