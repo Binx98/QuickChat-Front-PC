@@ -64,9 +64,7 @@ export default {
       },
 
       // 会话列表
-      sessionList: [
-        "wenshuangxin"
-      ],
+      sessionList: [],
 
       // 聊天信息
       chatMsgList: [],
@@ -75,6 +73,7 @@ export default {
 
   created() {
     this.getByToken()
+    this.getSessionList()
   },
 
   methods: {
@@ -112,8 +111,6 @@ export default {
       }
       userApi.getByToken().then(res => {
         this.loginUser = res.data.data;
-        this.getSessionList();
-        this.getChatMsgList();
         this.initWebSocket();
       }).catch(e => {
         localStorage.removeItem("token");
@@ -127,6 +124,11 @@ export default {
     getSessionList() {
       sessionApi.getSessionList().then(res => {
         this.sessionList = res.data.data;
+        let accountIds = [];
+        for (let i = 0; i < this.sessionList.length; i++) {
+          accountIds.push(this.sessionList[i].toId)
+        }
+        this.getChatMsgList(accountIds);
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
       })
@@ -135,8 +137,8 @@ export default {
     /**
      * 查询会话聊天列表
      */
-    getChatMsgList() {
-      chatMsgApi.getChatMsgList(this.sessionList).then(res => {
+    getChatMsgList(param) {
+      chatMsgApi.getChatMsgList(param).then(res => {
         this.chatMsgList = res.data.data;
       }).catch(e => {
         this.$message.error('聊天记录信息加载失败，请刷新页面重试！')
