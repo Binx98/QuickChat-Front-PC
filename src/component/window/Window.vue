@@ -3,12 +3,12 @@
     <el-col :span="15" class="window-cls">
       <!--  上边栏  -->
       <div class="head-bar">
-        <el-avatar shape="square" style="margin-right: 1%;cursor:pointer;"/>
+        <el-avatar shape="square" style="margin-right: 1%;cursor:pointer"/>
         <div>{{ curSession.sessionName }}</div>
       </div>
 
       <!--  窗口  -->
-      <div style="height: 80%;overflow: auto;">
+      <div class="msg-window-cls">
         <div v-for="item in chatMsgList[curSession.relationId]">
           <!--  接收信息  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId">
@@ -115,6 +115,11 @@ export default {
   resize: vertical;
 }
 
+.msg-window-cls {
+  height: 80%;
+  overflow: auto;
+}
+
 .window-cls {
   background-color: $window-item-color;
   border-radius: 10px;
@@ -124,8 +129,8 @@ export default {
 
 // 滚动条样式
 .window-cls::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
 }
 
 .window-cls::-webkit-scrollbar-thumb {
@@ -134,6 +139,22 @@ export default {
 }
 
 .window-cls::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #ededed;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
+}
+
+.msg-window-cls::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+.msg-window-cls::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #9e9e9e;
+}
+
+.msg-window-cls::-webkit-scrollbar-track {
   border-radius: 10px;
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);

@@ -3,7 +3,7 @@
     <el-col :span="4" style="height: 90%">
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <div>
-          <el-avatar shape="square" :size="48"/>
+          <el-avatar shape="square" :size="50"/>
         </div>
         <div style="width: 50%">
           <div style="font-size: 12px;margin-bottom: 2%;color: antiquewhite">{{ item.sessionName }}</div>
@@ -39,6 +39,7 @@ export default {
 
 <style lang="scss" scoped>
 .session-cls {
+  height: 7vh;
   background-color: $window-item-color;
   border-radius: 6px;
   margin-bottom: 2px;
