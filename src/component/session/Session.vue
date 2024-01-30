@@ -1,33 +1,13 @@
 <template>
   <div>
     <el-col :span="4" style="height: 90%">
-<!--      <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">-->
-<!--        &lt;!&ndash; 头像 &ndash;&gt;-->
-<!--        <div style="border: 1px solid red;height: 6.9vh;width: 3.5vw;display: inline-block;float: left">-->
-
-<!--        </div>-->
-
-<!--        &lt;!&ndash; 昵称、时间 &ndash;&gt;-->
-<!--        <div style="border: 1px solid mediumspringgreen;height:2.3vh;width: 9vw;display: inline;float: left">-->
-<!--          <span style="width: 3vw;font-size: 13px">去你的</span>-->
-<!--          <span style="width: 3vw;font-size: 13px">2024-02-01</span>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; 聊天信息、未读数 &ndash;&gt;-->
-<!--        <div style="border: 1px solid mediumspringgreen;height: 3.6vh;width: 7vw;display: inline;float: left">-->
-<!--          <span style="width: 3vw;font-size: 13px">去你的</span>-->
-<!--          <span style="width: 3vw;font-size: 13px">2024-02-01</span>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; 聊天信息、未读数 &ndash;&gt;-->
-<!--        <div style="border: 1px solid mediumspringgreen;height: 3.6vh;width: 2vw;display: inline;float: left">-->
-<!--          <span style="width: 3vw;font-size: 13px">去你的</span>-->
-<!--          <span style="width: 3vw;font-size: 13px">2024-02-01</span>-->
-<!--        </div>-->
-<!--      </div>-->
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <!-- 头像 -->
-        <div style="border: 1px solid red; height: 100%; width: 26%; display: inline-block; float: left;"></div>
+        <div style="height: 100%; width: 26%; display: inline-block; float: left;">
+          <el-badge :value="1">
+            <img style="width: 3.4vw;height: 7vh"/>
+          </el-badge>
+        </div>
 
         <!-- 昵称、时间 -->
         <div style="border: 1px solid mediumspringgreen; height: 40%; width: 69%; display: inline; float: left;">
