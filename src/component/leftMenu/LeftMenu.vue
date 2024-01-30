@@ -1,9 +1,9 @@
 <template>
   <div>
-    <el-col :span="1" style="width: 5vw">
+    <el-col :span="1" style="width: 5vw;">
       <div class="colorStyle">
-        <el-avatar :size="48" shape="square" style="cursor: pointer"/>
-<!--        {{this.loginUser}}-->
+        <el-avatar class="avatar-cls" :size="48" shape="square"/>
+        <!--        {{this.loginUser}}-->
       </div>
     </el-col>
   </div>
@@ -15,8 +15,7 @@ export default {
   props: ['loginUser'],
 
   data() {
-    return {
-    }
+    return {}
   },
 
   created() {
@@ -31,5 +30,12 @@ export default {
 .colorStyle {
   height: 93vh;
   background-color: $left-menu-color;
+  display: flex;
+  justify-content: center;
+}
+
+.avatar-cls {
+  cursor: pointer;
+  margin-top: 1.8vh;
 }
 </style>
