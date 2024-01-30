@@ -1,37 +1,44 @@
 <template>
   <div>
     <el-col :span="4" style="height: 90%">
+<!--      <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">-->
+<!--        &lt;!&ndash; 头像 &ndash;&gt;-->
+<!--        <div style="border: 1px solid red;height: 6.9vh;width: 3.5vw;display: inline-block;float: left">-->
+
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 昵称、时间 &ndash;&gt;-->
+<!--        <div style="border: 1px solid mediumspringgreen;height:2.3vh;width: 9vw;display: inline;float: left">-->
+<!--          <span style="width: 3vw;font-size: 13px">去你的</span>-->
+<!--          <span style="width: 3vw;font-size: 13px">2024-02-01</span>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 聊天信息、未读数 &ndash;&gt;-->
+<!--        <div style="border: 1px solid mediumspringgreen;height: 3.6vh;width: 7vw;display: inline;float: left">-->
+<!--          <span style="width: 3vw;font-size: 13px">去你的</span>-->
+<!--          <span style="width: 3vw;font-size: 13px">2024-02-01</span>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 聊天信息、未读数 &ndash;&gt;-->
+<!--        <div style="border: 1px solid mediumspringgreen;height: 3.6vh;width: 2vw;display: inline;float: left">-->
+<!--          <span style="width: 3vw;font-size: 13px">去你的</span>-->
+<!--          <span style="width: 3vw;font-size: 13px">2024-02-01</span>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <!-- 头像 -->
-        <div style="border: 1px solid red;height: 6.9vh;width: 3.5vw;display: inline-block;float: left">
-
-        </div>
+        <div style="border: 1px solid red; height: 100%; width: 26%; display: inline-block; float: left;"></div>
 
         <!-- 昵称、时间 -->
-        <div style="border: 1px solid mediumspringgreen;height:2.3vh;width: 9vw;display: inline;float: left">
-          <span style="width: 3vw;font-size: 13px">去你的</span>
-          <span style="width: 3vw;font-size: 13px">2024-02-01</span>
+        <div style="border: 1px solid mediumspringgreen; height: 40%; width: 69%; display: inline; float: left;">
+          <span style="width: 40%; font-size: 13px; display: inline-block;">陈冠希</span>
+          <span style="width: 60%; font-size: 12px; display: inline-block;">2024-02-02</span>
         </div>
 
-        <!-- 聊天信息、未读数 -->
-        <div style="border: 1px solid mediumspringgreen;height: 3.6vh;width: 7vw;display: inline;float: left">
-          <span style="width: 3vw;font-size: 13px">去你的</span>
-          <span style="width: 3vw;font-size: 13px">2024-02-01</span>
+        <!-- 聊天内容 -->
+        <div style="border: 1px solid mediumspringgreen; height: 50%; width: 69%; display: inline; float: left;">
+          <span style="width: 50%; font-size: 13px; display: inline-block;">陈冠希</span>
         </div>
-
-        <!-- 聊天信息、未读数 -->
-        <div style="border: 1px solid mediumspringgreen;height: 3.6vh;width: 2vw;display: inline;float: left">
-          <span style="width: 3vw;font-size: 13px">去你的</span>
-          <span style="width: 3vw;font-size: 13px">2024-02-01</span>
-        </div>
-        <!--        <el-avatar shape="square" :size="50"/>-->
-        <!--        <div style="width: 50%;border: 1px solid red">-->
-        <!--          <div style="font-size: 12px;color: antiquewhite;border: 1px solid blue">{{ item.sessionName }}</div>-->
-        <!--          <div style="font-size: 12px;color: antiquewhite;border: 1px solid blue">你好啊！</div>-->
-        <!--        </div>-->
-        <!--        <div style="border: 1px solid red;height: 2vh;">-->
-        <!--          <div style="font-size: 12px;color: antiquewhite">{{ item.updateTime }}</div>-->
-        <!--        </div>-->
       </div>
     </el-col>
   </div>
