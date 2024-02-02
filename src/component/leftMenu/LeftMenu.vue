@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-col :span="1" style="width: 5vw;">
+    <el-col style="width: 5.2vw">
       <div class="colorStyle">
         <el-avatar class="avatar-cls" :size="48" shape="square"/>
         <!--        {{this.loginUser}}-->
@@ -36,6 +36,6 @@ export default {
 
 .avatar-cls {
   cursor: pointer;
-  margin-top: 1.8vh;
+  margin-top: 2vh;
 }
 </style>

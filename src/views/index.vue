@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="window">
-      <el-row shape="square" :gutter="12" style="height: 100%">
+      <el-row shape="square" :gutter="10" style="height: 100%">
         <!-- 侧边导航栏 -->
         <LeftMenu :loginUser="loginUser"/>
 
@@ -145,7 +145,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  width: 75vw;
+  width: 74vw;
   height: 90vh;
   margin: auto;
   position: absolute;
@@ -161,10 +161,5 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-}
-
-.chat-footer el-input {
-  flex: 1;
-  margin-right: 10px;
 }
 </style>

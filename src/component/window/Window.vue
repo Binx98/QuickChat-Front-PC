@@ -197,7 +197,7 @@ export default {
 .input-cls {
   margin-top: 1%;
   height: 8%;
-  width: 51vw;
+  width: 52vw;
   border: solid $window-line-color;
   border-width: 2px 0 0 0;
 }
