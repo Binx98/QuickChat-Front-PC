@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-col style="width: 5.2vw">
+    <el-col style="width: 5vw;">
       <div class="colorStyle">
         <el-avatar class="avatar-cls" :size="48" shape="square"/>
         <!--        {{this.loginUser}}-->
@@ -29,6 +29,8 @@ export default {
 <style lang="scss" scoped>
 .colorStyle {
   height: 90vh;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   background-color: $left-menu-color;
   display: flex;
   justify-content: center;

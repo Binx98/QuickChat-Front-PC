@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="window">
-      <el-row shape="square" :gutter="10" style="height: 100%">
+      <el-row shape="square" :gutter="4" style="height: 100%">
         <!-- 侧边导航栏 -->
         <LeftMenu :loginUser="loginUser"/>
 

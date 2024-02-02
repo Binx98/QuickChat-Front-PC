@@ -1,6 +1,6 @@
 <template>
   <span>
-    <el-col :span="17" class="window-cls">
+    <el-col class="window-cls">
       <!--  上边栏  -->
       <div class="head-bar">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer"/>
@@ -115,15 +115,16 @@ export default {
   resize: vertical;
 }
 
-.msg-window-cls {
-  height: 80%;
-  overflow: auto;
-}
-
 .window-cls {
   background-color: $window-item-color;
   border-radius: 10px;
   height: 90%;
+  width: 54vw;
+  overflow: auto;
+}
+
+.msg-window-cls {
+  height: 80%;
   overflow: auto;
 }
 

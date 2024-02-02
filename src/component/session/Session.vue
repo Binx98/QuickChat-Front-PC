@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-col style="width: 16vw">
+    <el-col style="width: 15vw">
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <!-- 头像 -->
         <div style="height: 100%; width: 26%; display: inline-block; float: left;">
@@ -10,14 +10,14 @@
         </div>
 
         <!-- 昵称、时间 -->
-        <div style="border: 1px solid mediumspringgreen; height: 40%; width: 70%; display: inline; float: left;">
-          <span style="width: 40%; font-size: 13px; display: inline-block;">{{ item.sessionName }}</span>
-          <span style="width: 60%; font-size: 12px; display: inline-block;">2024-02-02</span>
+        <div style="height: 48%; width: 74%; display: inline; float: left;">
+          <span style="width: 58%; font-size: 13px; display: inline-block;margin-top: 3%">{{ item.sessionName }}</span>
+          <span style="width: 40%; font-size: 12px; display: inline-block;">2024-02-02</span>
         </div>
 
         <!-- 聊天内容 -->
-        <div style="border: 1px solid mediumspringgreen; height: 50%; width: 70%; display: inline; float: left;">
-          <span style="width: 50%; font-size: 13px; display: inline-block;">陈冠希</span>
+        <div style="height: 48%; width: 74%; display: inline; float: left;">
+          <span style="width: 90%; font-size: 13px; display: inline-block;">我也不知道咋回事啊!</span>
         </div>
       </div>
     </el-col>
@@ -45,10 +45,10 @@ export default {
 
 <style lang="scss" scoped>
 .session-cls {
-  height: 7vh;
+  height: 7.3vh;
   background-color: $window-item-color;
   border-radius: 6px;
-  margin-bottom: 2px;
+  margin-bottom: 1.6px;
   cursor: pointer;
 }
 
