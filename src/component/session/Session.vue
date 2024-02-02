@@ -10,13 +10,13 @@
         </div>
 
         <!-- 昵称、时间 -->
-        <div style="border: 1px solid mediumspringgreen; height: 40%; width: 69%; display: inline; float: left;">
-          <span style="width: 40%; font-size: 13px; display: inline-block;">陈冠希</span>
+        <div style="border: 1px solid mediumspringgreen; height: 40%; width: 70%; display: inline; float: left;">
+          <span style="width: 40%; font-size: 13px; display: inline-block;">{{ item.sessionName }}</span>
           <span style="width: 60%; font-size: 12px; display: inline-block;">2024-02-02</span>
         </div>
 
         <!-- 聊天内容 -->
-        <div style="border: 1px solid mediumspringgreen; height: 50%; width: 69%; display: inline; float: left;">
+        <div style="border: 1px solid mediumspringgreen; height: 50%; width: 70%; display: inline; float: left;">
           <span style="width: 50%; font-size: 13px; display: inline-block;">陈冠希</span>
         </div>
       </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import EventBus from "@/component/js/event-bus";
+import EventBus from "@/component/event-bus";
 
 export default {
   name: "Session",

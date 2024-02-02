@@ -53,7 +53,7 @@
 <script>
 import Emoji from "@/component/window/Emoji";
 import chatMsgApi from "@/api/chatMsg";
-import EventBus from "@/component/js/event-bus";
+import EventBus from "@/component/event-bus";
 
 export default {
   name: "Window",
