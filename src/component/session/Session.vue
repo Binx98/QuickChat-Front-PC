@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-col :span="4" style="height: 90%">
+    <el-col :span="5" style="height: 90%">
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <!-- 头像 -->
         <div style="height: 100%; width: 26%; display: inline-block; float: left;">

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="window">
-      <el-row shape="square" :gutter="8" style="height: 100%">
+      <el-row shape="square" :gutter="12" style="height: 100%">
         <!-- 侧边导航栏 -->
         <LeftMenu :loginUser="loginUser"/>
 
@@ -13,9 +13,6 @@
 
         <!-- 聊天窗口 -->
         <Window :chatMsgList="chatMsgList" :loginUser="loginUser"/>
-
-        <!-- 用户信息、功能框架 -->
-        <Right/>
       </el-row>
     </div>
   </div>
@@ -26,7 +23,6 @@ import LeftMenu from "@/component/leftMenu/LeftMenu";
 import Header from "@/component/header/Header";
 import Session from "@/component/session/Session";
 import Window from "@/component/window/Window";
-import Right from "@/component/right/InfoDynamic";
 
 import userApi from '@/api/user'
 import sessionApi from '@/api/session'
@@ -35,7 +31,6 @@ import chatMsgApi from "@/api/chatMsg";
 export default {
   components: {
     LeftMenu,
-    Right,
     Window,
     Session,
     Header
@@ -150,8 +145,8 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  width: 82%;
-  height: 93%;
+  width: 75vw;
+  height: 90vh;
   margin: auto;
   position: absolute;
   top: 0;

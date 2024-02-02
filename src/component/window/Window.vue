@@ -1,6 +1,6 @@
 <template>
   <span>
-    <el-col :span="15" class="window-cls">
+    <el-col :span="17" class="window-cls">
       <!--  上边栏  -->
       <div class="head-bar">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer"/>

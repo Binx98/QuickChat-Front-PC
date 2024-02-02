@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .colorStyle {
-  height: 93vh;
+  height: 90vh;
   background-color: $left-menu-color;
   display: flex;
   justify-content: center;
