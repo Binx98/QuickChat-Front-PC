@@ -26,19 +26,51 @@
 
 <script>
 import EventBus from "@/component/event-bus";
+import sessionApi from "@/api/session";
 
 export default {
   name: "Session",
-  props: ['sessionList'],
 
   data() {
-    return {}
+    return {
+      sessionList: [],
+    }
+  },
+
+  created() {
+    this.getSessionList();
   },
 
   methods: {
+    /**
+     * 同级组件传参
+     */
     chooseSession(item) {
       EventBus.$emit('sessionInfo', item)
-    }
+    },
+
+    /**
+     * 查询会话列表
+     */
+    getSessionList() {
+      sessionApi.getSessionList().then(res => {
+        this.sessionList = res.data.data;
+        EventBus.$emit('sessionList', this.sessionList)
+        this.getUnreadCountList(this.sessionList)
+      }).catch(e => {
+        this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
+      })
+    },
+
+    /**
+     * 查询会话未读数量列表
+     */
+    getUnreadCountList(sessionList) {
+      sessionApi.getUnreadCountList(sessionList).then(res => {
+      }).catch(e => {
+        this.$message.error('会话列表未读数量查询失败，请刷新页面重试！')
+      })
+    },
   }
 }
 </script>

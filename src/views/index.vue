@@ -23,10 +23,7 @@ import LeftMenu from "@/component/leftMenu/LeftMenu";
 import Header from "@/component/header/Header";
 import Session from "@/component/session/Session";
 import Window from "@/component/window/Window";
-
 import userApi from '@/api/user'
-import sessionApi from '@/api/session'
-import chatMsgApi from "@/api/chatMsg";
 
 export default {
   components: {
@@ -108,49 +105,10 @@ export default {
       }
       userApi.getByToken().then(res => {
         this.loginUser = res.data.data;
-        this.getSessionList();
         this.initWebSocket();
       }).catch(e => {
         localStorage.removeItem("token");
         this.$router.push('/login')
-      })
-    },
-
-    /**
-     * 查询会话列表
-     */
-    getSessionList() {
-      sessionApi.getSessionList().then(res => {
-        this.sessionList = res.data.data;
-        let accountIds = [];
-        for (let i = 0; i < this.sessionList.length; i++) {
-          accountIds.push(this.sessionList[i].toId)
-        }
-        this.getChatMsgList(accountIds);
-        this.getUnreadCountList(this.sessionList)
-      }).catch(e => {
-        this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
-      })
-    },
-
-    /**
-     * 查询会话未读数量列表
-     */
-    getUnreadCountList(sessionList) {
-      sessionApi.getUnreadCountList(sessionList).then(res => {
-      }).catch(e => {
-        this.$message.error('会话列表未读数量查询失败，请刷新页面重试！')
-      })
-    },
-
-    /**
-     * 查询会话聊天列表
-     */
-    getChatMsgList(param) {
-      chatMsgApi.getChatMsgList(param).then(res => {
-        this.chatMsgList = res.data.data;
-      }).catch(e => {
-        this.$message.error('聊天记录信息加载失败，请刷新页面重试！')
       })
     },
   },

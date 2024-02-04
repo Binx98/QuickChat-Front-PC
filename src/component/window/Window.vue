@@ -59,7 +59,6 @@ export default {
   name: "Window",
 
   props: [
-    'chatMsgList',
     'loginUser'
   ],
 
@@ -68,10 +67,13 @@ export default {
   },
 
   created() {
-    // 接收 Session 同级传值：选中会话
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
-    })
+    });
+    EventBus.$on('sessionList', sessionList => {
+      this.sessionList = sessionList;
+      this.getChatMsgList(this.sessionList)
+    });
   },
 
   data() {
@@ -83,12 +85,29 @@ export default {
         content: '',
       },
       curSession: '',
+      chatMsgList: [],
+      sessionList: []
     }
   },
 
   methods: {
     /**
-     * 发送按钮：针对文字 + emoji
+     * 查询会话列表聊天信息列表
+     */
+    getChatMsgList() {
+      let accountIds = [];
+      for (let i = 0; i < this.sessionList.length; i++) {
+        accountIds.push(this.sessionList[i].toId)
+      }
+      chatMsgApi.getChatMsgList(accountIds).then(res => {
+        this.chatMsgList = res.data.data;
+      }).catch(e => {
+        this.$message.error('聊天记录信息加载失败，请刷新页面重试！')
+      })
+    },
+
+    /**
+     * 发送按钮（文字 + Emoji）
      */
     sendMsg() {
       if (this.chatMsg.content === '') {
@@ -97,7 +116,6 @@ export default {
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
-        console.log(res)
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
       })
