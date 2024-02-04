@@ -9,5 +9,16 @@ export default {
             url: `/chat/session/list`,
             method: 'get'
         })
+    },
+
+    /**
+     * 查询聊天会话未读数量
+     */
+    getUnreadCountList(sessionList) {
+        return axios({
+            url: `/chat/session/getUnreadCountList`,
+            method: 'post',
+            data: sessionList
+        })
     }
 }
