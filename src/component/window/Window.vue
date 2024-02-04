@@ -72,14 +72,14 @@ export default {
     });
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
-      this.getChatMsgList(this.sessionList)
+      this.getChatMsgList()
     });
   },
 
   data() {
     return {
       chatMsg: {
-        fromId: this.loginUser.accountId,
+        fromId: '',
         toId: '',
         msgType: '',
         content: '',
@@ -114,6 +114,7 @@ export default {
         return;
       }
       this.chatMsg.fromId = this.loginUser.accountId;
+      this.chatMsg.toId = this.curSession.toId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
       }).catch(e => {
