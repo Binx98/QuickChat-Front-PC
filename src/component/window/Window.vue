@@ -71,9 +71,17 @@ export default {
   },
 
   created() {
+    /**
+     * 点击会话监听
+     */
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
+      this.scrollBottom('window-id')
     });
+
+    /**
+     * 会话列表监听
+     */
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
       this.getChatMsgList()
@@ -119,6 +127,7 @@ export default {
       let limit = 30;
       chatMsgApi.getChatMsgByRelationId(relationId, current, limit).then(res => {
         this.chatMsgList[relationId] = res.data.data[relationId];
+        this.scrollBottom('window-id');
       })
     },
 
@@ -133,9 +142,8 @@ export default {
       this.chatMsg.toId = this.curSession.toId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
-        this.getChatMsgByRelationId();
         this.chatMsg.content = '';
-        this.scrollBottom('window-id');
+        this.getChatMsgByRelationId();
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
       })
@@ -143,10 +151,13 @@ export default {
 
     /**
      * 滑动到div最底部
+     * 注意：使用setTimeout延迟操作DOM，否则不是可能出现不是最底部情况
      */
     scrollBottom(id) {
-      let divCls = document.getElementById(id);
-      divCls.scrollTop = divCls.scrollHeight
+      setTimeout(() => {
+        let divCls = document.getElementById(id);
+        divCls.scrollTop = divCls.scrollHeight
+      }, 0)
     }
   },
 }
