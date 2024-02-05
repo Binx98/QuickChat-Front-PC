@@ -13,6 +13,16 @@ export default {
     },
 
     /**
+     * 根据 relation_id 查询聊天记录
+     */
+    getChatMsgByRelationId(relationId, current, size) {
+        return axios({
+            url: `/chat/msg/getByRelationId/${relationId}/${current}/${size}`,
+            method: 'get'
+        })
+    },
+
+    /**
      * 发送消息
      */
     sendMsg(data) {

@@ -111,6 +111,18 @@ export default {
     },
 
     /**
+     * 查询双方聊天记录
+     */
+    getChatMsgByRelationId() {
+      let relationId = this.curSession.relationId;
+      let current = 0;
+      let limit = 30;
+      chatMsgApi.getChatMsgByRelationId(relationId, current, limit).then(res => {
+        this.chatMsgList[relationId] = res.data.data[relationId];
+      })
+    },
+
+    /**
      * 发送按钮（文字 + Emoji）
      */
     sendMsg() {
@@ -121,6 +133,7 @@ export default {
       this.chatMsg.toId = this.curSession.toId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
+        this.getChatMsgByRelationId();
         this.chatMsg.content = '';
         this.scrollBottom('window-id');
       }).catch(e => {
