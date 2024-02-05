@@ -1,6 +1,7 @@
 <template>
   <span>
-    <el-col class="window-cls">
+    <!--  1、选中会话  -->
+    <el-col class="window-cls" v-if="this.curSession != ''">
       <!--  上边栏  -->
       <div class="head-bar">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer"/>
@@ -8,7 +9,7 @@
       </div>
 
       <!--  窗口  -->
-      <div class="msg-window-cls">
+      <div id="window-id" class="msg-window-cls">
         <div v-for="item in chatMsgList[curSession.relationId]">
           <!--  接收信息  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId">
@@ -47,6 +48,9 @@
         <span @click="sendMsg()">发送</span>
       </div>
     </el-col>
+
+    <!--  2、未选中会话  -->
+    <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
   </span>
 </template>
 
@@ -117,10 +121,20 @@ export default {
       this.chatMsg.toId = this.curSession.toId;
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
+        this.chatMsg.content = '';
+        this.scrollBottom('window-id');
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
       })
     },
+
+    /**
+     * 滑动到div最底部
+     */
+    scrollBottom(id) {
+      let divCls = document.getElementById(id);
+      divCls.scrollTop = divCls.scrollHeight
+    }
   },
 }
 </script>
@@ -147,7 +161,6 @@ export default {
   overflow: auto;
 }
 
-// 滚动条样式
 .window-cls::-webkit-scrollbar {
   width: 14px;
   height: 14px;
