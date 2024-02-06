@@ -4,7 +4,7 @@
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <!-- 头像 -->
         <div style="height: 100%; width: 26%; display: inline-block; float: left;">
-          <el-badge :value="1">
+          <el-badge :value="unreadCountList[item.relationId]">
             <img style="width: 3.4vw;height: 7vh"/>
           </el-badge>
         </div>
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       sessionList: [],
+      unreadCountList: []
     }
   },
 
@@ -67,6 +68,7 @@ export default {
      */
     getUnreadCountList(sessionList) {
       sessionApi.getUnreadCountList(sessionList).then(res => {
+        this.unreadCountList = res.data.data;
       }).catch(e => {
         this.$message.error('会话列表未读数量查询失败，请刷新页面重试！')
       })
