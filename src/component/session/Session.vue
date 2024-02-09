@@ -4,7 +4,7 @@
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <!-- 头像 -->
         <div style="height: 100%; width: 26%; display: inline-block; float: left;">
-          <el-badge :value="unreadCountList[item.relationId]">
+          <el-badge :value="item.unreadCount">
             <img style="width: 3.4vw;height: 7vh"/>
           </el-badge>
         </div>
@@ -33,8 +33,7 @@ export default {
 
   data() {
     return {
-      sessionList: [],
-      unreadCountList: []
+      sessionList: []
     }
   },
 
@@ -48,9 +47,7 @@ export default {
      */
     chooseSession(item) {
       EventBus.$emit('sessionInfo', item)
-      console.log(item)
       this.updateReadTime(item.sessionId)
-      console.log(item.unreadCount)
       item.unreadCount = null
     },
 
@@ -61,20 +58,8 @@ export default {
       sessionApi.getSessionList().then(res => {
         this.sessionList = res.data.data;
         EventBus.$emit('sessionList', this.sessionList)
-        this.getUnreadCountList(this.sessionList)
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
-      })
-    },
-
-    /**
-     * 查询会话未读数量列表
-     */
-    getUnreadCountList(sessionList) {
-      sessionApi.getUnreadCountList(sessionList).then(res => {
-        this.unreadCountList = res.data.data;
-      }).catch(e => {
-        this.$message.error('会话列表未读数量查询失败，请刷新页面重试！')
       })
     },
 
