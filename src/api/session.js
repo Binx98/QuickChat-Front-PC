@@ -20,5 +20,15 @@ export default {
             method: 'post',
             data: sessionList
         })
+    },
+
+    /**
+     * 更修已读时间
+     */
+    updateReadTime(sessionId) {
+        return axios({
+            url: `/chat/session/updateReadTime/${sessionId}`,
+            method: 'post'
+        })
     }
 }

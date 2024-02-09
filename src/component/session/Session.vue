@@ -17,7 +17,7 @@
 
         <!-- 聊天内容 -->
         <div style="height: 48%; width: 74%; display: inline; float: left;">
-          <span style="width: 90%; font-size: 13px; display: inline-block;">我也不知道咋回事啊!</span>
+          <span style="width: 90%; font-size: 13px; display: inline-block;">哈哈</span>
         </div>
       </div>
     </el-col>
@@ -44,10 +44,14 @@ export default {
 
   methods: {
     /**
-     * 同级组件传参
+     * 选择会话：同级组件传参
      */
     chooseSession(item) {
       EventBus.$emit('sessionInfo', item)
+      console.log(item)
+      this.updateReadTime(item.sessionId)
+      console.log(item.unreadCount)
+      item.unreadCount = null
     },
 
     /**
@@ -73,6 +77,13 @@ export default {
         this.$message.error('会话列表未读数量查询失败，请刷新页面重试！')
       })
     },
+
+    /**
+     * 更新已读时间
+     */
+    updateReadTime(sessionId) {
+      sessionApi.updateReadTime(sessionId)
+    }
   }
 }
 </script>
