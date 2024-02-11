@@ -9,10 +9,10 @@
         <Header/>
 
         <!-- 会话列表 -->
-        <Session :sessionList="sessionList"/>
+        <Session :sessionList="sessionList" :chatMsgEvent="chatMsgEvent"/>
 
         <!-- 聊天窗口 -->
-        <Window :chatMsgList="chatMsgList" :loginUser="loginUser"/>
+        <Window :chatMsgList="chatMsgList" :loginUser="loginUser" :chatMsgEvent="chatMsgEvent"/>
       </el-row>
     </div>
   </div>
@@ -55,6 +55,11 @@ export default {
         phone: '',
       },
 
+      // 发送消息载体
+      chatMsgEvent: {
+        relationId: '',
+      },
+
       // 会话列表
       sessionList: [],
 
@@ -79,14 +84,12 @@ export default {
 
       // 建立连接
       ws.onopen = evt => {
-        console.log("客户端WebSocket建立连接：" + this.loginUser.accountId);
-        ws.send("Hello WebSockets!");
+        ws.send(this.loginUser.accountId);
       };
 
       // 获取Channel消息
       ws.onmessage = evt => {
-        console.log("Received Message: " + evt.data);
-        ws.close();
+        this.chatMsgEvent = JSON.parse(evt.data);
       };
 
       // 关闭连接

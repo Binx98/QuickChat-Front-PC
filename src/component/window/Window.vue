@@ -63,7 +63,8 @@ export default {
   name: "Window",
 
   props: [
-    'loginUser'
+    'loginUser',
+    'chatMsgEvent'
   ],
 
   components: {
@@ -72,7 +73,7 @@ export default {
 
   created() {
     /**
-     * 点击会话监听
+     * 点击会话：同级接参
      */
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
@@ -80,7 +81,7 @@ export default {
     });
 
     /**
-     * 会话列表监听
+     * 查询会话列表：：同级接参
      */
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
@@ -102,6 +103,22 @@ export default {
     }
   },
 
+  watch: {
+    /**
+     * 监听父级组件：用户发送消息
+     */
+    chatMsgEvent: {
+      immediate: true,
+      handler(msg) {
+        console.log(msg)
+        console.log(msg.relationId)
+        if (msg.relationId) {
+          this.getChatMsgByRelationId(msg.relationId)
+        }
+      }
+    },
+  },
+
   methods: {
     /**
      * 查询会话列表聊天信息列表
@@ -121,8 +138,7 @@ export default {
     /**
      * 查询双方聊天记录
      */
-    getChatMsgByRelationId() {
-      let relationId = this.curSession.relationId;
+    getChatMsgByRelationId(relationId) {
       let current = 0;
       let limit = 30;
       chatMsgApi.getChatMsgByRelationId(relationId, current, limit).then(res => {
@@ -143,7 +159,7 @@ export default {
       this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
-        this.getChatMsgByRelationId();
+        this.getChatMsgByRelationId(this.curSession.relationId);
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
       })
@@ -156,7 +172,9 @@ export default {
     scrollBottom(id) {
       setTimeout(() => {
         let divCls = document.getElementById(id);
-        divCls.scrollTop = divCls.scrollHeight
+        if (divCls) {
+          divCls.scrollTop = divCls.scrollHeight
+        }
       }, 0)
     }
   },

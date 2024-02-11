@@ -52,7 +52,7 @@ export default {
     },
 
     /**
-     * 查询会话列表
+     * 查询会话列表：同级组件传参
      */
     getSessionList() {
       sessionApi.getSessionList().then(res => {
