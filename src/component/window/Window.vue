@@ -110,8 +110,6 @@ export default {
     chatMsgEvent: {
       immediate: true,
       handler(msg) {
-        console.log(msg)
-        console.log(msg.relationId)
         if (msg.relationId) {
           this.getChatMsgByRelationId(msg.relationId)
         }

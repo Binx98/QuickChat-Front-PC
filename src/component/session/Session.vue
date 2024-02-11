@@ -31,6 +31,10 @@ import sessionApi from "@/api/session";
 export default {
   name: "Session",
 
+  props: [
+    'chatMsgEvent'
+  ],
+
   data() {
     return {
       sessionList: []
@@ -39,6 +43,18 @@ export default {
 
   created() {
     this.getSessionList();
+  },
+
+  watch: {
+    /**
+     * 监听父级组件：用户发送消息
+     */
+    chatMsgEvent: {
+      immediate: true,
+      handler(msg) {
+        this.getSessionInfo(msg.fromId, msg.toId, msg.relationId)
+      }
+    },
   },
 
   methods: {
@@ -60,6 +76,16 @@ export default {
         EventBus.$emit('sessionList', this.sessionList)
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
+      })
+    },
+
+    /**
+     * 查询会话信息
+     */
+    getSessionInfo(fromId, toId, relationId) {
+      sessionApi.getSessionInfo(fromId, toId).then(res => {
+        this.sessionList[relationId] = res.data.data;
+        console.log(this.sessionList[relationId])
       })
     },
 

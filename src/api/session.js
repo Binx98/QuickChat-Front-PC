@@ -12,13 +12,12 @@ export default {
     },
 
     /**
-     * 查询聊天会话未读数量
+     *
      */
-    getUnreadCountList(sessionList) {
+    getSessionInfo(fromId, toId) {
         return axios({
-            url: `/chat/session/getUnreadCountList`,
-            method: 'post',
-            data: sessionList
+            url: `/chat/session/getSessionInfo/${fromId}/${toId}`,
+            method: 'get'
         })
     },
 
