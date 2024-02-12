@@ -99,7 +99,7 @@ export default {
       },
       curSession: '',
       chatMsgList: [],
-      sessionList: []
+      sessionList: [],
     }
   },
 
@@ -158,6 +158,7 @@ export default {
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
+        EventBus.$emit('readCount0Event', this.curSession)
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
       })

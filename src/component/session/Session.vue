@@ -43,6 +43,19 @@ export default {
 
   created() {
     this.getSessionList(true);
+
+    /**
+     * 监听同级组件：未读数清 0
+     */
+    EventBus.$on('readCount0Event', sessionInfo => {
+      this.updateReadTime(sessionInfo.sessionId)
+      for (let i = 0; i < this.sessionList.length; i++) {
+        if (this.sessionList[i].relationId == sessionInfo.relationId) {
+          this.sessionList[i].unreadCount = null;
+          break;
+        }
+      }
+    });
   },
 
   watch: {
@@ -80,25 +93,6 @@ export default {
         }
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
-      })
-    },
-
-    /**
-     * 查询会话信息
-     */
-    getSessionInfo(fromId, toId) {
-      sessionApi.getSessionInfo(fromId, toId).then(res => {
-        let relationId = res.data.data.relationId;
-        let arr = [];
-        arr.push(res.data.data);
-        for (let i = 0; i < this.sessionList.length; i++) {
-          if (this.sessionList[relationId].relationId == relationId) {
-            console.log(this.sessionList[relationId])
-            continue;
-          }
-        }
-        this.sessionList = arr;
-        console.log(this.sessionList)
       })
     },
 
