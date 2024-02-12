@@ -81,7 +81,7 @@ export default {
     });
 
     /**
-     * 查询会话列表：：同级接参
+     * 查询会话列表：同级接参
      */
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
@@ -158,9 +158,6 @@ export default {
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
-        // this.sessionList[this.curSession.relationId].unreadCount = null;
-        // this.curSession.unreadCount = null;
-        // console.log(this.curSession)
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
       })
@@ -244,7 +241,7 @@ export default {
 }
 
 .receive-item {
-  width: 90%;
+  width: 72%;
   display: flex;
   align-items: center;
   margin-left: 1%;
@@ -252,8 +249,8 @@ export default {
 }
 
 .send-item {
-  float: right;
   width: 70%;
+  float: right;
   margin-right: 1%;
   margin-top: 1%;
   display: flex;

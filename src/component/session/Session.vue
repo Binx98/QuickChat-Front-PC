@@ -37,7 +37,7 @@ export default {
 
   data() {
     return {
-      sessionList: []
+      sessionList: [],
     }
   },
 
@@ -52,7 +52,7 @@ export default {
     chatMsgEvent: {
       immediate: true,
       handler(msg) {
-        this.getSessionList()
+        this.getSessionInfo(msg.fromId, msg.toId, msg.relationId)
       }
     },
   },
@@ -76,6 +76,19 @@ export default {
         EventBus.$emit('sessionList', this.sessionList)
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
+      })
+    },
+
+    /**
+     * 查询会话信息
+     */
+    getSessionInfo(fromId, toId, relationId) {
+      sessionApi.getSessionInfo(fromId, toId).then(res => {
+        console.log(res.data.data)
+        console.log(res.data.data.relationId);
+        // let data = JSON.parse(res.data.data);
+        // data.relationId;
+        // console.log(res.data.data.relationId)
       })
     },
 
