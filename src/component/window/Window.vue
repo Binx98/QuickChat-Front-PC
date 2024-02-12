@@ -158,6 +158,9 @@ export default {
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
+        // this.sessionList[this.curSession.relationId].unreadCount = null;
+        // this.curSession.unreadCount = null;
+        // console.log(this.curSession)
       }).catch(e => {
         this.$message.error('服务端功能异常，发送消息失败！')
       })
