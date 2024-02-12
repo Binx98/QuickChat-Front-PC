@@ -42,7 +42,7 @@ export default {
   },
 
   created() {
-    this.getSessionList();
+    this.getSessionList(true);
   },
 
   watch: {
@@ -52,7 +52,9 @@ export default {
     chatMsgEvent: {
       immediate: true,
       handler(msg) {
-        this.getSessionInfo(msg.fromId, msg.toId, msg.relationId)
+        if (msg.relationId != '') {
+          this.getSessionList(false);
+        }
       }
     },
   },
@@ -70,10 +72,12 @@ export default {
     /**
      * 查询会话列表：同级组件传参
      */
-    getSessionList() {
+    getSessionList(isFirst) {
       sessionApi.getSessionList().then(res => {
         this.sessionList = res.data.data;
-        EventBus.$emit('sessionList', this.sessionList)
+        if (isFirst) {
+          EventBus.$emit('sessionList', this.sessionList)
+        }
       }).catch(e => {
         this.$message.error('聊天会话列表信息加载失败，请刷新页面重试！');
       })
@@ -82,13 +86,19 @@ export default {
     /**
      * 查询会话信息
      */
-    getSessionInfo(fromId, toId, relationId) {
+    getSessionInfo(fromId, toId) {
       sessionApi.getSessionInfo(fromId, toId).then(res => {
-        console.log(res.data.data)
-        console.log(res.data.data.relationId);
-        // let data = JSON.parse(res.data.data);
-        // data.relationId;
-        // console.log(res.data.data.relationId)
+        let relationId = res.data.data.relationId;
+        let arr = [];
+        arr.push(res.data.data);
+        for (let i = 0; i < this.sessionList.length; i++) {
+          if (this.sessionList[relationId].relationId == relationId) {
+            console.log(this.sessionList[relationId])
+            continue;
+          }
+        }
+        this.sessionList = arr;
+        console.log(this.sessionList)
       })
     },
 
