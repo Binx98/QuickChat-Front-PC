@@ -12,16 +12,6 @@ export default {
     },
 
     /**
-     *
-     */
-    getSessionInfo(fromId, toId) {
-        return axios({
-            url: `/chat/session/getSessionInfo/${fromId}/${toId}`,
-            method: 'get'
-        })
-    },
-
-    /**
      * 更修已读时间
      */
     updateReadTime(sessionId) {

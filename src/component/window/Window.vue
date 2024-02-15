@@ -40,8 +40,8 @@
       <!-- 输入框 -->
       <div class="input-cls">
         <span>语音、</span>
-        <el-input id="chat-input" placeholder="请开始你的表演......" style="width: 70%;"
-                  type="text" v-model="chatMsg.content"/>
+        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请开始你的表演......" style="width: 70%;"
+               v-model="chatMsg.content"/>
         <Emoji/>
         <span>截图、</span>
         <span>文件、</span>
@@ -160,7 +160,7 @@ export default {
         this.getChatMsgByRelationId(this.curSession.relationId);
         EventBus.$emit('readCount0Event', this.curSession)
       }).catch(e => {
-        this.$message.error('服务端功能异常，发送消息失败！')
+        this.$message.error(e.data.msg)
       })
     },
 
@@ -182,11 +182,11 @@ export default {
 
 <style lang="scss" scoped>
 #chat-input {
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 14px;
-  white-space: pre-wrap;
+  word-break: break-all;
+  height: 4.6vh;
   overflow-y: auto;
-  resize: vertical;
 }
 
 .window-cls {
