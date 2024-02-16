@@ -5,7 +5,7 @@
       <div style="margin-top: -10%;margin-bottom: 3.2%">
         <!--  账号密码输入框  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
-        <el-input class="input-cls" placeholder="请输入密码" v-model="loginForm.passWord"/>
+        <el-input class="input-cls" show-password placeholder="请输入密码" v-model="loginForm.passWord"/>
         <!--  验证码输入框  -->
         <div style="display: flex; justify-content: center;margin-bottom: 2%">
           <el-input style="border-radius: 10px;opacity: 0.6;margin-right: 1%;width: 13vw;height: 5.4vh;"

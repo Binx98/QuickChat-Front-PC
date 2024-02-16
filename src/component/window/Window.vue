@@ -40,7 +40,7 @@
       <!-- 输入框 -->
       <div class="input-cls">
         <span>语音、</span>
-        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请开始你的表演......" style="width: 70%;"
+        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请开始你的表演......"
                v-model="chatMsg.content"/>
         <Emoji/>
         <span>截图、</span>
@@ -182,6 +182,9 @@ export default {
 
 <style lang="scss" scoped>
 #chat-input {
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 70%;
   border-radius: 10px;
   font-size: 14px;
   word-break: break-all;
