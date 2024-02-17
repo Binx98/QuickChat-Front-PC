@@ -43,7 +43,6 @@
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请开始你的表演......"
                v-model="chatMsg.content"/>
         <Emoji/>
-        <span>截图、</span>
         <span>文件、</span>
         <span @click="sendMsg()">发送</span>
       </div>
