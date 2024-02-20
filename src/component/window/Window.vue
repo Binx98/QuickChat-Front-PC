@@ -266,7 +266,7 @@ export default {
   align-items: center;
   padding-left: 1%;
   height: 9%;
-  border: solid $window-line-color;
+  border: solid $window-bottom-color;
   border-width: 0 0 2px 0;
 }
 
@@ -274,7 +274,7 @@ export default {
   margin-top: 1%;
   height: 8%;
   width: 52vw;
-  border: solid $window-line-color;
+  border: solid $window-bottom-color;
   border-width: 2px 0 0 0;
 }
 
