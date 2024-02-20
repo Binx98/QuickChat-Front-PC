@@ -5,7 +5,7 @@
       <!--  上边栏  -->
       <div class="head-bar">
         <el-avatar shape="square" style="margin-right: 1%;cursor:pointer"/>
-        <div>{{ curSession.sessionName }}</div>
+        <div class="session-name-cls">{{ curSession.sessionName }}</div>
       </div>
 
       <!--  窗口  -->
@@ -276,5 +276,10 @@ export default {
   width: 52vw;
   border: solid $window-line-color;
   border-width: 2px 0 0 0;
+}
+
+.session-name-cls {
+  color: $session-nick-color;
+  font-family: "Arial Rounded MT Bold";
 }
 </style>

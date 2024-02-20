@@ -121,9 +121,23 @@ export default {
   background-color: $logo-color;
 }
 
+.session-item-cls {
+  height: 48%;
+  width: 74%;
+  display: inline;
+  float: left;
+}
+
+.avatar-cls {
+  height: 100%;
+  width: 26%;
+  display: inline-block;
+  float: left;
+}
+
 .session-name-cls {
   width: 58%;
-  font-size: 13px;
+  font-size: 13.6px;
   display: inline-block;
   margin-top: 3%;
   color: $session-nick-color;
@@ -134,25 +148,13 @@ export default {
   width: 40%;
   font-size: 12px;
   display: inline-block;
-}
-
-.session-item-cls {
-  height: 48%;
-  width: 74%;
-  display: inline;
-  float: left;
+  color: $session-msg-color;
 }
 
 .session-msg-cls {
   width: 90%;
   font-size: 13px;
   display: inline-block;
-}
-
-.avatar-cls {
-  height: 100%;
-  width: 26%;
-  display: inline-block;
-  float: left;
+  color: $session-msg-color;
 }
 </style>
