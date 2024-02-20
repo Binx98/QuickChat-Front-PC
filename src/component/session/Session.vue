@@ -78,8 +78,10 @@ export default {
      */
     chooseSession(item) {
       EventBus.$emit('sessionInfo', item)
-      this.updateReadTime(item)
-      item.unreadCount = null
+      if (item.unreadCount) {
+        this.updateReadTime(item.sessionId)
+        item.unreadCount = null
+      }
     },
 
     /**
@@ -99,10 +101,8 @@ export default {
     /**
      * 更新已读时间
      */
-    updateReadTime(item) {
-      if (item.unreadCount) {
-        sessionApi.updateReadTime(item.sessionId)
-      }
+    updateReadTime(sessionId) {
+      sessionApi.updateReadTime(sessionId)
     }
   }
 }
