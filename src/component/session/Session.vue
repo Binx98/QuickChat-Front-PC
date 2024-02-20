@@ -3,21 +3,21 @@
     <el-col style="width: 15vw">
       <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
         <!-- 头像 -->
-        <div style="height: 100%; width: 26%; display: inline-block; float: left;">
+        <div class="avatar-cls">
           <el-badge :value="item.unreadCount">
             <img style="width: 3.4vw;height: 7vh"/>
           </el-badge>
         </div>
 
         <!-- 昵称、时间 -->
-        <div style="height: 48%; width: 74%; display: inline; float: left;">
-          <span style="width: 58%; font-size: 13px; display: inline-block;margin-top: 3%">{{ item.sessionName }}</span>
-          <span style="width: 40%; font-size: 12px; display: inline-block;">2024-02-02</span>
+        <div class="session-item-cls">
+          <span class="session-name-cls">{{ item.sessionName }}</span>
+          <span class="session-time-cls">2024-02-02</span>
         </div>
 
         <!-- 聊天内容 -->
-        <div style="height: 48%; width: 74%; display: inline; float: left;">
-          <span style="width: 90%; font-size: 13px; display: inline-block;">哈哈</span>
+        <div class="session-item-cls">
+          <span class="session-msg-cls">哈哈</span>
         </div>
       </div>
     </el-col>
@@ -78,7 +78,7 @@ export default {
      */
     chooseSession(item) {
       EventBus.$emit('sessionInfo', item)
-      this.updateReadTime(item.sessionId)
+      this.updateReadTime(item)
       item.unreadCount = null
     },
 
@@ -99,8 +99,10 @@ export default {
     /**
      * 更新已读时间
      */
-    updateReadTime(sessionId) {
-      sessionApi.updateReadTime(sessionId)
+    updateReadTime(item) {
+      if (item.unreadCount) {
+        sessionApi.updateReadTime(item.sessionId)
+      }
     }
   }
 }
@@ -117,5 +119,40 @@ export default {
 
 .session-cls:hover {
   background-color: $logo-color;
+}
+
+.session-name-cls {
+  width: 58%;
+  font-size: 13px;
+  display: inline-block;
+  margin-top: 3%;
+  color: $session-nick-color;
+  font-family: "Arial Rounded MT Bold";
+}
+
+.session-time-cls {
+  width: 40%;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.session-item-cls {
+  height: 48%;
+  width: 74%;
+  display: inline;
+  float: left;
+}
+
+.session-msg-cls {
+  width: 90%;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.avatar-cls {
+  height: 100%;
+  width: 26%;
+  display: inline-block;
+  float: left;
 }
 </style>
