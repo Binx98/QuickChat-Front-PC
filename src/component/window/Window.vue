@@ -14,7 +14,7 @@
           <!--  接收信息  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId">
             <span style="margin-right: 6px">
-              <el-avatar shape="square" style="cursor:pointer"/>
+              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
             <div style="background-color: floralwhite;border-radius: 10px;">
               <div style="padding: 15px;font-size: 14px;word-break: break-all;">
