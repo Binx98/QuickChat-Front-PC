@@ -4,7 +4,7 @@
     <el-col class="window-cls" v-if="this.curSession != ''">
       <!--  上边栏  -->
       <div class="head-bar">
-        <el-avatar shape="square" style="margin-right: 1%;cursor:pointer"/>
+        <el-avatar :src="curSession.sessionAvatar" shape="square" style="margin-right: 1%;cursor:pointer"/>
         <div class="session-name-cls">{{ curSession.sessionName }}</div>
       </div>
 
@@ -31,7 +31,7 @@
               </div>
             </div>
             <span style="margin-left: 6px">
-              <el-avatar shape="square" style="cursor:pointer;"/>
+              <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
             </span>
           </div>
         </div>

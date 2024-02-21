@@ -2,8 +2,7 @@
   <div>
     <el-col style="width: 5vw;">
       <div class="colorStyle">
-        <el-avatar class="avatar-cls" :size="48" shape="square"/>
-        <!--        {{this.loginUser}}-->
+        <el-avatar :src=this.loginUser.avatar class="avatar-cls" :size="48" shape="square"/>
       </div>
     </el-col>
   </div>
@@ -19,7 +18,6 @@ export default {
   },
 
   created() {
-
   },
 
   methods: {}

@@ -5,7 +5,7 @@
         <!-- 头像 -->
         <div class="avatar-cls">
           <el-badge :value="item.unreadCount">
-            <img style="width: 3.4vw;height: 7vh"/>
+            <img :src="item.sessionAvatar" style="width: 3.4vw;height: 7.3vh"/>
           </el-badge>
         </div>
 
