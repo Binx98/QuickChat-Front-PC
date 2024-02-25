@@ -18,9 +18,6 @@
       <!-- 表情框 -->
       <div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
         <div class="emoji-picker" :style="{ top: display.y + 'px', left: display.x + 'px' }">
-          <div class="emoji-picker__search">
-            <input type="text" v-focus>
-          </div>
           <div v-for="(emojiGroup, category) in emojis" :key="category">
             <div class="emojis">
               <span
@@ -81,14 +78,6 @@ export default {
   box-sizing: border-box;
   border-radius: 0.5rem;
   box-shadow: 1px 1px 8px #c7dbe6;
-}
-
-.emoji-picker__search > input {
-  flex: 1;
-  border-radius: 10rem;
-  border: 1px solid #ccc;
-  padding: 0.5rem 1rem;
-  outline: none;
 }
 
 .emoji-picker .emojis {
