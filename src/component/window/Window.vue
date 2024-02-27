@@ -43,7 +43,7 @@
         <span>语音、</span>
 
         <!-- 输入框 -->
-        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请开始你的表演......"
+        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="良言一句三冬暖，恶语伤人六月寒..."
                v-model="chatMsg.content"/>
 
         <!-- Emoji -->
@@ -358,7 +358,7 @@ export default {
 .emoji-picker {
   border: 1px solid #ccc;
   width: 30vw;
-  height: 50vh;
+  height: 38vh;
   overflow: scroll;
   padding: 1rem;
   box-sizing: border-box;
@@ -380,7 +380,7 @@ export default {
 }
 
 .emoji-picker .emojis span {
-  padding: 0.2rem;
+  padding: 0.1rem;
   cursor: pointer;
   border-radius: 5px;
 }

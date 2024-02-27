@@ -2,7 +2,7 @@
   <div class="main">
     <div class="form-container" style="height: 84vh;margin-top: 3.2%;">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
-      <div style="margin-top: -10%;margin-bottom: 3.2%">
+      <div style="margin-top: -10%;margin-bottom: 3.2%" @keyup.enter="register()">
         <el-input class="input-cls" placeholder="请输入账号" v-model="registerForm.accountId"/>
         <el-input class="input-cls" type="password" show-password placeholder="请输入密码" v-model="registerForm.password1"/>
         <el-input class="input-cls" type="password" show-password placeholder="请再次输入密码" v-model="registerForm.password2"/>
