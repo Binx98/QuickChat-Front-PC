@@ -16,19 +16,21 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div style="background-color: floralwhite;border-radius: 10px;">
-              <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                {{ item.content }}
-              </div>
+            <!--  文字信息  -->
+            <div
+                style="padding: 15px;font-size: 14px;word-break: break-all;background-color: floralwhite;border-radius: 10px;">
+              {{ item.content }}
             </div>
           </div>
 
           <!--  主动发送  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId">
             <div class="send-div-cls">
+              <!--  文字信息  -->
               <div style="padding: 15px;font-size: 14px;word-break: break-all">
                 {{ item.content }}
               </div>
+              <!--  图片信息  -->
             </div>
             <span style="margin-left: 6px">
               <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
@@ -82,7 +84,19 @@
         </span>
 
         <!-- 文件 -->
-        <span>文件、</span>
+        <span style="display: inline-block">
+          <el-upload
+              class="upload-demo"
+              :on-preview="handlePreview"
+              :on-remove="handleRemove"
+              :before-remove="beforeRemove"
+              multiple
+              :limit="3"
+              :on-exceed="handleExceed"
+              :file-list="fileList">
+            <el-button size="small" type="primary">点击上传</el-button>
+          </el-upload>
+        </span>
 
         <!-- 发送按钮 -->
         <span @click="sendMsg()">发送</span>
@@ -141,6 +155,7 @@ export default {
       curSession: '',
       chatMsgList: [],
       sessionList: [],
+      // fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
     }
   },
 
