@@ -87,13 +87,9 @@
         <span style="display: inline-block">
           <el-upload
               class="upload-demo"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
               multiple
               :limit="3"
-              :on-exceed="handleExceed"
-              :file-list="fileList">
+              :on-exceed="handleExceed">
             <el-button size="small" type="primary">点击上传</el-button>
           </el-upload>
         </span>
@@ -211,6 +207,22 @@ export default {
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.toId = this.curSession.toId;
       this.chatMsg.msgType = '1';
+      chatMsgApi.sendMsg(this.chatMsg).then(res => {
+        this.chatMsg.content = '';
+        this.getChatMsgByRelationId(this.curSession.relationId);
+        EventBus.$emit('readCount0Event', this.curSession)
+      }).catch(e => {
+        this.$message.error(e.data.msg)
+      })
+    },
+
+    /**
+     * 发送文件
+     */
+    sendFile() {
+      this.chatMsg.fromId = this.loginUser.accountId;
+      this.chatMsg.toId = this.curSession.toId;
+      this.chatMsg.msgType = '4';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
