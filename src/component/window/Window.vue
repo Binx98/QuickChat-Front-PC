@@ -86,11 +86,12 @@
         <!-- 文件 -->
         <span style="display: inline-block">
           <el-upload
-              class="upload-demo"
-              multiple
-              :limit="3"
-              :on-exceed="handleExceed">
-            <el-button size="small" type="primary">点击上传</el-button>
+              :action="uploadFileUrl"
+              :headers="fileHeaders()"
+              :on-success="handleSuccess"
+              :show-file-list="false"
+          >
+            <el-button size="small" type="primary">文件</el-button>
           </el-upload>
         </span>
 
@@ -108,7 +109,6 @@
 import chatMsgApi from "@/api/chatMsg";
 import EventBus from "@/component/event-bus";
 import EmojiPicker from "vue-emoji-picker";
-
 
 export default {
   name: "Window",
@@ -148,10 +148,17 @@ export default {
         msgType: '',
         content: '',
       },
+      fileUrl: 'http://101.42.13.186:9000/avatar/2092d737f4a4a9c8830e4104891b4f1d_1.jpg',
+      fileMsg: {
+        fromId: '',
+        toId: '',
+        msgType: '',
+        content: '',
+      },
       curSession: '',
       chatMsgList: [],
       sessionList: [],
-      // fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+      uploadFileUrl: process.env.VUE_APP_BASE_API + '/file/upload/3'
     }
   },
 
@@ -170,6 +177,12 @@ export default {
   },
 
   methods: {
+    handleSuccess(res, file) {
+      console.log(file);
+      console.log(res.data)
+      this.sendFile(res.data)
+    },
+
     /**
      * 查询会话列表聊天信息列表
      */
@@ -219,17 +232,27 @@ export default {
     /**
      * 发送文件
      */
-    sendFile() {
-      this.chatMsg.fromId = this.loginUser.accountId;
-      this.chatMsg.toId = this.curSession.toId;
-      this.chatMsg.msgType = '4';
-      chatMsgApi.sendMsg(this.chatMsg).then(res => {
-        this.chatMsg.content = '';
+    sendFile(url) {
+      console.log(url)
+      this.fileMsg.fromId = this.loginUser.accountId;
+      this.fileMsg.toId = this.curSession.toId;
+      this.fileMsg.msgType = '4';
+      this.fileMsg.content = url;
+      chatMsgApi.sendMsg(this.fileMsg).then(res => {
         this.getChatMsgByRelationId(this.curSession.relationId);
         EventBus.$emit('readCount0Event', this.curSession)
       }).catch(e => {
         this.$message.error(e.data.msg)
       })
+    },
+
+    /**
+     * 上传文件消息头
+     */
+    fileHeaders() {
+      return {
+        'token': localStorage.getItem('token')
+      }
     },
 
     /**
@@ -281,8 +304,8 @@ export default {
 }
 
 .window-cls::-webkit-scrollbar {
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
 }
 
 .window-cls::-webkit-scrollbar-thumb {
@@ -297,8 +320,8 @@ export default {
 }
 
 .msg-window-cls::-webkit-scrollbar {
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
 }
 
 .msg-window-cls::-webkit-scrollbar-thumb {
