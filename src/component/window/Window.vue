@@ -148,12 +148,16 @@ export default {
         msgType: '',
         content: '',
       },
-      fileUrl: 'http://101.42.13.186:9000/avatar/2092d737f4a4a9c8830e4104891b4f1d_1.jpg',
       fileMsg: {
         fromId: '',
         toId: '',
         msgType: '',
         content: '',
+        extraInfo: {
+          name: '',
+          size: '',
+          type: ''
+        }
       },
       curSession: '',
       chatMsgList: [],
@@ -178,8 +182,9 @@ export default {
 
   methods: {
     handleSuccess(res, file) {
-      console.log(file);
-      console.log(res.data)
+      this.fileMsg.extraInfo.name = file.raw.name;
+      this.fileMsg.extraInfo.size = file.raw.size;
+      this.fileMsg.extraInfo.type = file.raw.type;
       this.sendFile(res.data)
     },
 
@@ -233,7 +238,6 @@ export default {
      * 发送文件
      */
     sendFile(url) {
-      console.log(url)
       this.fileMsg.fromId = this.loginUser.accountId;
       this.fileMsg.toId = this.curSession.toId;
       this.fileMsg.msgType = '4';
@@ -303,12 +307,33 @@ export default {
   overflow: auto;
 }
 
+
 .window-cls::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
+.msg-window-cls::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.emoji-picker::-webkit-scrollbar {
+  width: 10px;
+  height: 0px;
+}
+
 .window-cls::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #9e9e9e;
+}
+
+.msg-window-cls::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #9e9e9e;
+}
+
+.emoji-picker::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: #9e9e9e;
 }
@@ -319,17 +344,13 @@ export default {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
-.msg-window-cls::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-.msg-window-cls::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: #9e9e9e;
-}
-
 .msg-window-cls::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #ededed;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
+}
+
+.emoji-picker::-webkit-scrollbar-track {
   border-radius: 10px;
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
@@ -412,10 +433,11 @@ export default {
   overflow: scroll;
   padding: 1rem;
   box-sizing: border-box;
+  background-color: #f0fff3;
   border-radius: 0.5rem;
   box-shadow: 1px 1px 8px #c7dbe6;
   position: fixed;
-  transform: translate(-105%, -105%);
+  transform: translate(-105%, -108%);
 }
 
 .emoji-picker .emojis {
