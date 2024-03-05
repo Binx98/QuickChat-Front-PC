@@ -37,7 +37,8 @@
           </div>
           <!--  文件 File  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 4">
-            <div class="send-div-cls" style="background-color: antiquewhite;cursor: pointer" @click="downloadFile">
+            <div class="send-div-cls" style="background-color: antiquewhite;cursor: pointer"
+                 @click="downloadFile(item.msgType, item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
                   <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
@@ -267,6 +268,17 @@ export default {
         EventBus.$emit('readCount0Event', this.curSession)
       }).catch(e => {
         this.$message.error(e.data.msg)
+      })
+    },
+
+    /**
+     * 点击下载文件
+     */
+    downloadFile(type, fileName) {
+      chatMsgApi.downloadFile(type, fileName).then(res => {
+
+      }).catch(e => {
+
       })
     },
 

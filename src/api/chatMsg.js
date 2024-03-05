@@ -31,5 +31,15 @@ export default {
             method: 'post',
             data: data
         })
-    }
+    },
+
+    /**
+     * 下载文件
+     */
+    downloadFile(type, fileName) {
+        return axios({
+            url: `/file/download/${type}/${fileName}`,
+            method: 'get'
+        })
+    },
 }
