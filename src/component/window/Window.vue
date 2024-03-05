@@ -11,26 +11,46 @@
       <!--  2.窗口  -->
       <div id="window-id" class="msg-window-cls">
         <div v-for="item in chatMsgList[curSession.relationId]">
-          <!--  接收信息  -->
-          <div class="receive-item" v-if="item.accountId === curSession.toId">
+          <!------------------------------------------被动接收------------------------------------------>
+          <!--  文字信息  -->
+          <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 1">
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <!--  文字信息  -->
             <div
                 style="padding: 15px;font-size: 14px;word-break: break-all;background-color: floralwhite;border-radius: 10px;">
               {{ item.content }}
             </div>
           </div>
 
-          <!--  主动发送  -->
-          <div class="send-item" v-if="item.accountId === curSession.fromId">
+          <!------------------------------------------主动发送------------------------------------------>
+          <!--  文字 Font  -->
+          <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 1">
             <div class="send-div-cls">
-              <!--  文字信息  -->
               <div style="padding: 15px;font-size: 14px;word-break: break-all">
                 {{ item.content }}
               </div>
-              <!--  图片信息  -->
+            </div>
+            <span style="margin-left: 6px">
+              <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
+            </span>
+          </div>
+          <!--  文件 File  -->
+          <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 4">
+            <div class="send-div-cls" style="background-color: antiquewhite;cursor: pointer" @click="downloadFile">
+              <div style="padding: 4px;">
+                <div style="border: 1px solid red;height: 65px;width: 240px">
+                  <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
+                    <img/>
+                  </div>
+                  <div style="font-size: 14px">
+                    {{ item.extraInfo.name }}
+                  </div>
+                  <div>
+                    {{ item.extraInfo.size / 1024 }}
+                  </div>
+                </div>
+              </div>
             </div>
             <span style="margin-left: 6px">
               <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
@@ -42,7 +62,7 @@
       <!-- 3.输入部分 -->
       <div class="input-cls">
         <!-- 语音 -->
-        <span>语音、</span>
+        <span>语音</span>
 
         <!-- 输入框 -->
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="良言一句三冬暖，恶语伤人六月寒..."
@@ -358,7 +378,7 @@ export default {
 
 .send-div-cls {
   margin-left: 1.6%;
-  background-color: #12CEC2FF;
+  background-color: $logo-color;
   border-radius: 10px;
   display: inline-block;
 }
