@@ -274,8 +274,8 @@ export default {
     /**
      * 点击下载文件
      */
-    downloadFile(type, fileName) {
-      chatMsgApi.downloadFile(type, fileName).then(res => {
+    downloadFile(type, url) {
+      chatMsgApi.downloadFile(type, url).then(res => {
 
       }).catch(e => {
 

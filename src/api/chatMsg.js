@@ -36,10 +36,14 @@ export default {
     /**
      * 下载文件
      */
-    downloadFile(type, fileName) {
+    downloadFile(type, url) {
         return axios({
-            url: `/file/download/${type}/${fileName}`,
-            method: 'get'
+            url: `/file/download`,
+            method: 'post',
+            params: {
+                type: type,
+                url: url
+            }
         })
     },
 }
