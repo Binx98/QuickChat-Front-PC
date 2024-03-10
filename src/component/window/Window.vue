@@ -63,7 +63,7 @@
       <!-- 3.输入部分 -->
       <div class="input-cls">
         <!-- 语音 -->
-        <span>语音</span>
+        <span @click="handleStart">语音</span>
 
         <!-- 输入框 -->
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="良言一句三冬暖，恶语伤人六月寒..."
@@ -123,10 +123,44 @@
 
     <!--  2、未选中会话  -->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
+
+     <div style="padding: 20px;">
+    <h3>录音上传</h3>
+
+    <div style="font-size:14px">
+      <h3>录音时长：{{ recorder && recorder.duration.toFixed(4) }}</h3>
+      <br/>
+      <el-button type="info" @click="handlePause">暂停录音</el-button>
+      <el-button type="success" @click="handleResume">继续录音</el-button>
+      <el-button type="warning" @click="handleStop">停止录音</el-button>
+      <br/>
+      <br/>
+      <h3>
+        播放时长：{{
+          recorder &&
+          (playTime > recorder.duration
+              ? recorder.duration.toFixed(4)
+              : playTime.toFixed(4))
+        }}
+      </h3>
+      <br/>
+      <el-button type="primary" @click="handlePlay">播放录音</el-button>
+      <el-button type="info" @click="handlePausePlay">暂停播放</el-button>
+      <el-button type="success" @click="handleResumePlay">继续播放</el-button>
+      <el-button type="warning" @click="handleStopPlay">停止播放</el-button>
+      <el-button type="error" @click="handleDestroy">销毁录音</el-button>
+      <el-button type="primary" @click="uploadRecord">上传</el-button>
+    </div>
+  </div>
+
+
+    <canvas id="canvas"></canvas>
+
   </span>
 </template>
 
 <script>
+import Recorder from 'js-audio-recorder'
 import chatMsgApi from "@/api/chatMsg";
 import EventBus from "@/component/event-bus";
 import EmojiPicker from "vue-emoji-picker";
@@ -144,25 +178,29 @@ export default {
   },
 
   created() {
-    /**
-     * 点击会话：同级接参
-     */
+    // 点击会话：同级接参
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
       this.scrollBottom('window-id')
     });
 
-    /**
-     * 查询会话列表：同级接参
-     */
+    // 查询会话列表：同级接参
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
       this.getChatMsgList()
     });
+
+    // 初始化录音对象
+    this.initRecorder()
   },
 
   data() {
     return {
+      recorder: null,
+      playTime: 0,
+      timer: null,
+      src: null,
+
       chatMsg: {
         fromId: '',
         toId: '',
@@ -310,6 +348,92 @@ export default {
     insertEmoji(emoji) {
       this.chatMsg.content += emoji
     },
+
+    // 开始录音
+    handleStart() {
+      this.recorder = new Recorder()
+      Recorder.getPermission().then(() => {
+        this.recorder.start()
+      }, error => {
+        this.$message({
+          message: '请先允许该网页使用麦克风',
+          type: 'info'
+        })
+        console.log(`${error.name} : ${error.message}`)
+      })
+    },
+    handlePause() {
+      this.recorder.pause() // 暂停录音
+    },
+    handleResume() {
+      this.recorder.resume() // 恢复录音
+    },
+    handleStop() {
+      this.recorder.stop() // 停止录音
+    },
+    handlePlay() {
+      this.recorder.play() // 播放录音
+      // 播放时长
+      this.timer = setInterval(() => {
+        try {
+          this.playTime = this.recorder.getPlayTime()
+        } catch (error) {
+          this.timer = null
+        }
+      }, 100)
+    },
+    handlePausePlay() {
+      this.recorder.pausePlay() // 暂停播放
+      this.playTime = this.recorder.getPlayTime()
+    },
+    handleResumePlay() {
+      this.recorder.resumePlay() // 恢复播放
+      this.timer = setInterval(() => {
+        try {
+          this.playTime = this.recorder.getPlayTime()
+        } catch (error) {
+          this.timer = null
+        }
+      }, 100)
+    },
+    handleStopPlay() {
+      console.log('停止播放')
+      this.recorder.stopPlay() // 停止播放
+
+      // 播放时长
+      this.playTime = this.recorder.getPlayTime()
+      this.timer = null
+    },
+    handleDestroy() {
+      console.log('销毁实例')
+      this.recorder.destroy() // 毁实例
+      this.timer = null
+    },
+    uploadRecord() {
+      if (this.recorder == null || this.recorder.duration === 0) {
+        this.$message({
+          message: '请先录音',
+          type: 'error'
+        })
+        return false
+      }
+      this.recorder.pause() // 暂停录音
+      this.timer = null
+      console.log('上传录音')// 上传录音
+
+      const formData = new FormData()
+      const blob = this.recorder.getWAVBlob()// 获取wav格式音频数据
+      // 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
+      const newbolb = new Blob([blob], {type: 'audio/wav'})
+      const fileOfBlob = new File([newbolb], new Date().getTime() + '.wav')
+      formData.append('file', fileOfBlob)
+      const url = window.URL.createObjectURL(fileOfBlob)
+      this.src = url
+      // const axios = require('axios')
+      // axios.post(url, formData).then(res => {
+      //   console.log(res.data.data[0].url)
+      // })
+    }
   },
 }
 </script>
