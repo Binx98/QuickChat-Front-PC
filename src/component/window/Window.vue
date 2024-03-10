@@ -10,6 +10,7 @@
 
       <!--  2.窗口  -->
       <div id="window-id" class="msg-window-cls">
+        <!--  聊天信息  -->
         <div v-for="item in chatMsgList[curSession.relationId]">
           <!------------------------------------------被动接收------------------------------------------>
           <!--  文字信息  -->
@@ -48,7 +49,7 @@
                     {{ item.extraInfo.name }}
                   </div>
                   <div>
-                    {{ item.extraInfo.size / 1024 }}
+                    {{ item.extraInfo.size }}
                   </div>
                 </div>
               </div>
@@ -62,11 +63,8 @@
 
       <!-- 3.输入部分 -->
       <div class="input-cls">
-        <!-- 语音 -->
-        <span @click="handleStart">语音</span>
-
         <!-- 输入框 -->
-        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="良言一句三冬暖，恶语伤人六月寒..."
+        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请文明交流......"
                v-model="chatMsg.content"/>
 
         <!-- Emoji -->
@@ -104,6 +102,9 @@
           </emoji-picker>
         </span>
 
+
+        <span @click="handleStart">语音</span>
+
         <!-- 文件 -->
         <span style="display: inline-block">
           <el-upload
@@ -124,38 +125,11 @@
     <!--  2、未选中会话  -->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
 
-     <div style="padding: 20px;">
-    <h3>录音上传</h3>
-
-    <div style="font-size:14px">
-      <h3>录音时长：{{ recorder && recorder.duration.toFixed(4) }}</h3>
-      <br/>
-      <el-button type="info" @click="handlePause">暂停录音</el-button>
-      <el-button type="success" @click="handleResume">继续录音</el-button>
-      <el-button type="warning" @click="handleStop">停止录音</el-button>
-      <br/>
-      <br/>
-      <h3>
-        播放时长：{{
-          recorder &&
-          (playTime > recorder.duration
-              ? recorder.duration.toFixed(4)
-              : playTime.toFixed(4))
-        }}
-      </h3>
-      <br/>
-      <el-button type="primary" @click="handlePlay">播放录音</el-button>
-      <el-button type="info" @click="handlePausePlay">暂停播放</el-button>
-      <el-button type="success" @click="handleResumePlay">继续播放</el-button>
-      <el-button type="warning" @click="handleStopPlay">停止播放</el-button>
-      <el-button type="error" @click="handleDestroy">销毁录音</el-button>
-      <el-button type="primary" @click="uploadRecord">上传</el-button>
+    <!--  录音波浪图  -->
+    <!--    <canvas style="" v-if="canvasFlag" id="recordCanvas" ref="record"></canvas>-->
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <canvas style="" v-if="canvasFlag" id="recordCanvas" ref="record"></canvas>
     </div>
-  </div>
-
-
-    <canvas id="canvas"></canvas>
-
   </span>
 </template>
 
@@ -191,16 +165,13 @@ export default {
     });
 
     // 初始化录音对象
-    this.initRecorder()
+    this.recorder = new Recorder()
   },
 
   data() {
     return {
+      canvasFlag: false,
       recorder: null,
-      playTime: 0,
-      timer: null,
-      src: null,
-
       chatMsg: {
         fromId: '',
         toId: '',
@@ -349,91 +320,74 @@ export default {
       this.chatMsg.content += emoji
     },
 
-    // 开始录音
+    /*--------------------------------------------------语音消息-------------------------------------------------------*/
+    /**
+     * 开始录音
+     */
     handleStart() {
+      this.canvasFlag = true;
       this.recorder = new Recorder()
       Recorder.getPermission().then(() => {
-        this.recorder.start()
-      }, error => {
-        this.$message({
-          message: '请先允许该网页使用麦克风',
-          type: 'info'
+        this.recorder.start().then(() => {
+          this.drawRecord();
         })
+      }, (error) => {
         console.log(`${error.name} : ${error.message}`)
       })
     },
-    handlePause() {
-      this.recorder.pause() // 暂停录音
-    },
-    handleResume() {
-      this.recorder.resume() // 恢复录音
-    },
+
+    /**
+     * 停止录音
+     */
     handleStop() {
-      this.recorder.stop() // 停止录音
+      this.recorder.stop()
+      this.drawRecordId && cancelAnimationFrame(this.drawRecordId);
+      this.drawRecordId = null;
     },
+
+    /**
+     * 播放录音
+     */
     handlePlay() {
-      this.recorder.play() // 播放录音
-      // 播放时长
-      this.timer = setInterval(() => {
-        try {
-          this.playTime = this.recorder.getPlayTime()
-        } catch (error) {
-          this.timer = null
-        }
-      }, 100)
+      this.recorder.play()
     },
-    handlePausePlay() {
-      this.recorder.pausePlay() // 暂停播放
-      this.playTime = this.recorder.getPlayTime()
-    },
-    handleResumePlay() {
-      this.recorder.resumePlay() // 恢复播放
-      this.timer = setInterval(() => {
-        try {
-          this.playTime = this.recorder.getPlayTime()
-        } catch (error) {
-          this.timer = null
-        }
-      }, 100)
-    },
-    handleStopPlay() {
-      console.log('停止播放')
-      this.recorder.stopPlay() // 停止播放
 
-      // 播放时长
-      this.playTime = this.recorder.getPlayTime()
-      this.timer = null
+    // 录音波浪图
+    drawRecord() {
+      this.drawRecordId = requestAnimationFrame(this.drawRecord)
+      this.drawWave({
+        canvas: this.$refs.record,
+        dataArray: this.recorder.getRecordAnalyseData(),
+      });
     },
-    handleDestroy() {
-      console.log('销毁实例')
-      this.recorder.destroy() // 毁实例
-      this.timer = null
-    },
-    uploadRecord() {
-      if (this.recorder == null || this.recorder.duration === 0) {
-        this.$message({
-          message: '请先录音',
-          type: 'error'
-        })
-        return false
+    // 绘制波形图
+    drawWave({canvas, dataArray}) {
+      const ctx = canvas.getContext("2d");
+      const bufferLength = dataArray.length;
+      // 填充背景色
+      ctx.fillStyle = "grey";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // 设定波形绘制颜色
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#12CEC2FF";
+      ctx.beginPath();
+      var sliceWidth = (canvas.width * 1.0) / bufferLength, x = 0;
+      for (var i = 0; i < bufferLength; i++) {
+        var v = dataArray[i] / 128.0;
+        var y = (v * canvas.height) / 2;
+        if (i === 0) {
+          // 第一个点
+          ctx.moveTo(x, y);
+        } else {
+          // 剩余的点
+          ctx.lineTo(x, y);
+        }
+        // 依次平移，绘制所有点
+        x += sliceWidth;
       }
-      this.recorder.pause() // 暂停录音
-      this.timer = null
-      console.log('上传录音')// 上传录音
-
-      const formData = new FormData()
-      const blob = this.recorder.getWAVBlob()// 获取wav格式音频数据
-      // 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
-      const newbolb = new Blob([blob], {type: 'audio/wav'})
-      const fileOfBlob = new File([newbolb], new Date().getTime() + '.wav')
-      formData.append('file', fileOfBlob)
-      const url = window.URL.createObjectURL(fileOfBlob)
-      this.src = url
-      // const axios = require('axios')
-      // axios.post(url, formData).then(res => {
-      //   console.log(res.data.data[0].url)
-      // })
-    }
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+    },
   },
 }
 </script>
@@ -442,7 +396,7 @@ export default {
 #chat-input {
   padding-left: 8px;
   padding-right: 8px;
-  width: 70%;
+  width: 68%;
   border-radius: 10px;
   font-size: 14px;
   word-break: break-all;
