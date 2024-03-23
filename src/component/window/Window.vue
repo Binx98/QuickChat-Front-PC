@@ -249,7 +249,8 @@ export default {
      * 发送按钮（文字 + Emoji）
      */
     sendMsg() {
-      if (this.chatMsg.content === '') {
+      if (this.chatMsg.content.length == 0 || this.chatMsg.content.split(" ").join("").length == 0) {
+        this.$message.warning("不可以发送空白消息")
         return;
       }
       this.chatMsg.fromId = this.loginUser.accountId;
