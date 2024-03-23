@@ -110,8 +110,10 @@ export default {
         this.loginUser = res.data.data;
         this.initWebSocket();
       }).catch(e => {
-        localStorage.removeItem("token");
-        this.$router.push('/login')
+        if (e.data.code === 502) {
+          localStorage.removeItem("token");
+          this.$router.push('/login')
+        }
       })
     },
   },

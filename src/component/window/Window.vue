@@ -360,6 +360,7 @@ export default {
         dataArray: this.recorder.getRecordAnalyseData(),
       });
     },
+
     // 绘制波形图
     drawWave({canvas, dataArray}) {
       const ctx = canvas.getContext("2d");
