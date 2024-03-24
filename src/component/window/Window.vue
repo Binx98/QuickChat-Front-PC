@@ -23,6 +23,28 @@
               {{ item.content }}
             </div>
           </div>
+          <!--  文件 File  -->
+          <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 4">
+            <span style="margin-right: 6px">
+              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+            </span>
+            <div class="send-div-cls" style="background-color: antiquewhite;cursor: pointer"
+                 @click="downloadFile(item.msgType, item.content)">
+              <div style="padding: 4px;">
+                <div style="border: 1px solid red;height: 65px;width: 240px">
+                  <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
+                    <img/>
+                  </div>
+                  <div style="font-size: 14px">
+                    {{ item.extraInfo.name }}
+                  </div>
+                  <div>
+                    {{ item.extraInfo.size }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <!------------------------------------------主动发送------------------------------------------>
           <!--  文字 Font  -->
