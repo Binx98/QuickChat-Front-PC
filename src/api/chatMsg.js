@@ -32,18 +32,4 @@ export default {
             data: data
         })
     },
-
-    /**
-     * 下载文件
-     */
-    downloadFile(type, url) {
-        return axios({
-            url: `/file/download`,
-            method: 'post',
-            params: {
-                type: type,
-                url: url
-            }
-        })
-    },
 }

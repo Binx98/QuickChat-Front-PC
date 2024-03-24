@@ -307,11 +307,7 @@ export default {
      * 点击下载文件
      */
     downloadFile(type, url) {
-      chatMsgApi.downloadFile(type, url).then(res => {
-
-      }).catch(e => {
-
-      })
+      window.location.href = process.env.VUE_APP_BASE_API + '/file/download/' + type + '?url=' + url;
     },
 
     /**
