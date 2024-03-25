@@ -152,12 +152,35 @@
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <canvas style="" v-if="canvasFlag" id="recordCanvas" ref="record"></canvas>
     </div>
+
+    <div>
+      <el-button type="button" @click="startRecordAudio">开始录音</el-button>
+      <h3>录音时长：{{ recorder.duration.toFixed(4) }}</h3>
+      <br/>
+      <el-button type="button" @click="stopRecordAudio">停止录音</el-button>
+      <el-button type="button" @click="playRecordAudio">播放录音</el-button>
+      <el-button type="button" @click="getPCBRecordAudioData"
+      >获取PCB录音数据</el-button
+      >
+      <el-button type="button" @click="downloadPCBRecordAudioData"
+      >下载PCB录音文件</el-button
+      >
+      <el-button type="button" @click="getWAVRecordAudioData"
+      >获取WAV录音数据</el-button
+      >
+      <el-button type="button" @click="downloadWAVRecordAudioData"
+      >下载WAV录音文件</el-button
+      >
+      <el-button type="button" @click="uploadWAVData">上传WAV录音数据</el-button>
+      <br/>
+    </div>
   </span>
 </template>
 
 <script>
-import Recorder from 'js-audio-recorder'
+import Recorder from 'js-audio-recorder';
 import chatMsgApi from "@/api/chatMsg";
+import fileApi from "@/api/file"
 import EventBus from "@/component/event-bus";
 import EmojiPicker from "vue-emoji-picker";
 
@@ -187,13 +210,17 @@ export default {
     });
 
     // 初始化录音对象
-    this.recorder = new Recorder()
   },
 
   data() {
     return {
+      recorder: new Recorder({
+        sampleBits: 16, // 采样位数，支持 8 或 16，默认是16
+        sampleRate: 16000, // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
+        numChannels: 1, // 声道，支持 1 或 2， 默认是1
+        // compiling: false,(0.x版本中生效,1.x增加中)  // 是否边录边转换，默认是false
+      }),
       canvasFlag: false,
-      recorder: null,
       chatMsg: {
         fromId: '',
         toId: '',
@@ -233,6 +260,75 @@ export default {
   },
 
   methods: {
+    /**
+     * ========================================================================================
+     */
+    //开始录音
+    startRecordAudio() {
+      Recorder.getPermission().then(
+          () => {
+            console.log("开始录音");
+            this.recorder.start(); // 开始录音
+          },
+          (error) => {
+            this.$message({
+              message: "请先允许该网页使用麦克风",
+              type: "info",
+            });
+            console.log(`${error.name} : ${error.message}`);
+          }
+      );
+    },
+    //停止录音
+    stopRecordAudio() {
+      console.log("停止录音");
+      this.recorder.stop();
+    },
+    //播放录音
+    playRecordAudio() {
+      console.log("播放录音");
+      this.recorder.play();
+    },
+    //获取PCB录音数据
+    getPCBRecordAudioData() {
+      var pcmBlob = this.recorder.getPCMBlob();
+      console.log(pcmBlob);
+    },
+    //获取WAV录音数据
+    getWAVRecordAudioData() {
+      var wavBlob = this.recorder.getWAVBlob();
+      console.log(wavBlob);
+    },
+    //下载PCB录音文件
+    downloadPCBRecordAudioData() {
+      this.recorder.downloadPCM("badao");
+    },
+    //下载WAV录音文件
+    downloadWAVRecordAudioData() {
+      this.recorder.downloadWAV("badao");
+    },
+    //上传wav录音数据
+    uploadWAVData() {
+      var wavBlob = this.recorder.getWAVBlob();
+      // 创建一个formData对象
+      var formData = new FormData()
+      // 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
+      const newbolb = new Blob([wavBlob], {type: 'audio/wav'})
+      //获取当时时间戳作为文件名
+      const fileOfBlob = new File([newbolb], new Date().getTime() + '.wav')
+      formData.append('file', fileOfBlob)
+      fileApi.uploadFile(2, formData).then((response) => {
+        console.log(response);
+      });
+    },
+    /**
+     * ========================================================================================
+     */
+
+
+    /**
+     * 成功回调：上传文件
+     */
     handleSuccess(res, file) {
       this.fileMsg.extraInfo.name = file.raw.name;
       this.fileMsg.extraInfo.size = file.raw.size;
@@ -340,74 +436,6 @@ export default {
     },
 
     /*--------------------------------------------------语音消息-------------------------------------------------------*/
-    /**
-     * 开始录音
-     */
-    handleStart() {
-      this.canvasFlag = true;
-      this.recorder = new Recorder()
-      Recorder.getPermission().then(() => {
-        this.recorder.start().then(() => {
-          this.drawRecord();
-        })
-      }, (error) => {
-        console.log(`${error.name} : ${error.message}`)
-      })
-    },
-
-    /**
-     * 停止录音
-     */
-    handleStop() {
-      this.recorder.stop()
-      this.drawRecordId && cancelAnimationFrame(this.drawRecordId);
-      this.drawRecordId = null;
-    },
-
-    /**
-     * 播放录音
-     */
-    handlePlay() {
-      this.recorder.play()
-    },
-
-    // 录音波浪图
-    drawRecord() {
-      this.drawRecordId = requestAnimationFrame(this.drawRecord)
-      this.drawWave({
-        canvas: this.$refs.record,
-        dataArray: this.recorder.getRecordAnalyseData(),
-      });
-    },
-
-    // 绘制波形图
-    drawWave({canvas, dataArray}) {
-      const ctx = canvas.getContext("2d");
-      const bufferLength = dataArray.length;
-      // 填充背景色
-      ctx.fillStyle = "grey";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      // 设定波形绘制颜色
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "#12CEC2FF";
-      ctx.beginPath();
-      var sliceWidth = (canvas.width * 1.0) / bufferLength, x = 0;
-      for (var i = 0; i < bufferLength; i++) {
-        var v = dataArray[i] / 128.0;
-        var y = (v * canvas.height) / 2;
-        if (i === 0) {
-          // 第一个点
-          ctx.moveTo(x, y);
-        } else {
-          // 剩余的点
-          ctx.lineTo(x, y);
-        }
-        // 依次平移，绘制所有点
-        x += sliceWidth;
-      }
-      ctx.lineTo(canvas.width, canvas.height / 2);
-      ctx.stroke();
-    },
   },
 }
 </script>
