@@ -13,7 +13,7 @@
         <!--  聊天信息  -->
         <div v-for="item in chatMsgList[curSession.relationId]">
           <!------------------------------------------被动接收------------------------------------------>
-          <!--  文字信息  -->
+          <!--  文字  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 1">
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
@@ -23,7 +23,17 @@
               {{ item.content }}
             </div>
           </div>
-          <!--  文件 File  -->
+          <!--  语音  -->
+          <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 2">
+            <span style="margin-right: 6px">
+              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+            </span>
+            <div
+                style="padding: 15px;font-size: 14px;word-break: break-all;background-color: floralwhite;border-radius: 10px;">
+              {{ item.content }}
+            </div>
+          </div>
+          <!--  文件  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 4">
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
@@ -47,7 +57,7 @@
           </div>
 
           <!------------------------------------------主动发送------------------------------------------>
-          <!--  文字 Font  -->
+          <!--  文字  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 1">
             <div class="send-div-cls">
               <div style="padding: 15px;font-size: 14px;word-break: break-all">
@@ -58,7 +68,18 @@
               <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
             </span>
           </div>
-          <!--  文件 File  -->
+          <!--  语音  -->
+          <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 2">
+            <div class="send-div-cls">
+              <audio controls>
+                <source :src=item.content type="audio/wav">
+              </audio>
+            </div>
+            <span style="margin-left: 6px">
+              <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
+            </span>
+          </div>
+          <!--  文件  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 4">
             <div class="send-div-cls" style="background-color: antiquewhite;cursor: pointer"
                  @click="downloadFile(item.msgType, item.content)">
@@ -125,7 +146,7 @@
         </span>
 
 
-        <span @click="handleStart">语音</span>
+        <span @mousedown="startRecordAudio">语音</span>
 
         <!-- 文件 -->
         <span style="display: inline-block">
@@ -173,6 +194,13 @@
       >
       <el-button type="button" @click="uploadWAVData">上传WAV录音数据</el-button>
       <br/>
+
+      <audio controls style="">
+        <source src="http://101.42.13.186:9000/voice-bucket/1711541213834_1711541213845.wav" type="audio/wav">
+<!--        <source src="horse.mp3" type="audio/mpeg">-->
+      </audio>
+
+      <audio />
     </div>
   </span>
 </template>
@@ -441,6 +469,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+audio::-webkit-media-controls-play-button {
+  //display:none;
+}
+audio::-webkit-media-controls-timeline {
+  //display:none;
+}
+audio::-webkit-media-controls-mute-button {
+  display:none;
+}
+
 #chat-input {
   padding-left: 8px;
   padding-right: 8px;
