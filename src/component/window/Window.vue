@@ -349,10 +349,16 @@ export default {
           this.voiceMsg.fromId = this.loginUser.accountId;
           this.voiceMsg.toId = this.curSession.toId;
           this.voiceMsg.msgType = '2';
-          this.voiceMsg.content = res.data.content;
-          chatMsgApi.sendMsg(this.voiceMsg).then(e => {
-            this.$message.error('发送语音消息功能异常')
-          });
+          this.voiceMsg.content = res.data.data;
+          chatMsgApi.sendMsg(this.voiceMsg)
+              .then(res => {
+                this.voiceMsg.content = '';
+                this.getChatMsgByRelationId(this.curSession.relationId);
+                EventBus.$emit('readCount0Event', this.curSession);
+              })
+              .catch(e => {
+                this.$message.error('发送语音消息功能异常')
+              });
         } else {
           this.$message.error('保存语音文件异常')
         }
@@ -414,7 +420,7 @@ export default {
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
-        EventBus.$emit('readCount0Event', this.curSession)
+        EventBus.$emit('readCount0Event', this.curSession);
       }).catch(e => {
         this.$message.error(e.data.msg)
       })
