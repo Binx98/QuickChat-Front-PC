@@ -194,13 +194,6 @@
       >
       <el-button type="button" @click="uploadWAVData">上传WAV录音数据</el-button>
       <br/>
-
-      <audio controls style="">
-        <source src="http://101.42.13.186:9000/voice-bucket/1711541213834_1711541213845.wav" type="audio/wav">
-<!--        <source src="horse.mp3" type="audio/mpeg">-->
-      </audio>
-
-      <audio />
     </div>
   </span>
 </template>
@@ -250,6 +243,12 @@ export default {
       }),
       canvasFlag: false,
       chatMsg: {
+        fromId: '',
+        toId: '',
+        msgType: '',
+        content: '',
+      },
+      voiceMsg: {
         fromId: '',
         toId: '',
         msgType: '',
@@ -345,8 +344,18 @@ export default {
       //获取当时时间戳作为文件名
       const fileOfBlob = new File([newbolb], new Date().getTime() + '.wav')
       formData.append('file', fileOfBlob)
-      fileApi.uploadFile(2, formData).then((response) => {
-        console.log(response);
+      fileApi.uploadFile(2, formData).then(res => {
+        if (res.data.code == 200) {
+          this.voiceMsg.fromId = this.loginUser.accountId;
+          this.voiceMsg.toId = this.curSession.toId;
+          this.voiceMsg.msgType = '2';
+          this.voiceMsg.content = res.data.content;
+          chatMsgApi.sendMsg(this.voiceMsg).then(e => {
+            this.$message.error('发送语音消息功能异常')
+          });
+        } else {
+          this.$message.error('保存语音文件异常')
+        }
       });
     },
     /**
@@ -462,22 +471,13 @@ export default {
     insertEmoji(emoji) {
       this.chatMsg.content += emoji
     },
-
-    /*--------------------------------------------------语音消息-------------------------------------------------------*/
   },
 }
 </script>
 
 <style lang="scss" scoped>
-
-audio::-webkit-media-controls-play-button {
-  //display:none;
-}
-audio::-webkit-media-controls-timeline {
-  //display:none;
-}
 audio::-webkit-media-controls-mute-button {
-  display:none;
+  display: none;
 }
 
 #chat-input {
