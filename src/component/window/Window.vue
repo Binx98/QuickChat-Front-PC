@@ -146,7 +146,7 @@
         </span>
 
 
-        <span @mousedown="startRecordAudio">语音</span>
+        <span @mousedown="holdDown()" @mouseup="holdUp()">语音</span>
 
         <!-- 文件 -->
         <span style="display: inline-block">
@@ -192,7 +192,7 @@
       <el-button type="button" @click="downloadWAVRecordAudioData"
       >下载WAV录音文件</el-button
       >
-      <el-button type="button" @click="uploadWAVData">上传WAV录音数据</el-button>
+      <el-button type="button" @click="uploadAudio">上传WAV录音数据</el-button>
       <br/>
     </div>
   </span>
@@ -204,6 +204,8 @@ import chatMsgApi from "@/api/chatMsg";
 import fileApi from "@/api/file"
 import EventBus from "@/component/event-bus";
 import EmojiPicker from "vue-emoji-picker";
+
+var timeStart, timeEnd, time;
 
 export default {
   name: "Window",
@@ -290,6 +292,35 @@ export default {
     /**
      * ========================================================================================
      */
+    //鼠标按下时触发
+    holdDown() {
+      console.log("鼠标按下.....")
+      this.startRecordAudio();
+      // //获取鼠标按下时的时间
+      // timeStart = new Date().getTime();
+      //
+      // //setInterval会每100毫秒执行一次，也就是每100毫秒获取一次时间
+      // time = setInterval(function () {
+      //   timeEnd = new Date().getTime();
+      //
+      //   console.log("鼠标按下.....")
+      //
+      //   //如果此时检测到的时间与第一次获取的时间差有1000毫秒
+      //   if (timeEnd - timeStart > 1000) {
+      //     //便不再继续重复此函数 （clearInterval取消周期性执行）
+      //     clearInterval(time);
+      //   }
+      // }, 100);
+    },
+
+    holdUp() {
+      //如果按下时间不到1000毫秒便弹起，
+      console.log("鼠标抬起.....")
+      this.stopRecordAudio();
+      this.uploadAudio();
+      // clearInterval(time);
+    },
+
     //开始录音
     startRecordAudio() {
       Recorder.getPermission().then(
@@ -308,7 +339,6 @@ export default {
     },
     //停止录音
     stopRecordAudio() {
-      console.log("停止录音");
       this.recorder.stop();
     },
     //播放录音
@@ -334,15 +364,18 @@ export default {
     downloadWAVRecordAudioData() {
       this.recorder.downloadWAV("badao");
     },
+
+
     //上传wav录音数据
-    uploadWAVData() {
+    uploadAudio() {
       var wavBlob = this.recorder.getWAVBlob();
       // 创建一个formData对象
       var formData = new FormData()
       // 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
-      const newbolb = new Blob([wavBlob], {type: 'audio/wav'})
+      const newBlob = new Blob([wavBlob], {type: 'audio/wav'})
+
       //获取当时时间戳作为文件名
-      const fileOfBlob = new File([newbolb], new Date().getTime() + '.wav')
+      const fileOfBlob = new File([newBlob], new Date().getTime() + '.wav')
       formData.append('file', fileOfBlob)
       fileApi.uploadFile(2, formData).then(res => {
         if (res.data.code == 200) {
@@ -364,10 +397,42 @@ export default {
         }
       });
     },
+
+    convertToMp3(wavDataView) {
+      // 获取wav头信息
+      const wav = lamejs.WavHeader.readHeader(wavDataView); // 此处其实可以不用去读wav头信息，毕竟有对应的config配置
+      const {channels, sampleRate} = wav;
+      const mp3enc = new lamejs.Mp3Encoder(channels, sampleRate, 128);
+      // 获取左右通道数据
+      const result = recorder.getChannelData()
+      const buffer = [];
+      const leftData = result.left && new Int16Array(result.left.buffer, 0, result.left.byteLength / 2);
+      const rightData = result.right && new Int16Array(result.right.buffer, 0, result.right.byteLength / 2);
+      const remaining = leftData.length + (rightData ? rightData.length : 0);
+      const maxSamples = 1152;
+      for (let i = 0; i < remaining; i += maxSamples) {
+        const left = leftData.subarray(i, i + maxSamples);
+        let right = null;
+        let mp3buf = null;
+        if (channels === 2) {
+          right = rightData.subarray(i, i + maxSamples);
+          mp3buf = mp3enc.encodeBuffer(left, right);
+        } else {
+          mp3buf = mp3enc.encodeBuffer(left);
+        }
+        if (mp3buf.length > 0) {
+          buffer.push(mp3buf);
+        }
+      }
+      const enc = mp3enc.flush();
+      if (enc.length > 0) {
+        buffer.push(enc);
+      }
+      return new Blob(buffer, {type: 'audio/mp3'});
+    },
     /**
      * ========================================================================================
      */
-
 
     /**
      * 成功回调：上传文件
@@ -482,9 +547,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+audio {
+  width: 22vw;
+}
+
+// 语音音量按钮
 audio::-webkit-media-controls-mute-button {
   display: none;
 }
+
+// 音量的控制条
+video::-webkit-media-controls-volume-slider {
+  display: none;
+}
+
+//video::-webkit-media-controls-toggle-closed-captions-button {
+//   display: none;
+//}
 
 #chat-input {
   padding-left: 8px;
