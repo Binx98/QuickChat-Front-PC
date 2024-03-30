@@ -237,6 +237,16 @@ export default {
 
   data() {
     return {
+      //波浪图-录音
+      drawRecordId:null,
+      oCanvas : null,
+      ctx : null,
+      //波浪图-播放
+      drawPlayId:null,
+      pCanvas : null,
+      pCtx : null,
+
+
       recorder: new Recorder({
         sampleBits: 16, // 采样位数，支持 8 或 16，默认是16
         sampleRate: 16000, // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
@@ -292,6 +302,18 @@ export default {
     /**
      * ========================================================================================
      */
+    /**
+     * 波浪图配置
+     * */
+    startCanvas(){
+      //录音波浪
+      this.oCanvas = document.getElementById('canvas');
+      this.ctx = this.oCanvas.getContext("2d");
+      //播放波浪
+      this.pCanvas = document.getElementById('playChart');
+      this.pCtx = this.pCanvas.getContext("2d");
+    },
+
     //鼠标按下时触发
     holdDown() {
       console.log("鼠标按下.....")
@@ -374,6 +396,7 @@ export default {
       // 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
       const newBlob = new Blob([wavBlob], {type: 'audio/wav'})
 
+
       //获取当时时间戳作为文件名
       const fileOfBlob = new File([newBlob], new Date().getTime() + '.wav')
       formData.append('file', fileOfBlob)
@@ -398,38 +421,6 @@ export default {
       });
     },
 
-    convertToMp3(wavDataView) {
-      // 获取wav头信息
-      const wav = lamejs.WavHeader.readHeader(wavDataView); // 此处其实可以不用去读wav头信息，毕竟有对应的config配置
-      const {channels, sampleRate} = wav;
-      const mp3enc = new lamejs.Mp3Encoder(channels, sampleRate, 128);
-      // 获取左右通道数据
-      const result = recorder.getChannelData()
-      const buffer = [];
-      const leftData = result.left && new Int16Array(result.left.buffer, 0, result.left.byteLength / 2);
-      const rightData = result.right && new Int16Array(result.right.buffer, 0, result.right.byteLength / 2);
-      const remaining = leftData.length + (rightData ? rightData.length : 0);
-      const maxSamples = 1152;
-      for (let i = 0; i < remaining; i += maxSamples) {
-        const left = leftData.subarray(i, i + maxSamples);
-        let right = null;
-        let mp3buf = null;
-        if (channels === 2) {
-          right = rightData.subarray(i, i + maxSamples);
-          mp3buf = mp3enc.encodeBuffer(left, right);
-        } else {
-          mp3buf = mp3enc.encodeBuffer(left);
-        }
-        if (mp3buf.length > 0) {
-          buffer.push(mp3buf);
-        }
-      }
-      const enc = mp3enc.flush();
-      if (enc.length > 0) {
-        buffer.push(enc);
-      }
-      return new Blob(buffer, {type: 'audio/mp3'});
-    },
     /**
      * ========================================================================================
      */
