@@ -231,22 +231,14 @@ export default {
       this.sessionList = sessionList;
       this.getChatMsgList()
     });
+  },
 
-    // 初始化录音对象
+  mounted() {
+    this.startCanvas();
   },
 
   data() {
     return {
-      //波浪图-录音
-      drawRecordId:null,
-      oCanvas : null,
-      ctx : null,
-      //波浪图-播放
-      drawPlayId:null,
-      pCanvas : null,
-      pCtx : null,
-
-
       recorder: new Recorder({
         sampleBits: 16, // 采样位数，支持 8 或 16，默认是16
         sampleRate: 16000, // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
@@ -305,7 +297,7 @@ export default {
     /**
      * 波浪图配置
      * */
-    startCanvas(){
+    startCanvas() {
       //录音波浪
       this.oCanvas = document.getElementById('canvas');
       this.ctx = this.oCanvas.getContext("2d");
@@ -387,17 +379,11 @@ export default {
       this.recorder.downloadWAV("badao");
     },
 
-
-    //上传wav录音数据
+    //上传wav录音文件
     uploadAudio() {
-      var wavBlob = this.recorder.getWAVBlob();
-      // 创建一个formData对象
-      var formData = new FormData()
-      // 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
+      let wavBlob = this.recorder.getWAVBlob();
+      let formData = new FormData()
       const newBlob = new Blob([wavBlob], {type: 'audio/wav'})
-
-
-      //获取当时时间戳作为文件名
       const fileOfBlob = new File([newBlob], new Date().getTime() + '.wav')
       formData.append('file', fileOfBlob)
       fileApi.uploadFile(2, formData).then(res => {
@@ -533,7 +519,8 @@ export default {
     insertEmoji(emoji) {
       this.chatMsg.content += emoji
     },
-  },
+  }
+  ,
 }
 </script>
 
