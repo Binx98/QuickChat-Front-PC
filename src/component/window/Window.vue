@@ -175,25 +175,14 @@
     </div>
 
     <div>
-      <el-button type="button" @click="startRecordAudio">开始录音</el-button>
-      <h3>录音时长：{{ recorder.duration.toFixed(4) }}</h3>
+      <el-button type="button" @click="getWAVRecordAudioData">获取WAV录音数据</el-button>
+      <el-button type="button" @click="downloadWAVRecordAudioData">下载WAV录音文件</el-button>
       <br/>
-      <el-button type="button" @click="stopRecordAudio">停止录音</el-button>
-      <el-button type="button" @click="playRecordAudio">播放录音</el-button>
-      <el-button type="button" @click="getPCBRecordAudioData"
-      >获取PCB录音数据</el-button
-      >
-      <el-button type="button" @click="downloadPCBRecordAudioData"
-      >下载PCB录音文件</el-button
-      >
-      <el-button type="button" @click="getWAVRecordAudioData"
-      >获取WAV录音数据</el-button
-      >
-      <el-button type="button" @click="downloadWAVRecordAudioData"
-      >下载WAV录音文件</el-button
-      >
-      <el-button type="button" @click="uploadAudio">上传WAV录音数据</el-button>
-      <br/>
+
+      <div class="BaseRecorder-wave">
+        <canvas ref="record"></canvas>
+      </div>
+
     </div>
   </span>
 </template>
@@ -233,12 +222,13 @@ export default {
     });
   },
 
-  mounted() {
-    this.startCanvas();
-  },
-
   data() {
     return {
+      // 波浪图-录音
+      drawRecordId: null,
+      // 波浪图-播放
+      drawPlayId: null,
+
       recorder: new Recorder({
         sampleBits: 16, // 采样位数，支持 8 或 16，默认是16
         sampleRate: 16000, // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
@@ -294,18 +284,6 @@ export default {
     /**
      * ========================================================================================
      */
-    /**
-     * 波浪图配置
-     * */
-    startCanvas() {
-      //录音波浪
-      this.oCanvas = document.getElementById('canvas');
-      this.ctx = this.oCanvas.getContext("2d");
-      //播放波浪
-      this.pCanvas = document.getElementById('playChart');
-      this.pCtx = this.pCanvas.getContext("2d");
-    },
-
     //鼠标按下时触发
     holdDown() {
       console.log("鼠标按下.....")
@@ -341,6 +319,7 @@ export default {
           () => {
             console.log("开始录音");
             this.recorder.start(); // 开始录音
+            this.drawRecord();
           },
           (error) => {
             this.$message({
@@ -357,22 +336,12 @@ export default {
     },
     //播放录音
     playRecordAudio() {
-      console.log("播放录音");
       this.recorder.play();
-    },
-    //获取PCB录音数据
-    getPCBRecordAudioData() {
-      var pcmBlob = this.recorder.getPCMBlob();
-      console.log(pcmBlob);
     },
     //获取WAV录音数据
     getWAVRecordAudioData() {
-      var wavBlob = this.recorder.getWAVBlob();
+      let wavBlob = this.recorder.getWAVBlob();
       console.log(wavBlob);
-    },
-    //下载PCB录音文件
-    downloadPCBRecordAudioData() {
-      this.recorder.downloadPCM("badao");
     },
     //下载WAV录音文件
     downloadWAVRecordAudioData() {
@@ -405,6 +374,61 @@ export default {
           this.$message.error('保存语音文件异常')
         }
       });
+    },
+
+    /**
+     * 绘制波浪图-录音
+     */
+    drawRecord() {
+      this.drawRecordId = requestAnimationFrame(this.drawRecord);
+      this.drawWave({
+        canvas: this.$refs.record,
+        dataArray: this.recorder.getRecordAnalyseData(),
+        bgcolor: 'white',
+        lineWidth: 1,
+        lineColor: 'red',
+      });
+    },
+
+    drawWave({
+               canvas,
+               dataArray,
+               bgcolor = 'rgb(200, 200, 200)',
+               lineWidth = 2,
+               lineColor = 'rgb(0, 0, 0)',
+             }) {
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const bufferLength = dataArray.length;
+      // 一个点占多少位置，共有bufferLength个点要绘制
+      const sliceWidth = canvas.width / bufferLength;
+      // 绘制点的x轴位置
+      let x = 0;
+      // 填充背景色
+      ctx.fillStyle = bgcolor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 设定波形绘制颜色
+      ctx.lineWidth = lineWidth;
+      ctx.strokeStyle = lineColor;
+      ctx.beginPath();
+
+      for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128;
+        const y = (v * canvas.height) / 2;
+        if (i === 0) {
+          // 第一个点
+          ctx.moveTo(x, y);
+        } else {
+          // 剩余的点
+          ctx.lineTo(x, y);
+        }
+        // 依次平移，绘制所有点
+        x += sliceWidth;
+      }
+      // 最后一个点
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
     },
 
     /**
@@ -525,6 +549,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.BaseRecorder {
+  text-align: center;
+  & > div {
+    margin: 20px 0;
+  }
+  &-wave {
+    canvas {
+      width: 400px;
+      height: 100px;
+      border: 1px solid #ccc;
+    }
+  }
+}
+
 audio {
   width: 22vw;
 }
