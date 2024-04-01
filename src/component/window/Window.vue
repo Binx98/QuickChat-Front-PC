@@ -25,12 +25,13 @@
           </div>
           <!--  语音  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 2">
-            <span style="margin-right: 6px">
-              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+            <span style="margin-left: 6px">
+              <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
             </span>
-            <div
-                style="padding: 15px;font-size: 14px;word-break: break-all;background-color: floralwhite;border-radius: 10px;">
-              {{ item.content }}
+            <div class="receive-item">
+              <audio controls>
+                <source :src=item.content type="audio/wav">
+              </audio>
             </div>
           </div>
           <!--  文件  -->
@@ -38,7 +39,7 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div class="send-div-cls" style="background-color: antiquewhite;cursor: pointer"
+            <div class="send-div-cls" style="background-color: #f0fff3;cursor: pointer"
                  @click="downloadFile(item.msgType, item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
@@ -81,7 +82,7 @@
           </div>
           <!--  文件  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 4">
-            <div class="send-div-cls" style="background-color: antiquewhite;cursor: pointer"
+            <div class="send-div-cls" style="background-color: #f0fff3;cursor: pointer"
                  @click="downloadFile(item.msgType, item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
@@ -109,7 +110,6 @@
         <!-- 输入框 -->
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请文明交流......"
                v-model="chatMsg.content"/>
-
         <!-- Emoji -->
         <span class="wrapper">
           <emoji-picker @emoji="">
@@ -144,10 +144,8 @@
             </div>
           </emoji-picker>
         </span>
-
-
+        <!-- 语音 -->
         <span @mousedown="holdDown()" @mouseup="holdUp()">语音</span>
-
         <!-- 文件 -->
         <span style="display: inline-block">
           <el-upload
@@ -159,30 +157,15 @@
             <el-button size="small" type="primary">文件</el-button>
           </el-upload>
         </span>
-
         <!-- 发送按钮 -->
         <span @click="sendMsg()">发送</span>
       </div>
     </el-col>
 
-    <!--  2、未选中会话  -->
+    <!----------------------------------------------------未选中会话---------------------------------------------------->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
-
-    <!--  录音波浪图  -->
-    <!--    <canvas style="" v-if="canvasFlag" id="recordCanvas" ref="record"></canvas>-->
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-        <canvas style="" v-if="canvasFlag" id="recordCanvas" ref="record"></canvas>
-    </div>
-
-    <div>
-      <el-button type="button" @click="getWAVRecordAudioData">获取WAV录音数据</el-button>
-      <el-button type="button" @click="downloadWAVRecordAudioData">下载WAV录音文件</el-button>
-      <br/>
-
-      <div class="BaseRecorder-wave">
-        <canvas ref="record"></canvas>
-      </div>
-
+    <div class="BaseRecorder-wave" v-if="this.canvasFlag">
+      <canvas ref="record"></canvas>
     </div>
   </span>
 </template>
@@ -224,18 +207,13 @@ export default {
 
   data() {
     return {
-      // 波浪图-录音
+      canvasFlag: false,
       drawRecordId: null,
-      // 波浪图-播放
-      drawPlayId: null,
-
       recorder: new Recorder({
         sampleBits: 16, // 采样位数，支持 8 或 16，默认是16
         sampleRate: 16000, // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
         numChannels: 1, // 声道，支持 1 或 2， 默认是1
-        // compiling: false,(0.x版本中生效,1.x增加中)  // 是否边录边转换，默认是false
       }),
-      canvasFlag: false,
       chatMsg: {
         fromId: '',
         toId: '',
@@ -287,6 +265,7 @@ export default {
     //鼠标按下时触发
     holdDown() {
       console.log("鼠标按下.....")
+      this.canvasFlag = true;
       this.startRecordAudio();
       // //获取鼠标按下时的时间
       // timeStart = new Date().getTime();
@@ -309,6 +288,7 @@ export default {
       //如果按下时间不到1000毫秒便弹起，
       console.log("鼠标抬起.....")
       this.stopRecordAudio();
+      this.canvasFlag = false;
       this.uploadAudio();
       // clearInterval(time);
     },
@@ -333,10 +313,6 @@ export default {
     //停止录音
     stopRecordAudio() {
       this.recorder.stop();
-    },
-    //播放录音
-    playRecordAudio() {
-      this.recorder.play();
     },
     //获取WAV录音数据
     getWAVRecordAudioData() {
@@ -552,13 +528,15 @@ export default {
 
 .BaseRecorder {
   text-align: center;
+
   & > div {
     margin: 20px 0;
   }
+
   &-wave {
     canvas {
-      width: 400px;
-      height: 100px;
+      width: 300px;
+      height: 60px;
       border: 1px solid #ccc;
     }
   }
