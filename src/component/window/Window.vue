@@ -18,8 +18,8 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div
-                style="padding: 15px;font-size: 14px;word-break: break-all;background-color: floralwhite;border-radius: 10px;">
+            <div style="padding: 15px;font-size: 14px;word-break: break-all;
+              background-color: floralwhite;border-radius: 10px;">
               {{ item.content }}
             </div>
           </div>
@@ -111,7 +111,7 @@
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请文明交流......"
                v-model="chatMsg.content"/>
         <!-- Emoji -->
-        <span class="wrapper">
+        <span style="display: inline-block">
           <emoji-picker @emoji="">
             <!-- 按钮 -->
             <button
@@ -164,6 +164,8 @@
 
     <!----------------------------------------------------未选中会话---------------------------------------------------->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
+
+    <!-- 录音波浪线 -->
     <div class="BaseRecorder-wave" v-if="this.canvasFlag">
       <canvas ref="record"></canvas>
     </div>
@@ -485,7 +487,7 @@ export default {
     },
 
     /**
-     * 点击下载文件
+     * 下载文件
      */
     downloadFile(type, url) {
       window.location.href = process.env.VUE_APP_BASE_API + '/file/download/' + type + '?url=' + url;
@@ -526,6 +528,7 @@ export default {
 
 <style lang="scss" scoped>
 
+/*-----------音频波浪线---------*/
 .BaseRecorder {
   text-align: center;
 
@@ -542,6 +545,9 @@ export default {
   }
 }
 
+/*-----------音频波浪线---------*/
+
+/*-----------音频样式---------*/
 audio {
   width: 22vw;
 }
@@ -556,9 +562,7 @@ video::-webkit-media-controls-volume-slider {
   display: none;
 }
 
-//video::-webkit-media-controls-toggle-closed-captions-button {
-//   display: none;
-//}
+/*-----------音频样式---------*/
 
 #chat-input {
   padding-left: 8px;
@@ -585,32 +589,13 @@ video::-webkit-media-controls-volume-slider {
 }
 
 
+/*-----------------滚动条样式-----------------*/
 .window-cls::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-.msg-window-cls::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-.emoji-picker::-webkit-scrollbar {
-  width: 10px;
-  height: 0px;
-}
-
 .window-cls::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: #9e9e9e;
-}
-
-.msg-window-cls::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: #9e9e9e;
-}
-
-.emoji-picker::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: #9e9e9e;
 }
@@ -621,10 +606,30 @@ video::-webkit-media-controls-volume-slider {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
+.msg-window-cls::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.msg-window-cls::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #9e9e9e;
+}
+
 .msg-window-cls::-webkit-scrollbar-track {
   border-radius: 10px;
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
+}
+
+.emoji-picker::-webkit-scrollbar {
+  width: 10px;
+  height: 0px;
+}
+
+.emoji-picker::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #9e9e9e;
 }
 
 .emoji-picker::-webkit-scrollbar-track {
@@ -632,6 +637,8 @@ video::-webkit-media-controls-volume-slider {
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
+
+/*-----------------滚动条样式-----------------*/
 
 .send-div-cls {
   margin-left: 1.6%;
@@ -680,10 +687,7 @@ video::-webkit-media-controls-volume-slider {
   font-family: "Arial Rounded MT Bold";
 }
 
-.wrapper {
-  display: inline-block;
-}
-
+/*-------------------Emoji--------------------*/
 .emoji-invoker {
   width: 2rem;
   height: 2rem;
