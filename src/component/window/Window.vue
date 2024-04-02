@@ -58,7 +58,7 @@
           <!------------------------------------------主动发送------------------------------------------>
           <!--  文字  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 1">
-            <div class="send-div-cls">
+            <div class="send-div-font">
               <div style="padding: 15px;font-size: 14px;word-break: break-all">
                 {{ item.content }}
               </div>
@@ -69,19 +69,16 @@
           </div>
           <!--  语音  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 2">
-            <div class="send-div-cls">
-              <audio controls>
-                <source :src=item.content type="audio/wav">
-              </audio>
-            </div>
+            <audio controls>
+              <source :src=item.content type="audio/wav">
+            </audio>
             <span style="margin-left: 6px">
               <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
             </span>
           </div>
           <!--  文件  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 4">
-            <div class="send-div-cls" style="background-color: #f0fff3;cursor: pointer"
-                 @click="downloadFile(item.msgType, item.content)">
+            <div class="send-div-file" @click="downloadFile(item.msgType, item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
                   <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
@@ -523,8 +520,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-/*-----------音频波浪线---------*/
+// ---------------------音频波浪线---------------------
 .BaseRecorder {
   text-align: center;
 
@@ -541,25 +537,21 @@ export default {
   }
 }
 
-/*-----------音频波浪线---------*/
 
-/*-----------音频样式---------*/
+// ---------------------音频播放器---------------------
 audio {
-  width: 22vw;
+  width: 16vw;
 }
 
-// 语音音量按钮
 audio::-webkit-media-controls-mute-button {
   display: none;
 }
 
-// 音量的控制条
 video::-webkit-media-controls-volume-slider {
   display: none;
 }
 
-/*-----------音频样式---------*/
-
+// ---------------------消息输入框---------------------
 #chat-input {
   padding-left: 8px;
   padding-right: 8px;
@@ -585,7 +577,7 @@ video::-webkit-media-controls-volume-slider {
 }
 
 
-/*-----------------滚动条样式-----------------*/
+// ---------------------滚动条---------------------
 .window-cls::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -634,15 +626,8 @@ video::-webkit-media-controls-volume-slider {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
-/*-----------------滚动条样式-----------------*/
 
-.send-div-cls {
-  margin-left: 1.6%;
-  background-color: $logo-color;
-  border-radius: 10px;
-  display: inline-block;
-}
-
+// ---------------------消息样式：发送方---------------------
 .send-item {
   width: 70%;
   float: right;
@@ -653,6 +638,22 @@ video::-webkit-media-controls-volume-slider {
   justify-content: flex-end
 }
 
+.send-div-font {
+  margin-left: 1.6%;
+  background-color: $logo-color;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.send-div-file {
+  margin-left: 1.6%;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: #f0fff3;
+  cursor: pointer
+}
+
+// ---------------------消息样式：接收方---------------------
 .receive-item {
   width: 72%;
   display: flex;
@@ -660,7 +661,6 @@ video::-webkit-media-controls-volume-slider {
   margin-left: 1%;
   margin-top: 1%;
 }
-
 
 .head-bar {
   display: flex;
@@ -679,12 +679,13 @@ video::-webkit-media-controls-volume-slider {
   border-width: 2px 0 0 0;
 }
 
+// ---------------------会话名称---------------------
 .session-name-cls {
   color: $session-nick-color;
   font-family: "Arial Rounded MT Bold";
 }
 
-/*-------------------Emoji--------------------*/
+// ---------------------Emoji---------------------
 .emoji-invoker {
   width: 2rem;
   height: 2rem;
