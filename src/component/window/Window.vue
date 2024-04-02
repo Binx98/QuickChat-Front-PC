@@ -25,8 +25,8 @@
           </div>
           <!--  语音  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 2">
-            <span style="margin-left: 6px">
-              <el-avatar :src="curSession.sessionAvatar" shape="square" style="cursor:pointer;"/>
+            <span style="margin-right: 6px">
+              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
             <audio controls>
               <source :src=item.content type="audio/wav">
@@ -37,8 +37,7 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div style="padding: 15px;font-size: 14px;word-break: break-all;
-              background-color: floralwhite;border-radius: 10px;"
+            <div style="font-size: 14px;background-color: floralwhite;border-radius: 10px;"
                  @click="downloadFile(item.msgType, item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
