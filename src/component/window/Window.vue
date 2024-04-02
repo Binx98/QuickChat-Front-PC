@@ -26,20 +26,19 @@
           <!--  语音  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 2">
             <span style="margin-left: 6px">
-              <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
+              <el-avatar :src="curSession.sessionAvatar" shape="square" style="cursor:pointer;"/>
             </span>
-            <div class="receive-item">
-              <audio controls>
-                <source :src=item.content type="audio/wav">
-              </audio>
-            </div>
+            <audio controls>
+              <source :src=item.content type="audio/wav">
+            </audio>
           </div>
           <!--  文件  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 4">
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div class="send-div-cls" style="background-color: #f0fff3;cursor: pointer"
+            <div style="padding: 15px;font-size: 14px;word-break: break-all;
+              background-color: floralwhite;border-radius: 10px;"
                  @click="downloadFile(item.msgType, item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
@@ -178,8 +177,6 @@ import chatMsgApi from "@/api/chatMsg";
 import fileApi from "@/api/file"
 import EventBus from "@/component/event-bus";
 import EmojiPicker from "vue-emoji-picker";
-
-var timeStart, timeEnd, time;
 
 export default {
   name: "Window",
@@ -647,14 +644,6 @@ video::-webkit-media-controls-volume-slider {
   display: inline-block;
 }
 
-.receive-item {
-  width: 72%;
-  display: flex;
-  align-items: center;
-  margin-left: 1%;
-  margin-top: 1%;
-}
-
 .send-item {
   width: 70%;
   float: right;
@@ -664,6 +653,15 @@ video::-webkit-media-controls-volume-slider {
   align-items: center;
   justify-content: flex-end
 }
+
+.receive-item {
+  width: 72%;
+  display: flex;
+  align-items: center;
+  margin-left: 1%;
+  margin-top: 1%;
+}
+
 
 .head-bar {
   display: flex;
