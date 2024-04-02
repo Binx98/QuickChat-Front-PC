@@ -27,7 +27,7 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <audio controls>
+            <audio controls controlsList="nodownload noplaybackrate">
               <source :src=item.content type="audio/wav">
             </audio>
           </div>
@@ -65,7 +65,7 @@
           </div>
           <!--  语音  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 2">
-            <audio controls>
+            <audio controls controlsList="nodownload noplaybackrate">
               <source :src=item.content type="audio/wav">
             </audio>
             <span style="margin-left: 6px">
