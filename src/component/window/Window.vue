@@ -18,8 +18,7 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div style="padding: 15px;font-size: 14px;word-break: break-all;
-              background-color: floralwhite;border-radius: 10px;">
+            <div class="receive-div-font">
               {{ item.content }}
             </div>
           </div>
@@ -37,8 +36,7 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div style="font-size: 14px;background-color: floralwhite;border-radius: 10px;"
-                 @click="downloadFile(item.msgType, item.content)">
+            <div class="receive-div-file" @click="downloadFile(item.msgType, item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
                   <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
@@ -59,9 +57,7 @@
           <!--  文字  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 1">
             <div class="send-div-font">
-              <div style="padding: 15px;font-size: 14px;word-break: break-all">
                 {{ item.content }}
-              </div>
             </div>
             <span style="margin-left: 6px">
               <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
@@ -630,38 +626,51 @@ video::-webkit-media-controls-volume-slider {
 // ---------------------消息样式：发送方---------------------
 .send-item {
   width: 70%;
-  float: right;
-  margin-right: 1%;
-  margin-top: 1%;
   display: flex;
   align-items: center;
+  margin-right: 1%;
+  margin-top: 1%;
+  float: right;
   justify-content: flex-end
 }
 
 .send-div-font {
-  margin-left: 1.6%;
+  padding: 15px;
+  font-size: 14px;
   background-color: $logo-color;
   border-radius: 10px;
-  display: inline-block;
 }
 
 .send-div-file {
-  margin-left: 1.6%;
   border-radius: 10px;
-  display: inline-block;
   background-color: #f0fff3;
   cursor: pointer
 }
 
 // ---------------------消息样式：接收方---------------------
 .receive-item {
-  width: 72%;
+  width: 70%;
   display: flex;
   align-items: center;
   margin-left: 1%;
   margin-top: 1%;
 }
 
+.receive-div-font {
+  padding: 15px;
+  font-size: 14px;
+  background-color: floralwhite;
+  border-radius: 10px;
+}
+
+.receive-div-file {
+  //font-size: 14px;
+  border-radius: 10px;
+  background-color: #f0fff3;
+  cursor: pointer;
+}
+
+// ---------------------分割线---------------------
 .head-bar {
   display: flex;
   align-items: center;
@@ -671,6 +680,7 @@ video::-webkit-media-controls-volume-slider {
   border-width: 0 0 2px 0;
 }
 
+// ---------------------输入框---------------------
 .input-cls {
   margin-top: 1%;
   height: 8%;
