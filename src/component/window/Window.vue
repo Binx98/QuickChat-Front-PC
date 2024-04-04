@@ -216,6 +216,11 @@ export default {
         toId: '',
         msgType: '',
         content: '',
+        extraInfo: {
+          name: '',
+          size: '',
+          type: ''
+        }
       },
       fileMsg: {
         fromId: '',
@@ -251,40 +256,25 @@ export default {
 
   methods: {
     /**
-     * ========================================================================================
+     * 鼠标按住：展示音频波浪，开始录音
      */
-    //鼠标按下时触发
     holdDown() {
-      console.log("鼠标按下.....")
       this.canvasFlag = true;
       this.startRecordAudio();
-      // //获取鼠标按下时的时间
-      // timeStart = new Date().getTime();
-      //
-      // //setInterval会每100毫秒执行一次，也就是每100毫秒获取一次时间
-      // time = setInterval(function () {
-      //   timeEnd = new Date().getTime();
-      //
-      //   console.log("鼠标按下.....")
-      //
-      //   //如果此时检测到的时间与第一次获取的时间差有1000毫秒
-      //   if (timeEnd - timeStart > 1000) {
-      //     //便不再继续重复此函数 （clearInterval取消周期性执行）
-      //     clearInterval(time);
-      //   }
-      // }, 100);
     },
 
+    /**
+     * 鼠标松开：关闭音频波浪，结束录音，上传录音文件
+     */
     holdUp() {
-      //如果按下时间不到1000毫秒便弹起，
-      console.log("鼠标抬起.....")
-      this.stopRecordAudio();
       this.canvasFlag = false;
+      this.stopRecordAudio();
       this.uploadAudio();
-      // clearInterval(time);
     },
 
-    //开始录音
+    /**
+     * 开始录音
+     */
     startRecordAudio() {
       Recorder.getPermission().then(
           () => {
@@ -301,36 +291,35 @@ export default {
           }
       );
     },
-    //停止录音
+
+    /**
+     * 停止录音
+     */
     stopRecordAudio() {
       this.recorder.stop();
     },
-    //获取WAV录音数据
-    getWAVRecordAudioData() {
-      let wavBlob = this.recorder.getWAVBlob();
-      console.log(wavBlob);
-    },
-    //下载WAV录音文件
-    downloadWAVRecordAudioData() {
-      this.recorder.downloadWAV("badao");
-    },
 
-    //上传wav录音文件
+    /**
+     * 上传wav录音文件
+     * TODO wav转mp3逻辑补充
+     */
     uploadAudio() {
       let wavBlob = this.recorder.getWAVBlob();
       let formData = new FormData()
       const newBlob = new Blob([wavBlob], {type: 'audio/wav'})
-      const fileOfBlob = new File([newBlob], new Date().getTime() + '.wav')
+      const fileOfBlob = new File([newBlob], this.loginUser.accountId + ':' + new Date().getTime() + '.wav')
       formData.append('file', fileOfBlob)
       fileApi.uploadFile(2, formData).then(res => {
         if (res.data.code == 200) {
           this.voiceMsg.fromId = this.loginUser.accountId;
           this.voiceMsg.toId = this.curSession.toId;
           this.voiceMsg.msgType = '2';
-          this.voiceMsg.content = res.data.data;
+          this.voiceMsg.content = res.data.data.url;
+          this.voiceMsg.extraInfo = res.data.data.extraInfo;
           chatMsgApi.sendMsg(this.voiceMsg)
               .then(res => {
                 this.voiceMsg.content = '';
+                this.voiceMsg.extraInfo = '';
                 this.getChatMsgByRelationId(this.curSession.relationId);
                 EventBus.$emit('readCount0Event', this.curSession);
               })
@@ -340,6 +329,8 @@ export default {
         } else {
           this.$message.error('保存语音文件异常')
         }
+      }).catch(e => {
+        this.$message.error(e.data.msg);
       });
     },
 
@@ -399,17 +390,24 @@ export default {
     },
 
     /**
-     * ========================================================================================
-     */
-
-    /**
      * 成功回调：上传文件
      */
     handleSuccess(res, file) {
       this.fileMsg.extraInfo.name = file.raw.name;
       this.fileMsg.extraInfo.size = file.raw.size;
       this.fileMsg.extraInfo.type = file.raw.type;
-      this.sendFile(res.data)
+
+      this.fileMsg.fromId = this.loginUser.accountId;
+      this.fileMsg.toId = this.curSession.toId;
+      this.fileMsg.msgType = '4';
+      this.fileMsg.content = res.data.url;
+
+      chatMsgApi.sendMsg(this.fileMsg).then(res => {
+        this.getChatMsgByRelationId(this.curSession.relationId);
+        EventBus.$emit('readCount0Event', this.curSession)
+      }).catch(e => {
+        this.$message.error(e.data.msg)
+      })
     },
 
     /**
@@ -454,22 +452,6 @@ export default {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
         EventBus.$emit('readCount0Event', this.curSession);
-      }).catch(e => {
-        this.$message.error(e.data.msg)
-      })
-    },
-
-    /**
-     * 发送文件
-     */
-    sendFile(url) {
-      this.fileMsg.fromId = this.loginUser.accountId;
-      this.fileMsg.toId = this.curSession.toId;
-      this.fileMsg.msgType = '4';
-      this.fileMsg.content = url;
-      chatMsgApi.sendMsg(this.fileMsg).then(res => {
-        this.getChatMsgByRelationId(this.curSession.relationId);
-        EventBus.$emit('readCount0Event', this.curSession)
       }).catch(e => {
         this.$message.error(e.data.msg)
       })
