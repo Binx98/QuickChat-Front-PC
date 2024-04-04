@@ -553,7 +553,7 @@ video::-webkit-media-controls-volume-slider {
 
 // ---------------------滚动条---------------------
 .window-cls::-webkit-scrollbar {
-  width: 10px;
+  width: 7.8px;
   height: 10px;
 }
 
@@ -569,7 +569,7 @@ video::-webkit-media-controls-volume-slider {
 }
 
 .msg-window-cls::-webkit-scrollbar {
-  width: 10px;
+  width: 7.8px;
   height: 10px;
 }
 
@@ -585,7 +585,7 @@ video::-webkit-media-controls-volume-slider {
 }
 
 .emoji-picker::-webkit-scrollbar {
-  width: 10px;
+  width: 7.8px;
   height: 0px;
 }
 

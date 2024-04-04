@@ -21,101 +21,6 @@
             <span class="session-msg-cls">哈哈</span>
           </div>
         </div>
-        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
-          <!-- 头像 -->
-          <div class="avatar-cls">
-            <el-badge :value="item.unreadCount">
-              <img :src="item.sessionAvatar" style="width: 3.4vw;height: 7.3vh"/>
-            </el-badge>
-          </div>
-
-          <!-- 昵称、时间 -->
-          <div class="session-item-cls">
-            <span class="session-name-cls">{{ item.sessionName }}</span>
-            <span class="session-time-cls">2024-02-02</span>
-          </div>
-
-          <!-- 聊天内容 -->
-          <div class="session-item-cls">
-            <span class="session-msg-cls">哈哈</span>
-          </div>
-        </div>
-        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
-          <!-- 头像 -->
-          <div class="avatar-cls">
-            <el-badge :value="item.unreadCount">
-              <img :src="item.sessionAvatar" style="width: 3.4vw;height: 7.3vh"/>
-            </el-badge>
-          </div>
-
-          <!-- 昵称、时间 -->
-          <div class="session-item-cls">
-            <span class="session-name-cls">{{ item.sessionName }}</span>
-            <span class="session-time-cls">2024-02-02</span>
-          </div>
-
-          <!-- 聊天内容 -->
-          <div class="session-item-cls">
-            <span class="session-msg-cls">哈哈</span>
-          </div>
-        </div>
-        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
-          <!-- 头像 -->
-          <div class="avatar-cls">
-            <el-badge :value="item.unreadCount">
-              <img :src="item.sessionAvatar" style="width: 3.4vw;height: 7.3vh"/>
-            </el-badge>
-          </div>
-
-          <!-- 昵称、时间 -->
-          <div class="session-item-cls">
-            <span class="session-name-cls">{{ item.sessionName }}</span>
-            <span class="session-time-cls">2024-02-02</span>
-          </div>
-
-          <!-- 聊天内容 -->
-          <div class="session-item-cls">
-            <span class="session-msg-cls">哈哈</span>
-          </div>
-        </div>
-        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
-          <!-- 头像 -->
-          <div class="avatar-cls">
-            <el-badge :value="item.unreadCount">
-              <img :src="item.sessionAvatar" style="width: 3.4vw;height: 7.3vh"/>
-            </el-badge>
-          </div>
-
-          <!-- 昵称、时间 -->
-          <div class="session-item-cls">
-            <span class="session-name-cls">{{ item.sessionName }}</span>
-            <span class="session-time-cls">2024-02-02</span>
-          </div>
-
-          <!-- 聊天内容 -->
-          <div class="session-item-cls">
-            <span class="session-msg-cls">哈哈</span>
-          </div>
-        </div>
-        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
-          <!-- 头像 -->
-          <div class="avatar-cls">
-            <el-badge :value="item.unreadCount">
-              <img :src="item.sessionAvatar" style="width: 3.4vw;height: 7.3vh"/>
-            </el-badge>
-          </div>
-
-          <!-- 昵称、时间 -->
-          <div class="session-item-cls">
-            <span class="session-name-cls">{{ item.sessionName }}</span>
-            <span class="session-time-cls">2024-02-02</span>
-          </div>
-
-          <!-- 聊天内容 -->
-          <div class="session-item-cls">
-            <span class="session-msg-cls">哈哈</span>
-          </div>
-        </div>
       </div>
     </el-col>
   </div>
@@ -207,13 +112,13 @@ export default {
 
 <style lang="scss" scoped>
 .div-cls {
-  overflow: auto;
   height: 81vh;
+  overflow: auto;
 }
 
 // 滚动条样式
 .div-cls::-webkit-scrollbar {
-  width: 10px;
+  width: 7.8px;
 }
 
 .div-cls::-webkit-scrollbar-thumb {
@@ -224,14 +129,14 @@ export default {
 .div-cls::-webkit-scrollbar-track {
   border-radius: 10px;
   background: #ededed;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
+// 会话容器
 .session-cls {
   height: 7.3vh;
   background-color: $window-item-color;
   border-radius: 6px;
-  margin-bottom: 1.6px;
+  margin-bottom: 2px;
   cursor: pointer;
 }
 
@@ -239,6 +144,7 @@ export default {
   background-color: $logo-color;
 }
 
+// 会话对象
 .session-item-cls {
   height: 48%;
   width: 74%;
