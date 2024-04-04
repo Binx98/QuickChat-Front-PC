@@ -27,7 +27,7 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <audio controls controlsList="nodownload noplaybackrate">
+            <audio preload controls controlsList="nodownload noplaybackrate">
               <source :src=item.content type="audio/wav">
             </audio>
           </div>
@@ -36,7 +36,7 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div class="receive-div-file" @click="downloadFile(item.msgType, item.content)">
+            <div class="receive-div-file" @click="downloadFile(item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
                   <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
@@ -65,7 +65,7 @@
           </div>
           <!--  语音  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 2">
-            <audio controls controlsList="nodownload noplaybackrate">
+            <audio preload controls controlsList="nodownload noplaybackrate">
               <source :src=item.content type="audio/wav">
             </audio>
             <span style="margin-left: 6px">
@@ -74,7 +74,7 @@
           </div>
           <!--  文件  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 4">
-            <div class="send-div-file" @click="downloadFile(item.msgType, item.content)">
+            <div class="send-div-file" @click="downloadFile(item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
                   <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
@@ -460,8 +460,8 @@ export default {
     /**
      * 下载文件
      */
-    downloadFile(type, url) {
-      window.location.href = process.env.VUE_APP_BASE_API + '/file/download/' + type + '?url=' + url;
+    downloadFile(url) {
+      window.location.href = process.env.VUE_APP_BASE_API + '/file/download/' + 3 + '?url=' + url;
     },
 
     /**
@@ -517,10 +517,6 @@ export default {
 
 
 // ---------------------音频播放器---------------------
-audio {
-  width: 16vw;
-}
-
 audio::-webkit-media-controls-mute-button {
   display: none;
 }
