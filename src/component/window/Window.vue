@@ -526,6 +526,10 @@ export default {
 
 
 // ---------------------音频播放器---------------------
+audio {
+  width: 14vw;
+}
+
 audio::-webkit-media-controls-mute-button {
   display: none;
 }
@@ -534,6 +538,9 @@ audio::-webkit-media-controls-panel {
   background: $logo-color;
 }
 
+audio::-webkit-media-controls-volume-control-container{
+  display:none;
+}
 
 // ---------------------消息输入框---------------------
 #chat-input {
@@ -652,7 +659,6 @@ audio::-webkit-media-controls-panel {
 }
 
 .receive-div-file {
-  //font-size: 14px;
   border-radius: 10px;
   background-color: #f0fff3;
   cursor: pointer;

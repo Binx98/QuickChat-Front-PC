@@ -6,8 +6,15 @@
     <el-col :span="15" class="col">
       <el-input v-model="searchMsg" style="width: 56%;"/>
     </el-col>
-    <el-col :span="1" style=" height: 10%;">
-      搞几个icon：喇叭、换主题、音乐
+    <el-col :span="1" class="col">
+      <el-switch
+          v-model="value"
+          width="50"
+          active-color="#12CEC2FF"
+          inactive-color=""
+          active-text="黑夜"
+          inactive-text="白天"
+      />
     </el-col>
   </span>
 </template>
@@ -18,7 +25,8 @@ export default {
 
   data() {
     return {
-      searchMsg: ''
+      searchMsg: '',
+      value: '',
     }
   },
 
