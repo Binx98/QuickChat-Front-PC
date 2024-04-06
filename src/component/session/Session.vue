@@ -119,6 +119,7 @@ export default {
 // 滚动条样式
 .div-cls::-webkit-scrollbar {
   width: 7.8px;
+  height: 7.8px;
 }
 
 .div-cls::-webkit-scrollbar-thumb {

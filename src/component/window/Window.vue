@@ -143,6 +143,7 @@
               :action="uploadFileUrl"
               :headers="fileHeaders()"
               :on-success="handleSuccess"
+              :on-error="handleError"
               :show-file-list="false"
           >
             <el-button size="small" type="primary">文件</el-button>
@@ -411,6 +412,14 @@ export default {
     },
 
     /**
+     * 失败回调：上传文件
+     */
+    handleError(err, file, fileList) {
+      console.log('上传文件失败回调.....')
+      this.$message.error(err)
+    },
+
+    /**
      * 查询会话列表聊天信息列表
      */
     getChatMsgList() {
@@ -521,9 +530,10 @@ audio::-webkit-media-controls-mute-button {
   display: none;
 }
 
-video::-webkit-media-controls-volume-slider {
-  display: none;
+audio::-webkit-media-controls-panel {
+  background: $logo-color;
 }
+
 
 // ---------------------消息输入框---------------------
 #chat-input {
@@ -554,7 +564,7 @@ video::-webkit-media-controls-volume-slider {
 // ---------------------滚动条---------------------
 .window-cls::-webkit-scrollbar {
   width: 7.8px;
-  height: 10px;
+  height: 7.8px;
 }
 
 .window-cls::-webkit-scrollbar-thumb {
@@ -570,7 +580,7 @@ video::-webkit-media-controls-volume-slider {
 
 .msg-window-cls::-webkit-scrollbar {
   width: 7.8px;
-  height: 10px;
+  height: 7.8px;
 }
 
 .msg-window-cls::-webkit-scrollbar-thumb {
