@@ -1,0 +1,126 @@
+@font-face {
+    font-family: "iconfont"; /* Project id 4496821 */
+    src: url('iconfont.eot?t=1712580480320'); /* IE9 */
+    src: url('iconfont.eot?t=1712580480320#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('iconfont.woff2?t=1712580480320') format('woff2'),
+    url('iconfont.woff?t=1712580480320') format('woff'),
+    url('iconfont.ttf?t=1712580480320') format('truetype'),
+    url('iconfont.svg?t=1712580480320#iconfont') format('svg');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 27px;
+    font-style: normal;
+    color: rgba(231, 231, 231, 0.85);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-setting:before {
+    content: "\e78e";
+}
+
+.icon-adduser:before {
+    content: "\e7ae";
+}
+
+.icon-team:before {
+    content: "\e7b0";
+}
+
+.icon-star:before {
+    content: "\e7df";
+}
+
+.icon-comment:before {
+    content: "\e8e8";
+}
+
+.icon-bell:before {
+    content: "\e7c4";
+}
+
+.icon-github-fill:before {
+    content: "\e885";
+}
+
+.icon-taiyang:before {
+    content: "\e635";
+}
+
+.icon-yueliang:before {
+    content: "\e65e";
+}
+
+.icon-airudiantubiaohuizhi-zhuanqu_helihuajianyi:before {
+    content: "\e696";
+}
+
+.icon-file-excel:before {
+    content: "\e7b7";
+}
+
+.icon-file-pdf:before {
+    content: "\e7b8";
+}
+
+.icon-file-image:before {
+    content: "\e7b9";
+}
+
+.icon-file-markdown:before {
+    content: "\e7ba";
+}
+
+.icon-file-unknown:before {
+    content: "\e7bb";
+}
+
+.icon-file-ppt:before {
+    content: "\e7bc";
+}
+
+.icon-file-word:before {
+    content: "\e7bd";
+}
+
+.icon-file-zip:before {
+    content: "\e7be";
+}
+
+.icon-file-text:before {
+    content: "\e7bf";
+}
+
+.icon-reloadtime:before {
+    content: "\e789";
+}
+
+.icon-meh:before {
+    content: "\e780";
+}
+
+.icon-smile:before {
+    content: "\e783";
+}
+
+.icon-rocket:before {
+    content: "\e7ce";
+}
+
+.icon-folder-open:before {
+    content: "\e7d1";
+}
+
+.icon-video:before {
+    content: "\e7da";
+}
+
+.icon-phone:before {
+    content: "\e7e3";
+}
+
+.icon-audio:before {
+    content: "\e897";
+}
+

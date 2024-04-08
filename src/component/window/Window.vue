@@ -99,7 +99,7 @@
       <!-- 3.输入部分 -->
       <div class="input-cls">
         <!-- 语音 -->
-        <span @mousedown="holdDown()" @mouseup="holdUp()">语音</span>
+        <span class="iconfont icon-audio" @mousedown="holdDown()" @mouseup="holdUp()"></span>
         <!-- 输入框 -->
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请文明交流......"
                v-model="chatMsg.content"/>
@@ -144,11 +144,13 @@
               :on-error="handleError"
               :show-file-list="false"
           >
-            <el-button size="small" type="primary">文件</el-button>
+            <span class="iconfont icon-folder-open" style="cursor: pointer"></span>
           </el-upload>
         </span>
+        <!-- 聊天记录 -->
+        <span class="iconfont icon-reloadtime" style="cursor: pointer"></span>
         <!-- 发送按钮 -->
-        <span @click="sendMsg()">发送</span>
+        <span class="iconfont icon-rocket" style="cursor: pointer" @click="sendMsg()"></span>
       </div>
     </el-col>
 

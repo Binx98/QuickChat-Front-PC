@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-col style="width: 5vw;">
-      <div class="colorStyle">
+      <div class="div-cls">
         <el-avatar :src=this.loginUser.avatar class="avatar-cls" :size="48" shape="square"/>
       </div>
     </el-col>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.colorStyle {
+.div-cls {
   height: 90vh;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
