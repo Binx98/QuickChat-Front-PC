@@ -12,15 +12,15 @@
     </el-col>
     <!--  主题  -->
     <el-col :span="1" class="col">
-      <span class="iconfont el-icon-sunny" style="cursor: pointer;font-size: 34px"></span>
+      <span class="iconfont el-icon-sunny" style="cursor: pointer;font-size: 34px;color: floralwhite;"></span>
     </el-col>
     <!--  Github  -->
     <el-col :span="1" class="col">
-      <span class="iconfont icon-github-fill" style="cursor: pointer;font-size: 34px"></span>
+      <span class="iconfont icon-github-fill" style="cursor: pointer;font-size: 34px;color: floralwhite;"></span>
     </el-col>
-    <!--  通知  -->
+    <!--  建议  -->
     <el-col :span="1" class="col">
-      <span class="iconfont icon-bell" style="cursor: pointer;font-size: 34px"></span>
+      <span class="iconfont icon-comment" style="cursor: pointer;font-size: 34px;color: floralwhite;"></span>
     </el-col>
   </span>
 </template>

@@ -2,7 +2,8 @@
   <div>
     <el-col style="width: 5vw;">
       <div class="div-cls">
-        <el-avatar :src=this.loginUser.avatar class="avatar-cls" :size="48" shape="square"/>
+        <el-avatar :src=this.loginUser.avatar style="display: inline-block" class="avatar-cls" :size="48" shape="square"/>
+        <el-avatar :src=this.loginUser.avatar style="display: block" class="avatar-cls" :size="48" shape="square"/>
       </div>
     </el-col>
   </div>

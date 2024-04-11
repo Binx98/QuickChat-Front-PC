@@ -99,12 +99,13 @@
       <!-- 3.输入部分 -->
       <div class="input-cls">
         <!-- 语音 -->
-        <span class="iconfont icon-audio" @mousedown="holdDown()" @mouseup="holdUp()"></span>
+        <span class="iconfont el-icon-microphone" style="color: floralwhite;font-size: 27px;" @mousedown="holdDown()"
+              @mouseup="holdUp()"></span>
         <!-- 输入框 -->
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请文明交流......"
                v-model="chatMsg.content"/>
         <!-- Emoji -->
-        <emoji-picker @emoji="" style="display: inline-block">
+        <emoji-picker style="display: inline-block">
           <!-- 按钮 -->
           <button
               class="emoji-invoker"
@@ -112,7 +113,7 @@
               slot-scope="{ events: { click: clickEvent } }"
               @click.stop="clickEvent"
           >
-            <span class="iconfont icon-smile"></span>
+            <span class="iconfont icon-smile" style="color: floralwhite;font-size: 27px;"></span>
           </button>
 
           <!-- 表情框 -->
@@ -131,6 +132,8 @@
             </div>
           </div>
         </emoji-picker>
+        <!-- 图片 -->
+        <span class="iconfont el-icon-picture-outline" style="cursor: pointer;color: floralwhite;font-size: 27px;"></span>
         <!-- 文件 -->
         <span style="display: inline-block">
           <el-upload
@@ -140,13 +143,13 @@
               :on-error="handleError"
               :show-file-list="false"
           >
-            <span class="iconfont icon-folder-open" style="cursor: pointer"></span>
+            <span class="iconfont el-icon-folder" style="cursor: pointer;color: floralwhite;font-size: 27px;"></span>
           </el-upload>
         </span>
         <!-- 聊天记录 -->
-        <span class="iconfont icon-reloadtime" style="cursor: pointer"></span>
+        <span class="iconfont el-icon-time" style="cursor: pointer;color: floralwhite;font-size: 27px;"></span>
         <!-- 发送按钮 -->
-        <span class="iconfont icon-rocket" style="cursor: pointer" @click="sendMsg()"></span>
+        <span class="iconfont el-icon-s-promotion" style="cursor: pointer;color: floralwhite;font-size: 27px;" @click="sendMsg()"></span>
       </div>
     </el-col>
 
