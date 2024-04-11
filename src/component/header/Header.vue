@@ -1,20 +1,26 @@
 <template>
   <span>
+    <!--  LOGO  -->
     <el-col :span="5" class="col">
       <el-image class="logo" :src="require('@/assets/logo/logo2_transparent.4cb48f1f(1).png')"/>
     </el-col>
-    <el-col :span="15" class="col">
-      <el-input v-model="searchMsg" style="width: 56%;"/>
+    <!--  占位  -->
+    <el-col :span="1" class="col"/>
+    <!--  输入框  -->
+    <el-col :span="11" class="col" style="margin-right: 4%">
+      <el-input v-model="searchMsg" style="width: 76%;"/>
     </el-col>
+    <!--  主题  -->
     <el-col :span="1" class="col">
-      <el-switch
-          v-model="value"
-          width="50"
-          active-color="#12CEC2FF"
-          inactive-color=""
-          active-text="黑夜"
-          inactive-text="白天"
-      />
+      <span class="iconfont el-icon-sunny" style="cursor: pointer;font-size: 34px"></span>
+    </el-col>
+    <!--  Github  -->
+    <el-col :span="1" class="col">
+      <span class="iconfont icon-github-fill" style="cursor: pointer;font-size: 34px"></span>
+    </el-col>
+    <!--  通知  -->
+    <el-col :span="1" class="col">
+      <span class="iconfont icon-bell" style="cursor: pointer;font-size: 34px"></span>
     </el-col>
   </span>
 </template>
@@ -52,11 +58,11 @@ export default {
 }
 
 .logo {
-  height: 10vh;
   cursor: pointer;
+  height: 10vh;
 }
 
 ::v-deep .el-input__inner {
-  border-radius: 16px;
+  border-radius: 18px;
 }
 </style>
