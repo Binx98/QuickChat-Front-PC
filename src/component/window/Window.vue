@@ -133,7 +133,8 @@
           </div>
         </emoji-picker>
         <!-- 图片 -->
-        <span class="iconfont el-icon-picture-outline" style="cursor: pointer;color: floralwhite;font-size: 27px;"></span>
+        <span class="iconfont el-icon-picture-outline"
+              style="cursor: pointer;color: floralwhite;font-size: 27px;"></span>
         <!-- 文件 -->
         <span style="display: inline-block">
           <el-upload
@@ -149,7 +150,8 @@
         <!-- 聊天记录 -->
         <span class="iconfont el-icon-time" style="cursor: pointer;color: floralwhite;font-size: 27px;"></span>
         <!-- 发送按钮 -->
-        <span class="iconfont el-icon-s-promotion" style="cursor: pointer;color: floralwhite;font-size: 27px;" @click="sendMsg()"></span>
+        <span class="iconfont el-icon-s-promotion" style="cursor: pointer;color: floralwhite;font-size: 27px;"
+              @click="sendMsg()"></span>
       </div>
     </el-col>
 
@@ -208,24 +210,25 @@ export default {
       chatMsg: {
         fromId: '',
         toId: '',
-        msgType: '',
+        msgType: '1',
         content: '',
       },
       voiceMsg: {
         fromId: '',
         toId: '',
-        msgType: '',
+        msgType: '2',
         content: '',
         extraInfo: {
           name: '',
           size: '',
-          type: ''
+          type: '',
+          voiceTime: 0
         }
       },
       fileMsg: {
         fromId: '',
         toId: '',
-        msgType: '',
+        msgType: '4',
         content: '',
         extraInfo: {
           name: '',
@@ -279,9 +282,7 @@ export default {
       if (this.voiceMsgTotalTime < 1) {
         this.$message.warning("录音时长不足1秒，请重试");
         this.voiceMsgTotalTime = 0;
-        return;
       } else {
-        this.voiceMsgTotalTime = 0;
         this.uploadAudio();
       }
     },
@@ -327,13 +328,14 @@ export default {
         if (res.data.code == 200) {
           this.voiceMsg.fromId = this.loginUser.accountId;
           this.voiceMsg.toId = this.curSession.toId;
-          this.voiceMsg.msgType = '2';
           this.voiceMsg.content = res.data.data.url;
           this.voiceMsg.extraInfo = res.data.data.extraInfo;
+          this.voiceMsg.extraInfo.voiceTime = this.voiceMsgTotalTime;
           chatMsgApi.sendMsg(this.voiceMsg)
               .then(res => {
                 this.voiceMsg.content = '';
                 this.voiceMsg.extraInfo = '';
+                this.voiceMsgTotalTime = 0;
                 this.getChatMsgByRelationId(this.curSession.relationId);
                 EventBus.$emit('readCount0Event', this.curSession);
               })
@@ -413,7 +415,6 @@ export default {
 
       this.fileMsg.fromId = this.loginUser.accountId;
       this.fileMsg.toId = this.curSession.toId;
-      this.fileMsg.msgType = '4';
       this.fileMsg.content = res.data.url;
 
       chatMsgApi.sendMsg(this.fileMsg).then(res => {
@@ -469,7 +470,6 @@ export default {
       }
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.toId = this.curSession.toId;
-      this.chatMsg.msgType = '1';
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
