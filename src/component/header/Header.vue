@@ -7,20 +7,25 @@
     <!--  占位  -->
     <el-col :span="1" class="col"/>
     <!--  输入框  -->
-    <el-col :span="11" class="col" style="margin-right: 4%">
+    <el-col :span="11" class="col" style="margin-right: 2%">
       <el-input v-model="searchMsg" style="width: 76%;"/>
     </el-col>
-    <!--  主题  -->
+    <!--  黑夜/白天  -->
     <el-col :span="1" class="col">
-      <span class="iconfont el-icon-sunny" style="cursor: pointer;font-size: 34px;color: floralwhite;"></span>
+      <span class="iconfont el-icon-sunny" style="cursor: pointer;font-size: 34px;"></span>
+    </el-col>
+    <!--  微信  -->
+    <el-col :span="1" class="col">
+      <span class="iconfont icon-comment" style="cursor: pointer;font-size: 34px;"></span>
     </el-col>
     <!--  Github  -->
     <el-col :span="1" class="col">
-      <span class="iconfont icon-github-fill" style="cursor: pointer;font-size: 34px;color: floralwhite;"></span>
+      <span class="iconfont icon-github-fill" style="cursor: pointer;font-size: 34px;"
+            @click="redirectToGithub()"></span>
     </el-col>
     <!--  建议  -->
     <el-col :span="1" class="col">
-      <span class="iconfont icon-comment" style="cursor: pointer;font-size: 34px;color: floralwhite;"></span>
+      <span class="iconfont el-icon-message" style="cursor: pointer;font-size: 34px;"></span>
     </el-col>
   </span>
 </template>
@@ -38,12 +43,10 @@ export default {
 
   methods: {
     /**
-     * 退出登录
+     * 跳转到 Github
      */
-    logout() {
-      localStorage.removeItem('token')
-      this.$message.success('退出成功')
-      this.$router.push('/login')
+    redirectToGithub() {
+      window.open('https://github.com/Binx98/QuickChat')
     }
   }
 }

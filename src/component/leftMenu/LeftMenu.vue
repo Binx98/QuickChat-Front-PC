@@ -2,7 +2,26 @@
   <div>
     <el-col style="width: 5vw;">
       <div class="div-cls">
-        <el-avatar :src=this.loginUser.avatar style="display: inline-block" class="avatar-cls" :size="48" shape="square"/>
+        <!-- 头像 -->
+        <div class="div-item-cls" style="padding-top: 2vh;">
+          <el-avatar :src=this.loginUser.avatar class="avatar-cls" :size="48" shape="square"/>
+        </div>
+        <!-- 会话 -->
+        <div class="div-item-cls">
+          <span class="iconfont el-icon-chat-dot-round"/>
+        </div>
+        <!-- 通讯录 -->
+        <div class="div-item-cls">
+          <span class="iconfont el-icon-user"/>
+        </div>
+        <!-- 收藏夹 -->
+        <div class="div-item-cls">
+          <span class="iconfont el-icon-star-off"/>
+        </div>
+        <!-- 设置 -->
+        <div class="div-item-cls">
+          <span class="iconfont el-icon-setting"/>
+        </div>
       </div>
     </el-col>
   </div>
@@ -30,12 +49,17 @@ export default {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   background-color: $left-menu-color;
+}
+
+.div-item-cls {
+  cursor: pointer;
+  font-size: 27px;
+  padding-top: 3.2vh;
   display: flex;
   justify-content: center;
 }
 
 .avatar-cls {
   cursor: pointer;
-  margin-top: 2vh;
 }
 </style>
