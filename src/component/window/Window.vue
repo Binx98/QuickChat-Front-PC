@@ -1,7 +1,7 @@
 <template>
   <span>
     <!--  选中会话  -->
-    <el-col class="window-cls" v-if="this.curSession != ''">
+    <el-col class="window-cls" v-if="this.curSession !== ''">
       <!--  1.上边栏  -->
       <div class="head-bar">
         <el-avatar :src="curSession.sessionAvatar" shape="square" style="margin-right: 1%;cursor:pointer"/>
@@ -13,6 +13,11 @@
         <!--  聊天信息  -->
         <div v-for="item in chatMsgList[curSession.relationId]">
           <!------------------------------------------被动接收------------------------------------------>
+          <!--  撤回  -->
+          <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
+               v-if="item.accountId === curSession.toId && item.msgType === 0">
+            <span style="color: rgba(231, 231, 231, 0.85)">{{ item.nickName }}撤回了一条消息，</span>
+          </div>
           <!--  文字  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 1">
             <span style="margin-right: 6px">
@@ -54,6 +59,12 @@
           </div>
 
           <!------------------------------------------主动发送------------------------------------------>
+          <!--  撤回  -->
+          <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
+               v-if="item.accountId === curSession.fromId && item.msgType === 0">
+            <span style="color: rgba(231, 231, 231, 0.85)">你撤回了一条消息，</span>
+            <span style="color: #12CEC2FF">重新编辑</span>
+          </div>
           <!--  文字  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 1">
             <div class="send-div-font">
