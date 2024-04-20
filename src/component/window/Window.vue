@@ -16,7 +16,7 @@
           <!--  撤回  -->
           <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
                v-if="item.accountId === curSession.toId && item.msgType === 0">
-            <span style="color: rgba(231, 231, 231, 0.85)">{{ item.nickName }}撤回了一条消息，</span>
+            <span style="color: rgba(231, 231, 231, 0.85)">{{ item.nickName }}撤回了一条消息</span>
           </div>
           <!--  文字  -->
           <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 1">
@@ -62,8 +62,9 @@
           <!--  撤回  -->
           <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
                v-if="item.accountId === curSession.fromId && item.msgType === 0">
-            <span style="color: rgba(231, 231, 231, 0.85)">你撤回了一条消息，</span>
-            <span style="color: #12CEC2FF">重新编辑</span>
+            <span style="color: rgba(231, 231, 231, 0.85)">你撤回了一条消息</span>
+            <span style="color: rgba(231, 231, 231, 0.85)">，</span>
+            <span style="color: #12CEC2FF;cursor: pointer" @click="reEdit()">重新编辑</span>
           </div>
           <!--  文字  -->
           <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 1">
@@ -442,6 +443,13 @@ export default {
     handleError(err, file, fileList) {
       console.log('上传文件失败回调.....')
       this.$message.error(err)
+    },
+
+    /**
+     * 重新编辑
+     */
+    reEdit() {
+
     },
 
     /**
