@@ -62,8 +62,7 @@
           <!--  撤回  -->
           <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
                v-if="item.accountId === curSession.fromId && item.msgType === 0">
-            <span style="color: rgba(231, 231, 231, 0.85)">你撤回了一条消息</span>
-            <span style="color: rgba(231, 231, 231, 0.85)">，</span>
+            <span style="color: rgba(231, 231, 231, 0.85)">你撤回了一条消息&nbsp;</span>
             <span style="color: #12CEC2FF;cursor: pointer" @click="reEdit()">重新编辑</span>
           </div>
           <!--  文字  -->
@@ -483,10 +482,23 @@ export default {
      * 发送按钮（文字 + Emoji）
      */
     sendMsg() {
-      if (this.chatMsg.content.length == 0 || this.chatMsg.content.split(" ").join("").length == 0) {
+      // 不允许发送空白消息
+      if (this.chatMsg.content.length === 0 ||
+          this.chatMsg.content.split(" ").join("").length === 0) {
         this.$message.warning("不可以发送空白消息")
         return;
       }
+
+      // 判断信息事件是否超过10分钟
+      let lastMsg = this.chatMsgList[this.curSession.relationId];
+      let lastMsgTime = lastMsg[lastMsg.length - 1].createTime;
+      console.log('当前时间：' + new Date().getTime())
+      console.log('最后消息时间：' + new Date(lastMsgTime).getTime())
+      // if () {
+      //   this.chatMsg.timeFlag = 1;
+      // }
+
+      // 发送消息
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.toId = this.curSession.toId;
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
