@@ -48,7 +48,7 @@ export default {
   height: 90vh;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  background-color: $left-menu-color;
+  background-color: $window-item-color;
 }
 
 .div-item-cls {
