@@ -17,8 +17,13 @@ export default {
      */
     getChatMsgByRelationId(relationId, current, size) {
         return axios({
-            url: `/chat/msg/getByRelationId/${relationId}/${current}/${size}`,
-            method: 'get'
+            url: `/chat/msg/getByRelationId`,
+            method: 'get',
+            params: {
+                relationId: relationId,
+                current: current,
+                size: size
+            }
         })
     },
 

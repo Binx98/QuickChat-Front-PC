@@ -6,9 +6,12 @@ export default {
      */
     uploadFile(type, file) {
         return axios({
-            url: `/file/upload/${type}`,
+            url: `/file/upload`,
             method: 'post',
-            data: file
+            params: {
+                type: type,
+                file: file
+            }
         })
     },
 }
