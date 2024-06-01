@@ -9,9 +9,9 @@ export default {
             url: `/file/upload`,
             method: 'post',
             params: {
-                type: type,
-                file: file
-            }
+                type: type
+            },
+            data: file
         })
     },
 }

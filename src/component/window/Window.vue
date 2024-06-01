@@ -252,7 +252,7 @@ export default {
       voiceInterval: null,
       chatMsgList: [],
       sessionList: [],
-      uploadFileUrl: process.env.VUE_APP_BASE_API + '/file/upload/3'
+      uploadFileUrl: process.env.VUE_APP_BASE_API + '/file/upload?type=3'
     }
   },
 
@@ -333,7 +333,7 @@ export default {
       let wavBlob = this.recorder.getWAVBlob();
       let formData = new FormData()
       const newBlob = new Blob([wavBlob], {type: 'audio/wav'})
-      const fileOfBlob = new File([newBlob], this.loginUser.accountId + ':' + new Date().getTime() + '.wav')
+      const fileOfBlob = new File([newBlob], this.loginUser.accountId + '_' + this.curSession.toId + '.wav')
       formData.append('file', fileOfBlob)
       fileApi.uploadFile(2, formData).then(res => {
         if (res.data.code == 200) {
@@ -445,13 +445,6 @@ export default {
     },
 
     /**
-     * 重新编辑
-     */
-    reEdit() {
-
-    },
-
-    /**
      * 查询会话列表聊天信息列表
      */
     getChatMsgList() {
@@ -492,11 +485,6 @@ export default {
       // 判断信息事件是否超过10分钟
       let lastMsg = this.chatMsgList[this.curSession.relationId];
       let lastMsgTime = lastMsg[lastMsg.length - 1].createTime;
-      console.log('当前时间：' + new Date().getTime())
-      console.log('最后消息时间：' + new Date(lastMsgTime).getTime())
-      // if () {
-      //   this.chatMsg.timeFlag = 1;
-      // }
 
       // 发送消息
       this.chatMsg.fromId = this.loginUser.accountId;
