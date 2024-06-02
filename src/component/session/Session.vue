@@ -69,6 +69,7 @@ export default {
       handler(msg) {
         if (msg.relationId != '') {
           this.getSessionList(false);
+          this.speakNotice('嘀嘀嘀')
         }
       }
     },
@@ -105,6 +106,14 @@ export default {
      */
     updateReadTime(sessionId) {
       sessionApi.updateReadTime(sessionId)
+    },
+
+    /**
+     * 来消息语音提示
+     */
+    speakNotice(msg) {
+      var utterThis = new window.SpeechSynthesisUtterance(msg);
+      window.speechSynthesis.speak(utterThis);
     }
   }
 }

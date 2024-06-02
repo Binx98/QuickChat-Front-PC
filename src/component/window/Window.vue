@@ -566,9 +566,9 @@ audio::-webkit-media-controls-mute-button {
   display: none;
 }
 
-audio::-webkit-media-controls-panel {
-  background: $logo-color;
-}
+//audio::-webkit-media-controls-panel {
+//  background: $logo-color;
+//}
 
 audio::-webkit-media-controls-volume-control-container {
   display: none;
