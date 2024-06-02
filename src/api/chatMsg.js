@@ -6,7 +6,7 @@ export default {
      */
     getChatMsgList(data) {
         return axios({
-            url: `/chat/msg/list`,
+            url: `/msg/list`,
             method: 'post',
             data: data
         })
@@ -17,7 +17,7 @@ export default {
      */
     getChatMsgByRelationId(relationId, current, size) {
         return axios({
-            url: `/chat/msg/getByRelationId`,
+            url: `/msg/getByRelationId`,
             method: 'get',
             params: {
                 relationId: relationId,
@@ -32,7 +32,7 @@ export default {
      */
     sendMsg(data) {
         return axios({
-            url: `/chat/msg/send`,
+            url: `/msg/send`,
             method: 'post',
             data: data
         })

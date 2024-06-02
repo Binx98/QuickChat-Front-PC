@@ -12,7 +12,8 @@
     </el-col>
     <!--  黑夜/白天  -->
     <el-col :span="1" class="col">
-      <span class="iconfont el-icon-sunny" style="cursor: pointer;font-size: 34px;"></span>
+      <span class="iconfont el-icon-sunny" style="cursor: pointer;font-size: 34px;" @click="changeTheme"></span>
+      <!--      <span class="iconfont el-icon-moon" style="cursor: pointer;font-size: 34px;"></span>-->
     </el-col>
     <!--  微信  -->
     <el-col :span="1" class="col">
@@ -42,6 +43,13 @@ export default {
   },
 
   methods: {
+    /**
+     * 白天、黑夜模式
+     */
+    changeTheme() {
+
+    },
+
     /**
      * 跳转到 Github
      */

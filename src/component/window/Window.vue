@@ -483,8 +483,8 @@ export default {
       }
 
       // 判断信息事件是否超过10分钟
-      let lastMsg = this.chatMsgList[this.curSession.relationId];
-      let lastMsgTime = lastMsg[lastMsg.length - 1].createTime;
+      // let lastMsg = this.chatMsgList[this.curSession.relationId];
+      // let lastMsgTime = lastMsg[lastMsg.length - 1].createTime;
 
       // 发送消息
       this.chatMsg.fromId = this.loginUser.accountId;

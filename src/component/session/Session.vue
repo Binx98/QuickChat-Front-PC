@@ -69,7 +69,7 @@ export default {
       handler(msg) {
         if (msg.relationId != '') {
           this.getSessionList(false);
-          this.speakNotice('嘀嘀嘀')
+          this.speakNotice('滴滴')
         }
       }
     },
