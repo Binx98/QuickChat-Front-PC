@@ -12,61 +12,19 @@
       <div id="window-id" class="msg-window-cls">
         <!--  聊天信息  -->
         <div v-for="item in chatMsgList[curSession.relationId]">
-          <!------------------------------------------被动接收------------------------------------------>
-          <!--  撤回  -->
-          <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
-               v-if="item.accountId === curSession.toId && item.msgType === 0">
-            <span style="color: rgba(231, 231, 231, 0.85)">{{ item.nickName }}撤回了一条消息</span>
-          </div>
-          <!--  文字  -->
-          <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 1">
-            <span style="margin-right: 6px">
-              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
-            </span>
-            <div class="receive-div-font">
-              {{ item.content }}
-            </div>
-          </div>
-          <!--  语音  -->
-          <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 2">
-            <span style="margin-right: 6px">
-              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
-            </span>
-            <audio preload controls controlsList="nodownload noplaybackrate">
-              <source :src=item.content type="audio/wav">
-            </audio>
-          </div>
-          <!--  文件  -->
-          <div class="receive-item" v-if="item.accountId === curSession.toId && item.msgType === 4">
-            <span style="margin-right: 6px">
-              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
-            </span>
-            <div class="receive-div-file" @click="downloadFile(item.content)">
-              <div style="padding: 4px;">
-                <div style="border: 1px solid red;height: 65px;width: 240px">
-                  <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
-                    <img/>
-                  </div>
-                  <div style="font-size: 14px">
-                    {{ item.extraInfo.name }}
-                  </div>
-                  <div>
-                    {{ item.extraInfo.size }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!------------------------------------------主动发送------------------------------------------>
           <!--  撤回  -->
           <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
-               v-if="item.accountId === curSession.fromId && item.msgType === 0">
+               v-if="(curSession.type === 1 && item.accountId === curSession.fromId && item.msgType === 0)
+               || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 0)">
             <span style="color: rgba(231, 231, 231, 0.85)">你撤回了一条消息&nbsp;</span>
             <span style="color: #12CEC2FF;cursor: pointer" @click="reEdit()">重新编辑</span>
           </div>
           <!--  文字  -->
-          <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 1">
+          <div class="send-item"
+               v-if="(curSession.type === 1 && item.accountId === curSession.fromId && item.msgType === 1)
+               || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 1)">
             <div class="send-div-font">
                 {{ item.content }}
             </div>
@@ -75,7 +33,9 @@
             </span>
           </div>
           <!--  语音  -->
-          <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 2">
+          <div class="send-item"
+               v-if="(curSession.type === 1 && item.accountId === curSession.fromId && item.msgType === 2)
+               || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 2)">
             <audio preload controls controlsList="nodownload noplaybackrate">
               <source :src=item.content type="audio/wav">
             </audio>
@@ -84,7 +44,9 @@
             </span>
           </div>
           <!--  文件  -->
-          <div class="send-item" v-if="item.accountId === curSession.fromId && item.msgType === 4">
+          <div class="send-item"
+               v-if="(curSession.type === 1 && item.accountId === curSession.fromId && item.msgType === 4)
+               || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 4)">
             <div class="send-div-file" @click="downloadFile(item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
@@ -103,6 +65,59 @@
             <span style="margin-left: 6px">
               <el-avatar :src="loginUser.avatar" shape="square" style="cursor:pointer;"/>
             </span>
+          </div>
+
+          <!------------------------------------------被动接收------------------------------------------>
+          <!--  撤回  -->
+          <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
+               v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 0)
+               || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 0)">
+            <span style="color: rgba(231, 231, 231, 0.85)">{{ item.nickName }}撤回了一条消息</span>
+          </div>
+          <!--  文字  -->
+          <div class="receive-item"
+               v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 1)
+               || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 1)">
+            <span style="margin-right: 6px">
+              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+            </span>
+            <div class="receive-div-font">
+              {{ item.content }}
+            </div>
+          </div>
+          <!--  语音  -->
+          <div class="receive-item"
+               v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 2)
+               || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 2)">
+            <span style="margin-right: 6px">
+              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+            </span>
+            <audio preload controls controlsList="nodownload noplaybackrate">
+              <source :src=item.content type="audio/wav">
+            </audio>
+          </div>
+          <!--  文件  -->
+          <div class="receive-item"
+               v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 4)
+               || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 4)">
+            <span style="margin-right: 6px">
+              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+            </span>
+            <div class="receive-div-file" @click="downloadFile(item.content)">
+              <div style="padding: 4px;">
+                <div style="border: 1px solid red;height: 65px;width: 240px">
+                  <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
+                    <img/>
+                  </div>
+                  <div style="font-size: 14px">
+                    {{ item.extraInfo.name }}
+                  </div>
+                  <div>
+                    {{ item.extraInfo.size }}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -199,6 +214,7 @@ export default {
     // 点击会话：同级接参
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
+      console.log(this.curSession)
       this.scrollBottom('window-id')
     });
 
