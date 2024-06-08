@@ -6,7 +6,7 @@
           <!-- 头像 -->
           <div class="avatar-cls">
             <el-badge :value="item.unreadCount">
-              <img :src="item.sessionAvatar" style="width: 3.4vw;height: 7.3vh"/>
+              <img class="avatar-img" :src="item.sessionAvatar"/>
             </el-badge>
           </div>
 
@@ -44,6 +44,9 @@ export default {
   },
 
   created() {
+    /**
+     * 查询会话列表
+     */
     this.getSessionList(true);
 
     /**
@@ -169,13 +172,18 @@ export default {
   float: left;
 }
 
+.avatar-img {
+  width: 3.4vw;
+  height: 7.3vh;
+  border-radius: 6px;
+}
+
 .session-name-cls {
   width: 58%;
   font-size: 13.6px;
   display: inline-block;
   margin-top: 3%;
   color: $session-nick-color;
-  font-family: "Arial Rounded MT Bold";
 }
 
 .session-time-cls {

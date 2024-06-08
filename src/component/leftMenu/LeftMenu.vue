@@ -8,7 +8,7 @@
         </div>
         <!-- 会话 -->
         <div class="div-item-cls">
-          <span class="iconfont el-icon-chat-dot-round"/>
+          <div class="iconfont el-icon-chat-dot-round" style="background-color: red;border-radius: 6px"/>
         </div>
         <!-- 通讯录 -->
         <div class="div-item-cls">
@@ -53,8 +53,8 @@ export default {
 
 .div-item-cls {
   cursor: pointer;
-  font-size: 27px;
-  padding-top: 3.2vh;
+  font-size: 28px;
+  padding-top: 3.5vh;
   display: flex;
   justify-content: center;
 }
