@@ -8,7 +8,7 @@
         </div>
         <!-- 会话 -->
         <div class="div-item-cls">
-          <div class="iconfont el-icon-chat-dot-round" style="background-color: red;border-radius: 6px"/>
+          <div class="iconfont el-icon-chat-dot-round"/>
         </div>
         <!-- 通讯录 -->
         <div class="div-item-cls">
@@ -57,6 +57,10 @@ export default {
   padding-top: 3.5vh;
   display: flex;
   justify-content: center;
+}
+
+.iconfont:hover {
+  background-color: $logo-color;
 }
 
 .avatar-cls {

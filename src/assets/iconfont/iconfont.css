@@ -10,6 +10,8 @@
 .iconfont {
     font-family: "iconfont" !important;
     color: floralwhite;
+    padding: 6px;
+    border-radius: 6px;
 }
 
 .icon-setting:before {
