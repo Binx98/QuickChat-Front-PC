@@ -83,7 +83,7 @@
             </span>
             <div>
               <div class="group-item-div-cls" v-if="curSession.type === 2">
-                {{ item.accountId }}
+                {{ item.nickName }}
               </div>
               <div class="receive-div-font">
                 {{ item.content }}
@@ -193,8 +193,7 @@
         <!-- 聊天记录 -->
         <span class="iconfont el-icon-time" style="cursor: pointer;font-size: 27px;"></span>
         <!-- 发送按钮 -->
-        <span class="iconfont el-icon-s-promotion" style="cursor: pointer;font-size: 27px;"
-              @click="sendMsg()"></span>
+        <span id="send-button-id" class="iconfont el-icon-s-promotion" @click="sendMsg()" v-if="chatMsg.content"></span>
       </div>
     </el-col>
 
@@ -371,6 +370,7 @@ export default {
         if (res.data.code == 200) {
           this.voiceMsg.fromId = this.loginUser.accountId;
           this.voiceMsg.toId = this.curSession.toId;
+          this.voiceMsg.nickName = this.loginUser.nickName;
           this.voiceMsg.content = res.data.data.url;
           this.voiceMsg.extraInfo = res.data.data.extraInfo;
           this.voiceMsg.extraInfo.voiceTime = this.voiceMsgTotalTime;
@@ -455,11 +455,9 @@ export default {
       this.fileMsg.extraInfo.name = file.raw.name;
       this.fileMsg.extraInfo.size = file.raw.size;
       this.fileMsg.extraInfo.type = file.raw.type;
-
       this.fileMsg.fromId = this.loginUser.accountId;
       this.fileMsg.toId = this.curSession.toId;
       this.fileMsg.content = res.data.url;
-
       chatMsgApi.sendMsg(this.fileMsg).then(res => {
         this.getChatMsgByRelationId(this.curSession.relationId);
         EventBus.$emit('readCount0Event', this.curSession)
@@ -521,6 +519,7 @@ export default {
       // 发送消息
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.toId = this.curSession.toId;
+      this.chatMsg.nickName = this.loginUser.nickName;
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
         this.getChatMsgByRelationId(this.curSession.relationId);
@@ -683,9 +682,8 @@ audio::-webkit-media-controls-volume-control-container {
 
 // ---------------------消息样式：群聊---------------------
 .group-item-div-cls {
-  font-size: 13.5px;
-  margin-top: 10px;
-  margin-bottom: 5px;
+  font-size: 13px;
+  margin-bottom: 4px;
   color: $session-nick-color;
 }
 
@@ -815,5 +813,12 @@ audio::-webkit-media-controls-volume-control-container {
 .emoji-picker .emojis span:hover {
   background: #ececec;
   cursor: pointer;
+}
+
+// ----------------按钮----------------
+#send-button-id {
+  cursor: pointer;
+  font-size: 27px;
+  background-color: $logo-color
 }
 </style>
