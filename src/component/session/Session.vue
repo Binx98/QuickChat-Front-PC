@@ -5,7 +5,7 @@
         <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
           <!-- 头像 -->
           <div class="avatar-cls">
-            <el-badge :value="item.unreadCount">
+            <el-badge :value="item.unreadCount" :max="99">
               <img class="avatar-img" :src="item.sessionAvatar"/>
             </el-badge>
           </div>
@@ -168,7 +168,6 @@ export default {
 .avatar-cls {
   height: 100%;
   width: 26%;
-  display: inline-block;
   float: left;
 }
 

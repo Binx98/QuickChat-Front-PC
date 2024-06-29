@@ -2,12 +2,12 @@
   <span>
     <!--  LOGO  -->
     <el-col :span="5" class="col">
-      <el-image class="logo" :src="require('@/assets/logo/logo2_transparent.4cb48f1f(1).png')"/>
+      <el-image class="logo-cls" :src="require('@/assets/logo/logo2_transparent.4cb48f1f(1).png')"/>
     </el-col>
     <!--  占位  -->
     <el-col :span="1" class="col"/>
     <!--  输入框  -->
-    <el-col :span="11" class="col" style="margin-right: 2%">
+    <el-col :span="12" class="col" style="margin-right: 2%">
       <el-input v-model="searchMsg" style="width: 76%;"/>
     </el-col>
     <!--  黑夜/白天  -->
@@ -23,10 +23,6 @@
     <el-col :span="1" class="col">
       <span class="iconfont icon-github-fill" style="cursor: pointer;font-size: 34px;"
             @click="redirectToGithub()"></span>
-    </el-col>
-    <!--  建议  -->
-    <el-col :span="1" class="col">
-      <span class="iconfont el-icon-message" style="cursor: pointer;font-size: 34px;"></span>
     </el-col>
   </span>
 </template>
@@ -68,8 +64,7 @@ export default {
   align-items: center;
 }
 
-.logo {
-  cursor: pointer;
+.logo-cls {
   height: 10vh;
 }
 

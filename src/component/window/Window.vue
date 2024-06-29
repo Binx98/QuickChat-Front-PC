@@ -1,7 +1,7 @@
 <template>
   <span>
     <!--  选中会话  -->
-    <el-col class="window-cls" v-if="this.curSession !== ''">
+    <el-col :span="5" class="window-cls" v-if="this.curSession !== ''">
       <!--  1.上边栏  -->
       <div class="head-bar">
         <el-avatar :src="curSession.sessionAvatar" shape="square" style="margin-right: 1%;cursor:pointer"/>
@@ -49,8 +49,8 @@
                || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 4)">
             <div class="send-div-file" @click="downloadFile(item.content)">
               <div style="padding: 4px;">
-                <div style="border: 1px solid red;height: 65px;width: 240px">
-                  <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
+                <div style="border: 1px solid red;height: 65px;width: 290px">
+                  <div style="float: left;width: 60px;height: 100%;border: 1px solid red">
                     <img/>
                   </div>
                   <div style="font-size: 14px">
@@ -99,7 +99,7 @@
             </span>
             <div>
               <div class="group-item-div-cls" v-if="curSession.type === 2">
-                {{ item.accountId }}
+                {{ item.nickName }}
               </div>
               <div>
                 <audio preload controls controlsList="nodownload noplaybackrate">
@@ -117,15 +117,15 @@
             </span>
             <div>
               <div class="group-item-div-cls" v-if="curSession.type === 2">
-                {{ item.accountId }}
+                {{ item.nickName }}
               </div>
               <div class="receive-div-file" @click="downloadFile(item.content)">
               <div style="padding: 4px;">
-                <div style="border: 1px solid red;height: 65px;width: 240px">
-                  <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
+                <div style="border: 1px solid red;height: 65px;width: 290px">
+                  <div style="float: left;width: 60px;height: 100%;border: 1px solid red">
                     <img/>
                   </div>
-                  <div style="font-size: 14px">
+                  <div style="font-size: 13px;">
                     {{ item.extraInfo.name }}
                   </div>
                   <div>
@@ -142,8 +142,8 @@
       <!-- 3.输入部分 -->
       <div class="input-cls">
         <!-- 语音 -->
-        <span class="iconfont el-icon-microphone" style="font-size: 27px;" @mousedown="holdDown()"
-              @mouseup="holdUp()"></span>
+        <span class="iconfont el-icon-microphone" style="font-size: 27px;cursor:pointer;"
+              @mousedown="holdDown()" @mouseup="holdUp()"></span>
         <!-- 输入框 -->
         <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请文明交流......"
                v-model="chatMsg.content"/>
@@ -193,10 +193,13 @@
         <!-- 聊天记录 -->
         <span class="iconfont el-icon-time" style="cursor: pointer;font-size: 27px;"></span>
         <!-- 发送按钮 -->
-        <span id="send-button-id" class="iconfont el-icon-s-promotion" @click="sendMsg()" v-if="chatMsg.content"></span>
+        <span id="send-button-id" class="iconfont el-icon-s-promotion" @click="sendMsg()"
+              v-if="!checkMsgIsNull()"></span>
       </div>
     </el-col>
 
+    <!----------------------------------------------------未选中会话---------------------------------------------------->
+    <!----------------------------------------------------未选中会话---------------------------------------------------->
     <!----------------------------------------------------未选中会话---------------------------------------------------->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
 
@@ -322,7 +325,7 @@ export default {
       this.stopRecordAudio();
       clearInterval(this.voiceInterval)
       if (this.voiceMsgTotalTime < 1) {
-        this.$message.warning("长摁持续录音，时长不小于1秒");
+        this.$message.warning("说话时间太短");
         this.voiceMsgTotalTime = 0;
       } else {
         this.uploadAudio();
@@ -506,15 +509,10 @@ export default {
      */
     sendMsg() {
       // 不允许发送空白消息
-      if (this.chatMsg.content.length === 0 ||
-          this.chatMsg.content.split(" ").join("").length === 0) {
-        this.$message.warning("不可以发送空白消息")
+      let msgIsNull = this.checkMsgIsNull();
+      if (msgIsNull) {
         return;
       }
-
-      // 判断信息事件是否超过10分钟
-      // let lastMsg = this.chatMsgList[this.curSession.relationId];
-      // let lastMsgTime = lastMsg[lastMsg.length - 1].createTime;
 
       // 发送消息
       this.chatMsg.fromId = this.loginUser.accountId;
@@ -527,6 +525,18 @@ export default {
       }).catch(e => {
         this.$message.error(e.data.msg)
       })
+    },
+
+    /**
+     * 校验输入框是否为空
+     */
+    checkMsgIsNull() {
+      let content = this.chatMsg.content;
+      if (content.length === 0 || content.split(" ").join("").length === 0) {
+        return true;
+      } else {
+        return false;
+      }
     },
 
     /**
@@ -700,7 +710,7 @@ audio::-webkit-media-controls-volume-control-container {
 }
 
 .send-div-font {
-  padding: 15px;
+  padding: 12px;
   font-size: 14px;
   background-color: $logo-color;
   border-radius: 10px;
@@ -722,7 +732,7 @@ audio::-webkit-media-controls-volume-control-container {
 }
 
 .receive-div-font {
-  padding: 15px;
+  padding: 12px;
   font-size: 14px;
   background-color: floralwhite;
   border-radius: 10px;
