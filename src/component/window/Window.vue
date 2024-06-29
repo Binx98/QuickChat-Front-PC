@@ -81,8 +81,13 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div class="receive-div-font">
-              {{ item.content }}
+            <div>
+              <div class="group-item-div-cls" v-if="curSession.type === 2">
+                {{ item.accountId }}
+              </div>
+              <div class="receive-div-font">
+                {{ item.content }}
+              </div>
             </div>
           </div>
           <!--  语音  -->
@@ -92,9 +97,16 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <audio preload controls controlsList="nodownload noplaybackrate">
-              <source :src=item.content type="audio/wav">
-            </audio>
+            <div>
+              <div class="group-item-div-cls" v-if="curSession.type === 2">
+                {{ item.accountId }}
+              </div>
+              <div>
+                <audio preload controls controlsList="nodownload noplaybackrate">
+                  <source :src=item.content type="audio/wav">
+                </audio>
+              </div>
+            </div>
           </div>
           <!--  文件  -->
           <div class="receive-item"
@@ -103,7 +115,11 @@
             <span style="margin-right: 6px">
               <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
             </span>
-            <div class="receive-div-file" @click="downloadFile(item.content)">
+            <div>
+              <div class="group-item-div-cls" v-if="curSession.type === 2">
+                {{ item.accountId }}
+              </div>
+              <div class="receive-div-file" @click="downloadFile(item.content)">
               <div style="padding: 4px;">
                 <div style="border: 1px solid red;height: 65px;width: 240px">
                   <div style="float: left;width: 10%;height: 100%;border: 1px solid red">
@@ -117,6 +133,7 @@
                   </div>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         </div>
@@ -214,7 +231,6 @@ export default {
     // 点击会话：同级接参
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
-      console.log(this.curSession)
       this.scrollBottom('window-id')
     });
 
@@ -663,6 +679,14 @@ audio::-webkit-media-controls-volume-control-container {
   border-radius: 10px;
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
+}
+
+// ---------------------消息样式：群聊---------------------
+.group-item-div-cls {
+  font-size: 13.5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: $session-nick-color;
 }
 
 
