@@ -122,8 +122,8 @@ export default {
 
 <style lang="scss" scoped>
 .main {
-  width: 74vw;
-  height: 90vh;
+  width: 77vw;
+  height: 91vh;
   margin: auto;
   position: absolute;
   top: 0;

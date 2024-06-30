@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .div-cls {
-  height: 90vh;
+  height: 91vh;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   background-color: $window-item-color;
@@ -53,8 +53,8 @@ export default {
 
 .div-item-cls {
   cursor: pointer;
-  font-size: 28px;
-  padding-top: 3.5vh;
+  font-size: 26px;
+  padding-top: 2.2vh;
   display: flex;
   justify-content: center;
 }

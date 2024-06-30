@@ -1,10 +1,10 @@
 // 窗口底色
-$window-bottom-color: #1E1F22FF;
+$window-bottom-color: var(--window-bottom-color, #1E1F22FF);
 //$window-bottom-color: #1d1d1f;
 //$window-bottom-color: #87ecf8;
 
 // 左侧功能栏、窗口单元颜色
-$window-item-color: #2B2D30FF;
+$window-item-color: var(--window-item-color, #2B2D30FF);
 //$window-item-color: #2f2f31;
 //$window-item-color: #daf1f8;
 
@@ -12,10 +12,10 @@ $window-item-color: #2B2D30FF;
 $logo-color: #12CEC2FF;
 
 // 表单文本颜色
-$form-font-color: #f2f4f7;
+$form-font-color: var(--form-font-color, #f2f4f7);
 
 // 会话项-昵称
-$session-nick-color: rgba(231, 231, 231, 0.85);
+$session-nick-color: var(--session-nick-color, rgba(231, 231, 231, 0.85));
 
 // 会话项-消息
 $session-msg-color: rgba(231, 231, 231, 0.46);

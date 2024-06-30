@@ -404,9 +404,9 @@ export default {
       this.drawWave({
         canvas: this.$refs.record,
         dataArray: this.recorder.getRecordAnalyseData(),
-        bgcolor: 'white',
-        lineWidth: 1,
-        lineColor: 'red',
+        bgcolor: '#1E1F22FF',
+        lineWidth: 2,
+        lineColor: '#12CEC2FF',
       });
     },
 
@@ -424,11 +424,9 @@ export default {
       const sliceWidth = canvas.width / bufferLength;
       // 绘制点的x轴位置
       let x = 0;
-      // 填充背景色
+      // 波形图样式
       ctx.fillStyle = bgcolor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // 设定波形绘制颜色
       ctx.lineWidth = lineWidth;
       ctx.strokeStyle = lineColor;
       ctx.beginPath();
@@ -488,7 +486,7 @@ export default {
       chatMsgApi.getChatMsgList(accountIds).then(res => {
         this.chatMsgList = res.data.data;
       }).catch(e => {
-        this.$message.error('聊天记录信息加载失败，请刷新页面重试！')
+        this.$message.error('聊天消息加载失败，请刷新页面重试！')
       })
     },
 
@@ -631,7 +629,7 @@ audio::-webkit-media-controls-volume-control-container {
   background-color: $window-item-color;
   border-radius: 10px;
   height: 90%;
-  width: 54vw;
+  width: 54.9vw;
   overflow: auto;
 }
 
@@ -643,56 +641,56 @@ audio::-webkit-media-controls-volume-control-container {
 
 // ---------------------滚动条---------------------
 .window-cls::-webkit-scrollbar {
-  width: 7.8px;
-  height: 7.8px;
+  width: 8px;
+  height: 8px;
 }
 
 .window-cls::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 9px;
   background: #9e9e9e;
 }
 
 .window-cls::-webkit-scrollbar-track {
-  border-radius: 10px;
+  border-radius: 9px;
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
 .msg-window-cls::-webkit-scrollbar {
-  width: 7.8px;
-  height: 7.8px;
+  width: 8px;
+  height: 8px;
 }
 
 .msg-window-cls::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 9px;
   background: #9e9e9e;
 }
 
 .msg-window-cls::-webkit-scrollbar-track {
-  border-radius: 10px;
+  border-radius: 9px;
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
 .emoji-picker::-webkit-scrollbar {
-  width: 7.8px;
+  width: 8px;
   height: 0px;
 }
 
 .emoji-picker::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 9px;
   background: #9e9e9e;
 }
 
 .emoji-picker::-webkit-scrollbar-track {
-  border-radius: 10px;
+  border-radius: 9px;
   background: #ededed;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .1);
 }
 
 // ---------------------消息样式：群聊---------------------
 .group-item-div-cls {
-  font-size: 13px;
+  font-size: 12.6px;
   margin-bottom: 4px;
   color: $session-nick-color;
 }
@@ -765,6 +763,7 @@ audio::-webkit-media-controls-volume-control-container {
 
 // ---------------------会话名称---------------------
 .session-name-cls {
+  cursor: pointer;
   color: $session-nick-color;
   font-family: "Arial Rounded MT Bold";
 }
