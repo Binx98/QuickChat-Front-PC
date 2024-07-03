@@ -4,12 +4,13 @@
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%" @keyup.enter="register()">
         <el-input class="input-cls" placeholder="请输入账号" v-model="registerForm.accountId"/>
-        <el-input class="input-cls" type="password" show-password placeholder="请输入密码" v-model="registerForm.password1"/>
-        <el-input class="input-cls" type="password" show-password placeholder="请再次输入密码" v-model="registerForm.password2"/>
+        <el-input class="input-cls" type="password" show-password placeholder="请输入密码"
+                  v-model="registerForm.password1"/>
+        <el-input class="input-cls" type="password" show-password placeholder="请再次输入密码"
+                  v-model="registerForm.password2"/>
         <div style="display: flex; justify-content: center;">
-          <el-input
-              style="border-radius: 10px;opacity: 0.6;margin-bottom: 2%;margin-right:1%;width: 11.3vw;height: 6.2vh"
-              placeholder="请输入邮箱" v-model="registerForm.toEmail"/>
+          <el-input style="border-radius: 10px;opacity: 0.5;margin-right:1%;width: 13vw;"
+                    placeholder="请输入邮箱" v-model="registerForm.toEmail"/>
           <el-button :disabled="disable" @click="sendEmail()"
                      class="send-btn"
                      type="primary">
@@ -128,7 +129,7 @@ export default {
 .btn-cls {
   background-color: $logo-color;
   width: 18vw;
-  height: 6vh;
+  height: 5vh;
   margin-bottom: 2%;
 }
 
@@ -142,10 +143,9 @@ export default {
 
 .input-cls {
   border-radius: 10px;
-  opacity: 0.6;
+  opacity: 0.5;
   margin-bottom: 2%;
   width: 18vw;
-  height: 6.2vh
 }
 
 .send-btn {

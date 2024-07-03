@@ -1,14 +1,14 @@
 <template>
   <div class="main">
-    <div class="form-container" style="height: 72vh;margin-top: 5%;">
+    <div class="form-container" style="height: 72vh;margin-top: 6%;">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%" @keyup.enter="login()">
-        <!--  账号密码输入框  -->
+        <!--  账号密码  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
         <el-input class="input-cls" show-password placeholder="请输入密码" v-model="loginForm.passWord"/>
-        <!--  验证码输入框  -->
-        <div style="display: flex; justify-content: center;margin-bottom: 2%">
-          <el-input style="border-radius: 10px;opacity: 0.6;margin-right: 1%;width: 13vw;height: 5.4vh;"
+        <!--  验证码  -->
+        <div style="display: flex; justify-content: center;">
+          <el-input class="input-cls" style="margin-right: 1%;width: 13vw;"
                     placeholder="请输入验证码" v-model="loginForm.verifyCode"/>
           <img class="captcha-cls" :src="captchaUrl" @click="captcha()"/>
         </div>
@@ -109,8 +109,7 @@ export default {
 .btn-cls {
   background-color: $logo-color;
   width: 18vw;
-  height: 6vh;
-  margin-bottom: 2%;
+  height: 5vh;
 }
 
 .form-container {
@@ -123,10 +122,9 @@ export default {
 
 .input-cls {
   border-radius: 10px;
-  opacity: 0.6;
+  opacity: 0.5;
   margin-bottom: 2%;
   width: 18vw;
-  height: 6.2vh
 }
 
 .go-register {
