@@ -9,16 +9,16 @@
         <el-input class="input-cls" type="password" show-password placeholder="请再次输入密码"
                   v-model="registerForm.password2"/>
         <div style="display: flex; justify-content: center;">
-          <el-input class="input-cls" style="margin-right:1%;width: 12.5vw;"
+          <el-input class="input-cls" style="margin-right:1%;width: 12vw;"
                     placeholder="请输入邮箱" v-model="registerForm.toEmail"/>
-          <el-button class="send-btn" :disabled="disable" @click="sendEmail()">
+          <button class="send-btn" :disabled="disable" @click="sendEmail()">
             {{ sendButtonMsg }}
-          </el-button>
+          </button>
         </div>
         <el-input class="input-cls" placeholder="请输入验证码" v-model="registerForm.emailCode"/>
-        <el-button class="btn-cls" round @click="register()">
+        <button class="btn-cls" @click="register()">
           注册
-        </el-button>
+        </button>
         <div style="font-size: 14px">
           <span class="form-font">已有账号？</span>
           <span class="go-login" @click="clickGoLogin()">去登录></span>
@@ -139,19 +139,24 @@ export default {
   background-color: $logo-color;
   width: 18vw;
   height: 5vh;
+  color: white;
   margin-bottom: 2%;
+  cursor: pointer;
+  border-radius: 20px;
 }
 
 .input-cls {
-  border-radius: 10px;
   opacity: 0.5;
   margin-bottom: 2%;
   width: 18vw;
 }
 
 .send-btn {
-  height: 5.2vh;
-  margin-bottom: 2%;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  height: 40px;
+  width: 5.7vw;
   background-color: $logo-color;
 }
 

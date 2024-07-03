@@ -5,7 +5,7 @@
       <div style="margin-top: -10%;margin-bottom: 3.2%;" @keyup.enter="login()">
         <!--  账号密码  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
-        <el-input class="input-cls" show-password placeholder="请输入密码" v-model="loginForm.passWord"/>
+        <el-input class="input-cls" placeholder="请输入密码" v-model="loginForm.passWord" show-password/>
         <!--  验证码  -->
         <div style="display: flex; justify-content: center;">
           <el-input class="input-cls" style="margin-right: 1%;width: 13vw;"
@@ -13,17 +13,12 @@
           <img class="captcha-cls" :src="captchaUrl" @click="captcha()"/>
         </div>
         <!--  登录按钮  -->
-        <el-button class="btn-cls" round @click="login()">
-          登录
-        </el-button>
-        <!--   去注册   -->
+        <button class="btn-cls" @click="login()">登录</button>
+        <!--   注册账号、找回密码   -->
         <div style="font-size: 14px">
           <span class="form-font">没有账号？</span>
           <span class="go-register" @click="clickGoRegister()">去注册></span>
-        </div>
-        <!--   找回密码   -->
-        <div style="font-size: 14px">
-          <span class="go-register" @click="clickGoRegister()">找回密码></span>
+          <div class="go-register" @click="clickGoRegister()">找回密码></div>
         </div>
       </div>
     </div>
@@ -111,18 +106,20 @@ export default {
   border-radius: 4px;
   opacity: 0.72;
   width: 4.6vw;
-  height: 5.2vh;
+  height: 40px;
 }
 
 .btn-cls {
-  background-color: $logo-color;
   width: 18vw;
   height: 5vh;
   margin-bottom: 2%;
+  cursor: pointer;
+  color: white;
+  border-radius: 20px;
+  background-color: $logo-color;
 }
 
 .input-cls {
-  border-radius: 10px;
   opacity: 0.5;
   margin-bottom: 2%;
   width: 18vw;
