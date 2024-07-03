@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
     <div class="form-container">
-      <el-image :src="require('@/assets/logo/logo.png')" style="height: 36vh;margin-top: -4%"/>
-      <div style="margin-top: -10%;margin-bottom: 3.2%" @keyup.enter="register()">
+      <el-image class="img-cls" :src="require('@/assets/logo/logo.png')"/>
+      <div style="margin-top: -12%;" @keyup.enter="register()">
         <el-input class="input-cls" placeholder="请输入账号" v-model="registerForm.accountId"/>
         <el-input class="input-cls" type="password" show-password placeholder="请输入密码"
                   v-model="registerForm.password1"/>
@@ -16,7 +16,7 @@
           </button>
         </div>
         <el-input class="input-cls" placeholder="请输入验证码" v-model="registerForm.emailCode"/>
-        <button class="btn-cls" @click="register()">
+        <button class="register-btn-cls" @click="register()">
           注册
         </button>
         <div style="font-size: 14px">
@@ -67,7 +67,7 @@ export default {
     sendEmail() {
       let email = this.registerForm.toEmail;
       if (email == null || email == '') {
-        this.$message.error("你还没输入邮箱呢，真讨厌！")
+        this.$message.error("你还没输入邮箱呢！")
         return;
       }
       let param = {
@@ -129,7 +129,7 @@ export default {
 }
 
 .form-container {
-  width: 35vw;
+  width: 33vw;
   opacity: 0.9;
   border-radius: 20px;
   text-align: center;
@@ -137,7 +137,7 @@ export default {
   background-color: $window-bottom-color;
 }
 
-.btn-cls {
+.register-btn-cls {
   background-color: $logo-color;
   width: 18vw;
   height: 5vh;
@@ -147,9 +147,14 @@ export default {
   border-radius: 20px;
 }
 
+.img-cls {
+  height: 36vh;
+  margin-top: -6%;
+}
+
 .input-cls {
   opacity: 0.5;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
   width: 18vw;
 }
 

@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
     <div class="form-container">
-      <el-image :src="require('@/assets/logo/logo.png')" style="height: 36vh;margin-top: -3%"/>
-      <div style="margin-top: -10%;margin-bottom: 3.2%;" @keyup.enter="login()">
+      <el-image class="img-cls" :src="require('@/assets/logo/logo.png')"/>
+      <div style="margin-top: -12%" @keyup.enter="login()">
         <!--  账号密码  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
         <el-input class="input-cls" placeholder="请输入密码" v-model="loginForm.passWord" show-password/>
@@ -96,12 +96,17 @@ export default {
 }
 
 .form-container {
-  width: 35vw;
+  width: 33vw;
   opacity: 0.9;
   border-radius: 20px;
   padding-bottom: 2.5%;
   text-align: center;
   background-color: $window-bottom-color;
+}
+
+.img-cls {
+  height: 36vh;
+  margin-top: -6%;
 }
 
 .captcha-cls {
@@ -123,7 +128,7 @@ export default {
 
 .input-cls {
   opacity: 0.5;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
   width: 18vw;
 }
 

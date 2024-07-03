@@ -1,6 +1,6 @@
 <template>
-  <div class="main">
-    <div class="window">
+  <div class="main-container">
+    <div class="window-container">
       <el-row shape="square" :gutter="4" style="height: 100%">
         <!-- 侧边导航栏 -->
         <LeftMenu :loginUser="loginUser"/>
@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
+.main-container {
   width: 77vw;
   height: 91vh;
   opacity: 0.9;
@@ -133,10 +133,10 @@ export default {
   bottom: 0;
 }
 
-.window {
-  background-color: $window-bottom-color;
+.window-container {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  background-color: $window-bottom-color;
 }
 </style>
