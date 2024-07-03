@@ -87,14 +87,19 @@ export default {
 .main-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .form-container {
   width: 35vw;
   opacity: 0.9;
   border-radius: 20px;
-  margin-top: 6.2%;
-  padding-bottom: 3%;
+  padding-bottom: 2.5%;
   text-align: center;
   background-color: $window-bottom-color;
 }

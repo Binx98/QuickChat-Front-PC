@@ -120,16 +120,20 @@ export default {
 .main-container {
   display: flex;
   justify-content: center;
-  height: 100%;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .form-container {
   width: 35vw;
   opacity: 0.9;
-  margin-top: 4%;
   border-radius: 20px;
   text-align: center;
-  overflow: hidden;
+  padding-bottom: 2.5%;
   background-color: $window-bottom-color;
 }
 

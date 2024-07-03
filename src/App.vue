@@ -7,3 +7,11 @@
     <router-view/>
   </div>
 </template>
+
+<style>
+/* 清除浏览器默认间距 */
+* {
+  margin: 0;
+  padding: 0;
+}
+</style>
