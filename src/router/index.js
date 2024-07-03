@@ -13,13 +13,13 @@ const routes = [
     {
         path: '/login',
         name: 'login',
-        component: () => import('../views/login')
+        component: () => import('../views/form/login')
     },
 
     {
         path: '/register',
         name: 'register',
-        component: () => import('../views/register')
+        component: () => import('../views/form/register')
     },
 ]
 

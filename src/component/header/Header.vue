@@ -2,7 +2,7 @@
   <span>
     <!--  LOGO  -->
     <el-col :span="5" class="col">
-      <el-image class="logo-cls" :src="require('@/assets/logo/logo2_transparent.4cb48f1f(1).png')"/>
+      <el-image class="logo-cls" :src="require('@/assets/logo/logo.png')"/>
     </el-col>
     <!--  占位  -->
     <el-col :span="1" class="col"/>

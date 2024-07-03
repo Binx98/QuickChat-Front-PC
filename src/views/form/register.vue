@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="form-container">
-      <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
+      <el-image :src="require('@/assets/logo/logo.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%" @keyup.enter="register()">
         <el-input class="input-cls" placeholder="请输入账号" v-model="registerForm.accountId"/>
         <el-input class="input-cls" type="password" show-password placeholder="请输入密码"
@@ -120,15 +120,13 @@ export default {
 .main-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
 }
 
 .form-container {
   width: 35vw;
-  height: 80vh;
   opacity: 0.9;
-  margin-top: 3.2%;
+  margin-top: 4%;
   border-radius: 20px;
   text-align: center;
   overflow: hidden;
@@ -155,7 +153,7 @@ export default {
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  height: 40px;
+  height: 41px;
   width: 5.7vw;
   background-color: $logo-color;
 }

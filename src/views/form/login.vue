@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div class="form-container">
-      <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -3%"/>
+      <el-image :src="require('@/assets/logo/logo.png')" style="height: 36vh;margin-top: -3%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%;" @keyup.enter="login()">
         <!--  账号密码  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
@@ -87,18 +87,15 @@ export default {
 .main-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 
 .form-container {
   width: 35vw;
-  height: 66vh;
   opacity: 0.9;
   border-radius: 20px;
   margin-top: 6.2%;
+  padding-bottom: 3%;
   text-align: center;
-  overflow: hidden;
   background-color: $window-bottom-color;
 }
 
