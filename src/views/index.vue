@@ -87,15 +87,41 @@ export default {
         ws.send(this.loginUser.accountId);
       };
 
-      // 获取Channel消息
-      ws.onmessage = evt => {
-        this.chatMsgEvent = JSON.parse(evt.data);
+      // 获取 Channel 消息，根据类型分别处理
+      ws.onmessage = msg => {
+        this.handleWsPushMsg(msg);
       };
 
       // 关闭连接
       ws.onclose = evt => {
         console.log("Connection closed.");
       };
+    },
+
+    /**'
+     * 根据推送消息类型，分别进行处理
+     */
+    handleWsPushMsg(msg) {
+      // 获取消息类型、消息体
+      let pushType = msg.data.pushType;
+      let message = msg.data.message;
+
+      // 1.发送信息
+      if (pushType === 1) {
+
+      }
+
+      // 2.好友申请
+      if (pushType === 2) {
+
+      }
+
+      // 3.系统通知
+      if (pushType === 3) {
+
+      }
+
+      this.chatMsgEvent = JSON.parse(evt.data);
     },
 
     /**
