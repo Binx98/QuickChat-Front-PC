@@ -1,8 +1,8 @@
 <template>
-  <div class="main">
-    <div class="form-container" style="height: 72vh;margin-top: 6%;">
-      <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
-      <div style="margin-top: -10%;margin-bottom: 3.2%" @keyup.enter="login()">
+  <div class="main-container">
+    <div class="form-container">
+      <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -3%"/>
+      <div style="margin-top: -10%;margin-bottom: 3.2%;" @keyup.enter="login()">
         <!--  账号密码  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
         <el-input class="input-cls" show-password placeholder="请输入密码" v-model="loginForm.passWord"/>
@@ -12,23 +12,19 @@
                     placeholder="请输入验证码" v-model="loginForm.verifyCode"/>
           <img class="captcha-cls" :src="captchaUrl" @click="captcha()"/>
         </div>
-        <!--  记住密码、忘记密码  -->
-        <div style="font-size: 14px;margin-bottom: 2%">
-          <span class="form-font" style="margin-right: 7vw">
-            记住密码
-            <el-switch v-model="loginForm.rememberPwd" active-color="#12CEC2FF"/>
-          </span>
-          <span class="form-font" style="cursor: pointer">忘记密码？</span>
-        </div>
         <!--  登录按钮  -->
-        <el-button class="btn-cls" type="primary" size="medium" round @click="login()">
+        <el-button class="btn-cls" round @click="login()">
           登录
         </el-button>
-      </div>
-      <!--   去注册   -->
-      <div style="font-size: 14px">
-        <span class="form-font">没有账号？</span>
-        <span class="go-register" @click="clickGoRegister()">去注册></span>
+        <!--   去注册   -->
+        <div style="font-size: 14px">
+          <span class="form-font">没有账号？</span>
+          <span class="go-register" @click="clickGoRegister()">去注册></span>
+        </div>
+        <!--   找回密码   -->
+        <div style="font-size: 14px">
+          <span class="go-register" @click="clickGoRegister()">找回密码></span>
+        </div>
       </div>
     </div>
   </div>
@@ -41,6 +37,7 @@ export default {
   name: "login",
   data() {
     return {
+      // 图片验证码
       captchaUrl: '',
 
       // 登录表单
@@ -92,11 +89,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
+.main-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.form-container {
+  width: 35vw;
+  height: 66vh;
+  opacity: 0.9;
+  border-radius: 20px;
+  margin-top: 6.2%;
+  text-align: center;
+  overflow: hidden;
+  background-color: $window-bottom-color;
 }
 
 .captcha-cls {
@@ -110,14 +118,7 @@ export default {
   background-color: $logo-color;
   width: 18vw;
   height: 5vh;
-}
-
-.form-container {
-  width: 35vw;
-  text-align: center;
-  background-color: $window-bottom-color;
-  opacity: 0.9;
-  border-radius: 20px
+  margin-bottom: 2%;
 }
 
 .input-cls {

@@ -1,6 +1,6 @@
 <template>
-  <div class="main">
-    <div class="form-container" style="height: 84vh;margin-top: 3.2%;">
+  <div class="main-container">
+    <div class="form-container">
       <el-image :src="require('@/assets/logo/logo2_transparent.png')" style="height: 36vh;margin-top: -4%"/>
       <div style="margin-top: -10%;margin-bottom: 3.2%" @keyup.enter="register()">
         <el-input class="input-cls" placeholder="请输入账号" v-model="registerForm.accountId"/>
@@ -9,16 +9,14 @@
         <el-input class="input-cls" type="password" show-password placeholder="请再次输入密码"
                   v-model="registerForm.password2"/>
         <div style="display: flex; justify-content: center;">
-          <el-input style="border-radius: 10px;opacity: 0.5;margin-right:1%;width: 13vw;"
+          <el-input class="input-cls" style="margin-right:1%;width: 12.5vw;"
                     placeholder="请输入邮箱" v-model="registerForm.toEmail"/>
-          <el-button :disabled="disable" @click="sendEmail()"
-                     class="send-btn"
-                     type="primary">
+          <el-button class="send-btn" :disabled="disable" @click="sendEmail()">
             {{ sendButtonMsg }}
           </el-button>
         </div>
         <el-input class="input-cls" placeholder="请输入验证码" v-model="registerForm.emailCode"/>
-        <el-button class="btn-cls" type="primary" size="medium" round @click="register()">
+        <el-button class="btn-cls" round @click="register()">
           注册
         </el-button>
         <div style="font-size: 14px">
@@ -119,11 +117,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
+.main-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.form-container {
+  width: 35vw;
+  height: 80vh;
+  opacity: 0.9;
+  margin-top: 3.2%;
+  border-radius: 20px;
+  text-align: center;
+  overflow: hidden;
+  background-color: $window-bottom-color;
 }
 
 .btn-cls {
@@ -131,14 +140,6 @@ export default {
   width: 18vw;
   height: 5vh;
   margin-bottom: 2%;
-}
-
-.form-container {
-  width: 35vw;
-  text-align: center;
-  background-color: $window-bottom-color;
-  opacity: 0.9;
-  border-radius: 20px
 }
 
 .input-cls {
