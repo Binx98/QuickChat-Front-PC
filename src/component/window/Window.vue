@@ -4,7 +4,7 @@
     <el-col :span="5" class="window-cls" v-if="this.curSession !== ''">
       <!--  1.上边栏  -->
       <div class="head-bar">
-        <el-avatar :src="curSession.sessionAvatar" shape="square" style="margin-right: 1%;cursor:pointer"/>
+        <el-avatar :src="curSession.avatar" shape="square" style="margin-right: 1%;cursor:pointer"/>
         <div class="session-name-cls">{{ curSession.sessionName }}</div>
       </div>
 
@@ -12,7 +12,6 @@
       <div id="window-id" class="msg-window-cls">
         <!--  聊天信息  -->
         <div v-for="item in chatMsgList[curSession.relationId]">
-
           <!------------------------------------------主动发送------------------------------------------>
           <!--  撤回  -->
           <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
@@ -199,8 +198,6 @@
     </el-col>
 
     <!----------------------------------------------------未选中会话---------------------------------------------------->
-    <!----------------------------------------------------未选中会话---------------------------------------------------->
-    <!----------------------------------------------------未选中会话---------------------------------------------------->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
 
     <!-- 录音波浪线 -->
@@ -230,13 +227,13 @@ export default {
   },
 
   created() {
-    // 点击会话：同级接参
+    // 点击会话
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
       this.scrollBottom('window-id')
     });
 
-    // 查询会话列表：同级接参
+    // 查询会话列表
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
       this.getChatMsgList()
@@ -255,6 +252,8 @@ export default {
       chatMsg: {
         fromId: '',
         toId: '',
+        relationId: '',
+        sessionType: '',
         msgType: '1',
         content: '',
       },
@@ -275,10 +274,12 @@ export default {
         toId: '',
         msgType: '4',
         content: '',
+        relationId: '',
+        sessionType: '',
         extraInfo: {
           name: '',
           size: '',
-          type: ''
+          type: '',
         }
       },
       curSession: '',
@@ -298,7 +299,7 @@ export default {
       immediate: true,
       handler(msg) {
         if (msg.relationId) {
-          this.getChatMsgByRelationId(msg.relationId)
+          this.getByRelationId(msg.relationId)
         }
       }
     },
@@ -361,7 +362,6 @@ export default {
 
     /**
      * 上传wav录音文件
-     * TODO wav转mp3逻辑补充
      */
     uploadAudio() {
       let wavBlob = this.recorder.getWAVBlob();
@@ -382,7 +382,7 @@ export default {
                 this.voiceMsg.content = '';
                 this.voiceMsg.extraInfo = '';
                 this.voiceMsgTotalTime = 0;
-                this.getChatMsgByRelationId(this.curSession.relationId);
+                this.getByRelationId(this.curSession.relationId);
                 EventBus.$emit('readCount0Event', this.curSession);
               })
               .catch(e => {
@@ -458,6 +458,8 @@ export default {
       this.fileMsg.extraInfo.type = file.raw.type;
       this.fileMsg.fromId = this.loginUser.accountId;
       this.fileMsg.toId = this.curSession.toId;
+      this.fileMsg.relationId = this.curSession.relationId;
+      this.fileMsg.sessionType = this.curSession.type;
       this.fileMsg.content = res.data.url;
       chatMsgApi.sendMsg(this.fileMsg).then(res => {
         this.getChatMsgByRelationId(this.curSession.relationId);
@@ -479,11 +481,11 @@ export default {
      * 查询会话列表聊天信息列表
      */
     getChatMsgList() {
-      let accountIds = [];
+      let relationIds = [];
       for (let i = 0; i < this.sessionList.length; i++) {
-        accountIds.push(this.sessionList[i].toId)
+        relationIds.push(this.sessionList[i].relationId)
       }
-      chatMsgApi.getChatMsgList(accountIds).then(res => {
+      chatMsgApi.getChatMsgList(relationIds, 30).then(res => {
         this.chatMsgList = res.data.data;
       }).catch(e => {
         this.$message.error('聊天消息加载失败，请刷新页面重试！')
@@ -493,10 +495,10 @@ export default {
     /**
      * 查询双方聊天记录
      */
-    getChatMsgByRelationId(relationId) {
+    getByRelationId(relationId) {
       let current = 0;
       let limit = 30;
-      chatMsgApi.getChatMsgByRelationId(relationId, current, limit).then(res => {
+      chatMsgApi.getByRelationId(relationId, current, limit).then(res => {
         this.chatMsgList[relationId] = res.data.data[relationId];
         this.scrollBottom('window-id');
       })
@@ -508,17 +510,17 @@ export default {
     sendMsg() {
       // 不允许发送空白消息
       let msgIsNull = this.checkMsgIsNull();
-      if (msgIsNull) {
-        return;
-      }
+      if (msgIsNull) return;
 
       // 发送消息
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.toId = this.curSession.toId;
+      this.chatMsg.relationId = this.curSession.relationId;
+      this.chatMsg.sessionType = this.curSession.type;
       this.chatMsg.nickName = this.loginUser.nickName;
       chatMsgApi.sendMsg(this.chatMsg).then(res => {
         this.chatMsg.content = '';
-        this.getChatMsgByRelationId(this.curSession.relationId);
+        this.getByRelationId(this.curSession.relationId);
         EventBus.$emit('readCount0Event', this.curSession);
       }).catch(e => {
         this.$message.error(e.data.msg)

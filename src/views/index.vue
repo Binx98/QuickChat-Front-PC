@@ -9,10 +9,10 @@
         <Header/>
 
         <!-- 会话列表 -->
-        <Session :sessionList="sessionList" :chatMsgEvent="chatMsgEvent"/>
+        <Session :chatMsgEvent="chatMsgEvent"/>
 
         <!-- 聊天窗口 -->
-        <Window :chatMsgList="chatMsgList" :loginUser="loginUser" :chatMsgEvent="chatMsgEvent"/>
+        <Window :loginUser="loginUser" :chatMsgEvent="chatMsgEvent"/>
       </el-row>
     </div>
   </div>
@@ -62,12 +62,6 @@ export default {
 
       // 会话列表
       sessionList: [],
-
-      // 会话未读数量列表
-      unreadCountList: [],
-
-      // 聊天信息
-      chatMsgList: [],
     }
   },
 
@@ -106,22 +100,17 @@ export default {
       let pushType = msg.data.pushType;
       let message = msg.data.message;
 
-      // 1.发送信息
+      // 1.发送聊天信息
       if (pushType === 1) {
 
       }
 
-      // 2.好友申请
+      // 2.好友/群申请
       if (pushType === 2) {
 
       }
 
-      // 3.系统通知
-      if (pushType === 3) {
-
-      }
-
-      this.chatMsgEvent = JSON.parse(evt.data);
+      this.chatMsgEvent = JSON.parse(msg.data);
     },
 
     /**

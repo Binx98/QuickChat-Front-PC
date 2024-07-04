@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 .div-cls {
-  height: 92vh;
+  height: 91vh;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   background-color: $window-item-color;

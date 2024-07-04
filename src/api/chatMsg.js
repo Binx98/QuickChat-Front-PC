@@ -2,20 +2,23 @@ import axios from '@/axios/axios'
 
 export default {
     /**
-     * 查询聊天记录列表
+     * 根据 relation_id 集合查询聊天记录列表
      */
-    getChatMsgList(data) {
+    getChatMsgList(relationIds, size) {
         return axios({
-            url: `/msg/list`,
+            url: `/msg/getByRelationIds`,
             method: 'post',
-            data: data
+            data: relationIds,
+            params: {
+                size: size
+            }
         })
     },
 
     /**
      * 根据 relation_id 查询聊天记录
      */
-    getChatMsgByRelationId(relationId, current, size) {
+    getByRelationId(relationId, current, size) {
         return axios({
             url: `/msg/getByRelationId`,
             method: 'get',

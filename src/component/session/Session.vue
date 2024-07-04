@@ -6,7 +6,7 @@
           <!-- 头像 -->
           <div class="avatar-cls">
             <el-badge :value="item.unreadCount" :max="99">
-              <img class="avatar-img" :src="item.sessionAvatar"/>
+              <img class="avatar-img" :src="item.avatar"/>
             </el-badge>
           </div>
 
@@ -50,7 +50,7 @@ export default {
     this.getSessionList(true);
 
     /**
-     * 监听同级组件：未读数清 0
+     * 组件传值：会话未读数清 0
      */
     EventBus.$on('readCount0Event', sessionInfo => {
       this.updateReadTime(sessionInfo.sessionId)
@@ -70,7 +70,7 @@ export default {
     chatMsgEvent: {
       immediate: true,
       handler(msg) {
-        if (msg.relationId != '') {
+        if (msg.relationId !== '') {
           this.getSessionList(false);
           this.speakNotice('滴滴')
         }
@@ -80,7 +80,7 @@ export default {
 
   methods: {
     /**
-     * 选择会话：同级组件传参
+     * 点击选中会话
      */
     chooseSession(item) {
       EventBus.$emit('sessionInfo', item)
@@ -91,7 +91,7 @@ export default {
     },
 
     /**
-     * 查询会话列表：同级组件传参
+     * 查询会话列表
      */
     getSessionList(isFirst) {
       sessionApi.getSessionList().then(res => {
