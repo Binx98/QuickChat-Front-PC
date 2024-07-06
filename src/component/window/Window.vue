@@ -219,25 +219,10 @@ export default {
 
   props: [
     'loginUser',
-    'chatMsgEvent'
   ],
 
   components: {
     EmojiPicker
-  },
-
-  created() {
-    // 组件传值：点击会话
-    EventBus.$on('sessionInfo', sessionInfo => {
-      this.curSession = sessionInfo;
-      this.scrollBottom('window-id')
-    });
-
-    // 组件传值：查询会话列表
-    EventBus.$on('sessionList', sessionList => {
-      this.sessionList = sessionList;
-      this.getChatMsgList()
-    });
   },
 
   data() {
@@ -291,18 +276,25 @@ export default {
     }
   },
 
-  watch: {
-    /**
-     * 监听父级组件：用户发送消息
-     */
-    chatMsgEvent: {
-      immediate: true,
-      handler(msg) {
-        if (msg.relationId) {
-          this.getByRelationId(msg.relationId)
-        }
+  created() {
+    // 组件传值：发送聊天信息
+    EventBus.$on('chatMsgEvent', msg => {
+      if (msg.relationId) {
+        this.getByRelationId(msg.relationId)
       }
-    },
+    });
+
+    // 组件传值：点击会话
+    EventBus.$on('sessionInfo', sessionInfo => {
+      this.curSession = sessionInfo;
+      this.scrollBottom('window-id')
+    });
+
+    // 组件传值：查询会话列表
+    EventBus.$on('sessionList', sessionList => {
+      this.sessionList = sessionList;
+      this.getChatMsgList()
+    });
   },
 
   methods: {

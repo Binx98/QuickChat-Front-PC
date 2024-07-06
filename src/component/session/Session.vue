@@ -33,10 +33,6 @@ import sessionApi from "@/api/session";
 export default {
   name: "Session",
 
-  props: [
-    'chatMsgEvent'
-  ],
-
   data() {
     return {
       sessionList: [],
@@ -50,6 +46,16 @@ export default {
     this.getSessionList(true);
 
     /**
+     * 组件传值：发送聊天信息
+     */
+    EventBus.$on('chatMsgEvent', msg => {
+      if (msg.relationId !== '') {
+        this.getSessionList(false);
+        this.speakNotice('滴滴')
+      }
+    });
+
+    /**
      * 组件传值：会话未读数清 0
      */
     EventBus.$on('readCount0Event', sessionInfo => {
@@ -61,21 +67,6 @@ export default {
         }
       }
     });
-  },
-
-  watch: {
-    /**
-     * 监听父级组件：用户发送消息
-     */
-    chatMsgEvent: {
-      immediate: true,
-      handler(msg) {
-        if (msg.relationId !== '') {
-          this.getSessionList(false);
-          this.speakNotice('滴滴')
-        }
-      }
-    },
   },
 
   methods: {

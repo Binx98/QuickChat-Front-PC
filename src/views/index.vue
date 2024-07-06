@@ -9,10 +9,10 @@
         <Header/>
 
         <!-- 会话列表 -->
-        <Session :chatMsgEvent="chatMsgEvent"/>
+        <Session/>
 
         <!-- 聊天窗口 -->
-        <Window :loginUser="loginUser" :chatMsgEvent="chatMsgEvent"/>
+        <Window :loginUser="loginUser"/>
       </el-row>
     </div>
   </div>
@@ -24,6 +24,7 @@ import Header from "@/component/header/Header";
 import Session from "@/component/session/Session";
 import Window from "@/component/window/Window";
 import userApi from '@/api/user'
+import EventBus from "@/component/event-bus";
 
 export default {
   components: {
@@ -95,22 +96,21 @@ export default {
     /**'
      * 根据推送消息类型，分别进行处理
      */
-    handleWsPushMsg(msg) {
+    handleWsPushMsg(wsMsg) {
       // 获取消息类型、消息体
-      let pushType = msg.data.pushType;
-      let message = msg.data.message;
+      let msg = JSON.parse(wsMsg.data);
+      let pushType = msg.pushType;
+      let message = msg.message;
 
       // 1.发送聊天信息
       if (pushType === 1) {
-
+        EventBus.$emit('chatMsgEvent', message);
       }
 
       // 2.好友/群申请
       if (pushType === 2) {
 
       }
-
-      this.chatMsgEvent = JSON.parse(msg.data);
     },
 
     /**
