@@ -48,7 +48,7 @@ export default {
     /**
      * 组件传值：发送聊天信息
      */
-    EventBus.$on('chatMsgEvent', msg => {
+    EventBus.$on('sendMsgEvent', msg => {
       if (msg.relationId !== '') {
         this.getSessionList(false);
         this.speakNotice('滴滴')
@@ -61,7 +61,7 @@ export default {
     EventBus.$on('readCount0Event', sessionInfo => {
       this.updateReadTime(sessionInfo.sessionId)
       for (let i = 0; i < this.sessionList.length; i++) {
-        if (this.sessionList[i].relationId == sessionInfo.relationId) {
+        if (this.sessionList[i].relationId === sessionInfo.relationId) {
           this.sessionList[i].unreadCount = null;
           break;
         }

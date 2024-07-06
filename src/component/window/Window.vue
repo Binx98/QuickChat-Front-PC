@@ -278,7 +278,7 @@ export default {
 
   created() {
     // 组件传值：发送聊天信息
-    EventBus.$on('chatMsgEvent', msg => {
+    EventBus.$on('sendMsgEvent', msg => {
       if (msg.relationId) {
         this.getByRelationId(msg.relationId)
       }
@@ -365,6 +365,7 @@ export default {
         if (res.data.code == 200) {
           this.voiceMsg.fromId = this.loginUser.accountId;
           this.voiceMsg.toId = this.curSession.toId;
+          this.voiceMsg.relationId = this.curSession.relationId;
           this.voiceMsg.nickName = this.loginUser.nickName;
           this.voiceMsg.content = res.data.data.url;
           this.voiceMsg.extraInfo = res.data.data.extraInfo;
@@ -454,7 +455,7 @@ export default {
       this.fileMsg.sessionType = this.curSession.type;
       this.fileMsg.content = res.data.url;
       chatMsgApi.sendMsg(this.fileMsg).then(res => {
-        this.getChatMsgByRelationId(this.curSession.relationId);
+        this.getByRelationId(this.curSession.relationId);
         EventBus.$emit('readCount0Event', this.curSession)
       }).catch(e => {
         this.$message.error(e.data.msg)

@@ -56,11 +56,6 @@ export default {
         phone: '',
       },
 
-      // 发送消息载体
-      chatMsgEvent: {
-        relationId: '',
-      },
-
       // 会话列表
       sessionList: [],
     }
@@ -104,7 +99,7 @@ export default {
 
       // 1.发送聊天信息
       if (pushType === 1) {
-        EventBus.$emit('chatMsgEvent', message);
+        EventBus.$emit('sendMsgEvent', message);
       }
 
       // 2.好友/群申请
