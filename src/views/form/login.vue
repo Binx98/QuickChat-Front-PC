@@ -70,8 +70,8 @@ export default {
      */
     login() {
       userApi.login(this.loginForm).then(res => {
+        localStorage.setItem("token", res.data.data.token)
         this.$message.success('登录成功')
-        localStorage.setItem("token", res.data.data)
         this.$router.push('/')
       }).catch(e => {
         this.$message.error(e.data.msg);

@@ -1,7 +1,7 @@
 <template>
   <span>
     <!--  选中会话  -->
-    <el-col :span="5" class="window-cls" v-if="this.curSession !== ''">
+    <el-col :span="5" class="window-cls" v-if="curSession !== ''">
       <!--  1.上边栏  -->
       <div class="head-bar">
         <el-avatar :src="curSession.avatar" shape="square" style="margin-right: 1%;cursor:pointer"/>
@@ -78,7 +78,7 @@
                v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 1)
                || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 1)">
             <span style="margin-right: 6px">
-              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+              <el-avatar :src=curSession.avatar shape="square" style="cursor:pointer"/>
             </span>
             <div>
               <div class="group-item-div-cls" v-if="curSession.type === 2">
@@ -94,7 +94,7 @@
                v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 2)
                || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 2)">
             <span style="margin-right: 6px">
-              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+              <el-avatar :src=curSession.avatar shape="square" style="cursor:pointer"/>
             </span>
             <div>
               <div class="group-item-div-cls" v-if="curSession.type === 2">
@@ -112,7 +112,7 @@
                v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 4)
                || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 4)">
             <span style="margin-right: 6px">
-              <el-avatar :src=curSession.sessionAvatar shape="square" style="cursor:pointer"/>
+              <el-avatar :src=curSession.avatar shape="square" style="cursor:pointer"/>
             </span>
             <div>
               <div class="group-item-div-cls" v-if="curSession.type === 2">
@@ -227,13 +227,13 @@ export default {
   },
 
   created() {
-    // 点击会话
+    // 组件传值：点击会话
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
       this.scrollBottom('window-id')
     });
 
-    // 查询会话列表
+    // 组件传值：查询会话列表
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
       this.getChatMsgList()

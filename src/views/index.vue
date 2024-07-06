@@ -118,7 +118,7 @@ export default {
      */
     getByToken() {
       let token = localStorage.getItem("token");
-      if (token === '' || token === null) {
+      if (!token) {
         this.$router.push('/login')
       }
       userApi.getByToken().then(res => {

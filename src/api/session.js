@@ -6,7 +6,7 @@ export default {
      */
     getSessionList() {
         return axios({
-            url: `/chat/session/list`,
+            url: `/session/list`,
             method: 'get'
         })
     },
@@ -16,7 +16,7 @@ export default {
      */
     updateReadTime(sessionId) {
         return axios({
-            url: `/chat/session/updateReadTime`,
+            url: `/session/updateReadTime`,
             method: 'post',
             params: {
                 sessionId: sessionId
