@@ -195,19 +195,12 @@
         <!-- 聊天记录 -->
         <span class="iconfont el-icon-time" style="cursor: pointer;font-size: 27px;"></span>
         <!-- 发送按钮 -->
-        <span id="send-button-id" class="iconfont el-icon-s-promotion" @click="sendMsg()"
-              v-if="!checkMsgIsNull()"></span>
+        <span :id="checkMsgIsNull() ? 'send-button-id1' : 'send-button-id2'"
+              class="iconfont el-icon-s-promotion"
+              @click="sendMsg()"
+              :style="!checkMsgIsNull()"></span>
       </div>
     </el-col>
-
-    <!----------------------------------------------------右键菜单---------------------------------------------------->
-    <div id="menu">
-        <ul>
-            <li><a href="#">分享</a></li>
-            <li><a href="#">收藏</a></li>
-            <li><a href="#">举报</a></li>
-        </ul>
-    </div>
 
     <!----------------------------------------------------未选中会话---------------------------------------------------->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
@@ -582,24 +575,6 @@ export default {
   }
 }
 
-window.onload = function () {
-  var menu = document.getElementById('menu');
-  document.body.oncontextmenu = function (e) { // 自定义body元素的鼠标事件处理函数
-    var e = e || window.event;
-    e.preventDefault();  // 阻止系统右键菜单 IE8-不支持
-    // 显示自定义的菜单调整位置
-    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;// 获取垂直滚动条位置
-    let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;// 获取水平滚动条位置
-    menu.style.display = 'block';
-    menu.style.left = e.clientX + scrollLeft + 'px';
-    menu.style.top = e.clientY + scrollTop + 'px';
-  }
-  // 鼠标点击其他位置时隐藏菜单
-  document.onclick = function () {
-    menu.style.display = 'none';
-  }
-}
-
 </script>
 
 <style lang="scss" scoped>
@@ -792,7 +767,6 @@ audio::-webkit-media-controls-volume-control-container {
 .session-name-cls {
   cursor: pointer;
   color: $session-nick-color;
-  font-family: "Arial Rounded MT Bold";
 }
 
 // ---------------------Emoji---------------------
@@ -852,29 +826,15 @@ audio::-webkit-media-controls-volume-control-container {
 }
 
 // ----------------按钮----------------
-#send-button-id {
-  cursor: pointer;
+#send-button-id1 {
   font-size: 27px;
-  background-color: $logo-color
+  background-color: gray;
+  cursor: no-drop;
 }
 
-ul li {
-  list-style-type: none;
-  margin: 10px 0;
-  text-align: center;
-}
-
-#menu {
-  border: 1px solid #ccc;
-  background: #eee;
-  position: absolute; // 设置菜单为绝对位置
-  width: 100px;
-  height: 120px;
-  display: none;
-}
-
-* {
-  margin: 0;
-  padding: 0;
+#send-button-id2 {
+  font-size: 27px;
+  background-color: $logo-color;
+  cursor: pointer;
 }
 </style>
