@@ -14,14 +14,14 @@
         <div class="div-item-cls">
           <span class="iconfont el-icon-user"/>
         </div>
-        <!-- 收藏夹 -->
-        <div class="div-item-cls">
-          <span class="iconfont el-icon-star-off"/>
-        </div>
-        <!-- 设置 -->
-        <div class="div-item-cls">
-          <span class="iconfont el-icon-setting"/>
-        </div>
+<!--        &lt;!&ndash; 收藏夹 &ndash;&gt;-->
+<!--        <div class="div-item-cls">-->
+<!--          <span class="iconfont el-icon-star-off"/>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; 设置 &ndash;&gt;-->
+<!--        <div class="div-item-cls">-->
+<!--          <span class="iconfont el-icon-setting"/>-->
+<!--        </div>-->
       </div>
     </el-col>
   </div>

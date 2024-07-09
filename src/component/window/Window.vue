@@ -140,14 +140,17 @@
 
       <!-- 3.输入部分 -->
       <div class="input-cls">
-        <!-- 语音 -->
-        <span class="iconfont el-icon-microphone" style="font-size: 27px;cursor:pointer;"
-              @mousedown="holdDown()" @mouseup="holdUp()"></span>
         <!-- 输入框 -->
-        <input @keyup.enter="sendMsg()" id="chat-input" placeholder="请文明交流......"
+        <input id="chat-input" @keyup.enter="sendMsg()"
+               placeholder="按下 Enter 快捷发送消息"
                v-model="chatMsg.content"/>
+        <!-- 语音 -->
+        <span class="iconfont el-icon-microphone"
+              style="font-size: 27px;cursor:pointer;"
+              @mousedown="holdDown()" @mouseup="holdUp()"></span>
         <!-- Emoji -->
-        <emoji-picker style="display: inline-block">
+        <span style="font-size: 27px;cursor:pointer;">
+          <emoji-picker style="display: inline">
           <!-- 按钮 -->
           <button
               class="emoji-invoker"
@@ -157,8 +160,7 @@
           >
             <span class="iconfont icon-smile" style="font-size: 27px;"></span>
           </button>
-
-          <!-- 表情框 -->
+            <!-- 表情框 -->
           <div slot="emoji-picker" slot-scope="{ emojis, insert, display }">
             <div class="emoji-picker" :style="{ top: display.y + 'px', left: display.x + 'px' }">
               <div v-for="(emojiGroup, category) in emojis" :key="category">
@@ -174,6 +176,7 @@
             </div>
           </div>
         </emoji-picker>
+        </span>
         <!-- 图片 -->
         <span class="iconfont el-icon-picture-outline"
               style="cursor: pointer;font-size: 27px;"></span>
@@ -196,6 +199,15 @@
               v-if="!checkMsgIsNull()"></span>
       </div>
     </el-col>
+
+    <!----------------------------------------------------右键菜单---------------------------------------------------->
+    <div id="menu">
+        <ul>
+            <li><a href="#">分享</a></li>
+            <li><a href="#">收藏</a></li>
+            <li><a href="#">举报</a></li>
+        </ul>
+    </div>
 
     <!----------------------------------------------------未选中会话---------------------------------------------------->
     <el-col class="window-cls" v-if="this.curSession === ''"></el-col>
@@ -568,8 +580,26 @@ export default {
       this.chatMsg.content += emoji
     },
   }
-  ,
 }
+
+window.onload = function () {
+  var menu = document.getElementById('menu');
+  document.body.oncontextmenu = function (e) { // 自定义body元素的鼠标事件处理函数
+    var e = e || window.event;
+    e.preventDefault();  // 阻止系统右键菜单 IE8-不支持
+    // 显示自定义的菜单调整位置
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;// 获取垂直滚动条位置
+    let scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;// 获取水平滚动条位置
+    menu.style.display = 'block';
+    menu.style.left = e.clientX + scrollLeft + 'px';
+    menu.style.top = e.clientY + scrollTop + 'px';
+  }
+  // 鼠标点击其他位置时隐藏菜单
+  document.onclick = function () {
+    menu.style.display = 'none';
+  }
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -610,9 +640,10 @@ audio::-webkit-media-controls-volume-control-container {
 
 // ---------------------消息输入框---------------------
 #chat-input {
-  padding-left: 8px;
-  padding-right: 8px;
-  width: 68%;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 1%;
+  width: 66%;
   border-radius: 10px;
   font-size: 14px;
   word-break: break-all;
@@ -753,7 +784,8 @@ audio::-webkit-media-controls-volume-control-container {
   height: 8%;
   width: 52vw;
   border: solid $window-bottom-color;
-  border-width: 2px 0 0 0;
+  border-width: 1px 0 0 0;
+  overflow: hidden;
 }
 
 // ---------------------会话名称---------------------
@@ -824,5 +856,25 @@ audio::-webkit-media-controls-volume-control-container {
   cursor: pointer;
   font-size: 27px;
   background-color: $logo-color
+}
+
+ul li {
+  list-style-type: none;
+  margin: 10px 0;
+  text-align: center;
+}
+
+#menu {
+  border: 1px solid #ccc;
+  background: #eee;
+  position: absolute; // 设置菜单为绝对位置
+  width: 100px;
+  height: 120px;
+  display: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 </style>

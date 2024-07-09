@@ -6,19 +6,14 @@
   </div>
 </template>
 
-<script>
-// 禁用浏览器页面默认右键菜单栏
-function banMenu() {
-  return false;
-}
-
-document.oncontextmenu = banMenu;
-</script>
-
 <style>
 /* 清除浏览器默认间距 */
 * {
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: inherit;
 }
 </style>
