@@ -88,7 +88,7 @@ export default {
       };
     },
 
-    /**'
+    /**
      * 根据推送消息类型，分别进行处理
      */
     handleWsPushMsg(wsMsg) {

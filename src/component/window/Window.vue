@@ -192,8 +192,6 @@
             <span class="iconfont el-icon-folder" style="cursor: pointer;font-size: 27px;"></span>
           </el-upload>
         </span>
-        <!-- 聊天记录 -->
-        <span class="iconfont el-icon-time" style="cursor: pointer;font-size: 27px;"></span>
         <!-- 发送按钮 -->
         <span :id="checkMsgIsNull() ? 'send-button-id1' : 'send-button-id2'"
               class="iconfont el-icon-s-promotion"
@@ -340,7 +338,7 @@ export default {
             this.recorder.start(); // 开始录音
             this.drawRecord();
           },
-          (error) => {
+          error => {
             this.$message({
               message: "请先允许该网页使用麦克风",
               type: "info",
@@ -756,11 +754,10 @@ audio::-webkit-media-controls-volume-control-container {
 // ---------------------输入框---------------------
 .input-cls {
   margin-top: 1%;
-  height: 8%;
   width: 52vw;
   border: solid $window-bottom-color;
   border-width: 1px 0 0 0;
-  overflow: hidden;
+  white-space: nowrap;
 }
 
 // ---------------------会话名称---------------------
@@ -821,14 +818,14 @@ audio::-webkit-media-controls-volume-control-container {
 }
 
 .emoji-picker .emojis span:hover {
-  background: #ececec;
+  background: rgba(236, 236, 236, 0.99);
   cursor: pointer;
 }
 
 // ----------------按钮----------------
 #send-button-id1 {
   font-size: 27px;
-  background-color: gray;
+  background-color: rgba(128, 128, 128, 0.98);
   cursor: no-drop;
 }
 
