@@ -2,17 +2,14 @@
   <div class="main-container">
     <div class="window-container">
       <el-row shape="square" :gutter="4" style="height: 100%">
-        <!-- 侧边导航栏 -->
-        <LeftMenu :loginUser="loginUser"/>
-
+        <!-- 侧边导航 -->
+        <LeftMenu/>
         <!-- 导航栏 -->
         <Header/>
-
         <!-- 会话列表 -->
         <Session/>
-
         <!-- 聊天窗口 -->
-        <Window :loginUser="loginUser"/>
+        <Window/>
       </el-row>
     </div>
   </div>
@@ -119,6 +116,7 @@ export default {
       userApi.getByToken().then(res => {
         this.loginUser = res.data.data;
         this.initWebSocket();
+        EventBus.$emit('loginUser', this.loginUser)
       }).catch(e => {
         if (e.data.code === 510) {
           localStorage.removeItem("token");

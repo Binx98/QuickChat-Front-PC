@@ -9,13 +9,11 @@
               <img class="avatar-img" :src="item.avatar"/>
             </el-badge>
           </div>
-
           <!-- 昵称、时间 -->
           <div class="session-item-cls">
             <span class="session-name-cls">{{ item.sessionName }}</span>
             <span class="session-time-cls">2024-02-02</span>
           </div>
-
           <!-- 聊天内容 -->
           <div class="session-item-cls">
             <span class="session-msg-cls">哈哈</span>

@@ -4,7 +4,7 @@
       <div class="div-cls">
         <!-- 头像 -->
         <div class="div-item-cls" style="padding-top: 2vh;">
-          <el-avatar :src=this.loginUser.avatar class="avatar-cls" :size="48" shape="square"/>
+          <el-avatar :src=loginUser.avatar class="avatar-cls" :size="48" shape="square"/>
         </div>
         <!-- 会话 -->
         <div class="div-item-cls">
@@ -14,29 +14,38 @@
         <div class="div-item-cls">
           <span class="iconfont el-icon-user"/>
         </div>
-<!--        &lt;!&ndash; 收藏夹 &ndash;&gt;-->
-<!--        <div class="div-item-cls">-->
-<!--          <span class="iconfont el-icon-star-off"/>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; 设置 &ndash;&gt;-->
-<!--        <div class="div-item-cls">-->
-<!--          <span class="iconfont el-icon-setting"/>-->
-<!--        </div>-->
+        <!--        &lt;!&ndash; 收藏夹 &ndash;&gt;-->
+        <!--        <div class="div-item-cls">-->
+        <!--          <span class="iconfont el-icon-star-off"/>-->
+        <!--        </div>-->
+        <!--        &lt;!&ndash; 设置 &ndash;&gt;-->
+        <!--        <div class="div-item-cls">-->
+        <!--          <span class="iconfont el-icon-setting"/>-->
+        <!--        </div>-->
       </div>
     </el-col>
   </div>
 </template>
 
 <script>
+import EventBus from "@/component/event-bus";
+
 export default {
   name: "LeftMenu",
-  props: ['loginUser'],
 
   data() {
-    return {}
+    return {
+      loginUser: '',
+    }
   },
 
   created() {
+    /**
+     * 组件传值：登录用户信息
+     */
+    EventBus.$on('loginUser', loginUser => {
+      this.loginUser = loginUser;
+    });
   },
 
   methods: {}

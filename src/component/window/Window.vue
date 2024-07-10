@@ -220,16 +220,13 @@ import EmojiPicker from "vue-emoji-picker";
 export default {
   name: "Window",
 
-  props: [
-    'loginUser',
-  ],
-
   components: {
     EmojiPicker
   },
 
   data() {
     return {
+      loginUser: '',
       canvasFlag: false,
       drawRecordId: null,
       recorder: new Recorder({
@@ -280,6 +277,11 @@ export default {
   },
 
   created() {
+    // 组件传值：登录用户信息
+    EventBus.$on('loginUser', loginUser => {
+      this.loginUser = loginUser;
+    });
+
     // 组件传值：发送聊天信息
     EventBus.$on('sendMsgEvent', msg => {
       if (msg.relationId) {
