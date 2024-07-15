@@ -24,7 +24,7 @@
           <div class="send-item"
                v-if="(curSession.type === 1 && item.accountId === curSession.fromId && item.msgType === 1)
                || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 1)">
-            <div class="send-div-font" @contextmenu.prevent="onContextmenu">
+            <div class="send-div-font" @contextmenu.prevent="fontMenu">
                 {{ item.content }}
             </div>
             <span style="margin-left: 6px">
@@ -35,7 +35,7 @@
           <div class="send-item"
                v-if="(curSession.type === 1 && item.accountId === curSession.fromId && item.msgType === 2)
                || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 2)">
-            <audio preload controls controlsList="nodownload noplaybackrate">
+            <audio preload controls controlsList="nodownload noplaybackrate" @contextmenu.prevent="audioMenu">
               <source :src=item.content type="audio/wav">
             </audio>
             <span style="margin-left: 6px">
@@ -574,52 +574,39 @@ export default {
     },
 
     /**
-     * 文字消息右键目录
+     * 右键目录：文字消息
      */
-    onContextmenu(event) {
+    fontMenu(event) {
       this.$contextmenu({
         items: [
-          {
-            label: "返回(B)",
-            onClick: () => {
-              this.message = "返回(B)";
-              console.log("返回(B)");
-            }
-          },
-          {label: "前进(F)", disabled: true},
-          {label: "重新加载(R)", divided: true, icon: "el-icon-refresh"},
-          {label: "另存为(A)..."},
-          {label: "打印(P)...", icon: "el-icon-printer"},
-          {label: "投射(C)...", divided: true},
-          {
-            label: "使用网页翻译(T)",
-            divided: true,
-            minWidth: 0,
-            children: [{label: "翻译成简体中文"}, {label: "翻译成繁体中文"}]
-          },
-          {
-            label: "截取网页(R)",
-            minWidth: 0,
-            children: [
-              {
-                label: "截取可视化区域",
-                onClick: () => {
-                  this.message = "截取可视化区域";
-                  console.log("截取可视化区域");
-                }
-              },
-              {label: "截取全屏"}
-            ]
-          },
-          {label: "查看网页源代码(V)", icon: "el-icon-view"},
-          {label: "检查(N)"}
+          {label: "复制", icon: "el-icon-printer"},
+          {label: "回复", icon: "el-icon-refresh"},
+          {label: "撤回", icon: "el-icon-printer"},
+          {label: "转发", icon: "el-icon-printer"},
+          {label: "翻译", icon: "el-icon-printer"},
         ],
         event,
-        //x: event.clientX,
-        //y: event.clientY,
         customClass: "custom-class",
         zIndex: 3,
-        minWidth: 230
+        minWidth: 150
+      });
+      return false;
+    },
+
+    /**
+     * 右键目录：语音消息
+     */
+    audioMenu(event) {
+      this.$contextmenu({
+        items: [
+          {label: "回复", icon: "el-icon-refresh"},
+          {label: "撤回", icon: "el-icon-printer"},
+          {label: "转文字", icon: "el-icon-printer"},
+        ],
+        event,
+        customClass: "custom-class",
+        zIndex: 3,
+        minWidth: 150
       });
       return false;
     }
@@ -888,43 +875,8 @@ audio::-webkit-media-controls-volume-control-container {
   cursor: pointer;
 }
 
-/* custom */
-.custom-class .menu_item__available:hover,
-.custom-class .menu_item_expand {
-  background: #ffecf2 !important;
-  color: #ff4050 !important;
-}
-
-/* antd */
-.antd-theme.menu {
-  border-radius: 2px !important;
-}
-
-.antd-theme .menu_item {
-  color: #000000d9 !important;
-}
-
-.antd-theme .menu_item__available:hover {
-  background: #f5f5f5 !important;
-}
-
-.antd-theme .menu_item_expand {
-  font-weight: 600 !important;
-  background-color: #e6f7ff !important;
-}
-
-/* material */
-.material-theme.menu {
-  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-  0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
-}
-
-.material-theme .menu_item {
-  color: #000000de !important;
-}
-
-.material-theme .menu_item__available:hover,
-.material-theme .menu_item_expand {
-  background: rgba(0, 0, 0, 0.04) !important;
+// ----------------右键菜单----------------
+.menu {
+  background-color: #b1c6d0;
 }
 </style>
