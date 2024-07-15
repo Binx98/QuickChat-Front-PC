@@ -6,6 +6,13 @@
   </div>
 </template>
 
+<script>
+/* 禁用浏览器默认右键菜单目录 */
+document.oncontextmenu = function (event) {
+  event.preventDefault();
+};
+</script>
+
 <style>
 /* 清除浏览器默认间距 */
 * {
