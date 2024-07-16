@@ -104,9 +104,48 @@ export default {
      * 来消息语音提示
      */
     speakNotice(msg) {
-      var utterThis = new window.SpeechSynthesisUtterance(msg);
+      const utterThis = new window.SpeechSynthesisUtterance(msg);
       window.speechSynthesis.speak(utterThis);
-    }
+    },
+
+    /**
+     * 右键目录：用户会话菜单
+     */
+    userSessionMenu(event) {
+      this.$contextmenu({
+        items: [
+          {label: "置顶", icon: "el-icon-printer"},
+          {label: "标记未读", icon: "el-icon-printer"},
+          {label: "设置备注", icon: "el-icon-refresh"},
+          {label: "消息免打扰", icon: "el-icon-printer"},
+          {label: "删除会话", icon: "el-icon-printer"},
+        ],
+        event,
+        customClass: "custom-class",
+        zIndex: 3,
+        minWidth: 150
+      });
+      return false;
+    },
+
+    /**
+     * 右键目录：群聊会话菜单
+     */
+    groupSessionMenu(event) {
+      this.$contextmenu({
+        items: [
+          {label: "置顶", icon: "el-icon-printer"},
+          {label: "标记未读", icon: "el-icon-printer"},
+          {label: "消息免打扰", icon: "el-icon-printer"},
+          {label: "删除会话", icon: "el-icon-printer"},
+        ],
+        event,
+        customClass: "custom-class",
+        zIndex: 3,
+        minWidth: 150
+      });
+      return false;
+    },
   }
 }
 </script>

@@ -580,10 +580,10 @@ export default {
       this.$contextmenu({
         items: [
           {label: "复制", icon: "el-icon-printer"},
+          {label: "翻译", icon: "el-icon-printer"},
           {label: "回复", icon: "el-icon-refresh"},
           {label: "撤回", icon: "el-icon-printer"},
           {label: "转发", icon: "el-icon-printer"},
-          {label: "翻译", icon: "el-icon-printer"},
         ],
         event,
         customClass: "custom-class",
@@ -609,7 +609,7 @@ export default {
         minWidth: 150
       });
       return false;
-    }
+    },
   }
 }
 
