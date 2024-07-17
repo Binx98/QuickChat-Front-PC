@@ -67,7 +67,7 @@ export default {
      * WebSocket客户端初始化
      */
     initWebSocket() {
-      let ws = new WebSocket('ws://localhost:10086');
+      let ws = new WebSocket(process.env.WS_SERVER_API);
 
       // 建立连接
       ws.onopen = evt => {
