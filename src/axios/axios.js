@@ -5,7 +5,7 @@ import axios from 'axios'
  * Axios配置
  */
 const service = axios.create({
-    baseURL: process.env.VUE_APP_BASE_API
+    baseURL: process.env.BACKEND_SERVER_API
     // timeout: 5000
 })
 

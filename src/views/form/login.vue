@@ -54,7 +54,7 @@ export default {
      * 生成验证码
      */
     captcha() {
-      this.captchaUrl = process.env.VUE_APP_BASE_API + '/user/captcha' + '?' + Math.random()
+      this.captchaUrl = process.env.BACKEND_SERVER_API + '/user/captcha' + '?' + Math.random()
     },
 
     /**

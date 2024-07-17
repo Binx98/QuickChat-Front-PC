@@ -14,7 +14,7 @@
         <div v-for="item in chatMsgList[curSession.relationId]">
           <!------------------------------------------主动发送------------------------------------------>
           <!--  撤回  -->
-          <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
+          <div class="recall-cls"
                v-if="(curSession.type === 1 && item.accountId === curSession.fromId && item.msgType === 0)
                || (curSession.type === 2 && item.accountId === curSession.fromId && item.msgType === 0)">
             <span style="color: rgba(231, 231, 231, 0.85)">你撤回了一条消息&nbsp;</span>
@@ -68,7 +68,7 @@
 
           <!------------------------------------------被动接收------------------------------------------>
           <!--  撤回  -->
-          <div style="width: 63%;display: flex;justify-content: flex-end;padding-top: 16px;font-size: 14px"
+          <div class="recall-cls"
                v-if="(curSession.type === 1 && item.accountId === curSession.toId && item.msgType === 0)
                || (curSession.type === 2 && item.accountId !== curSession.fromId && item.msgType === 0)">
             <span style="color: rgba(231, 231, 231, 0.85)">{{ item.nickName }}撤回了一条消息</span>
@@ -272,7 +272,7 @@ export default {
       voiceInterval: null,
       chatMsgList: [],
       sessionList: [],
-      uploadFileUrl: process.env.VUE_APP_BASE_API + '/file/upload?type=3'
+      uploadFileUrl: process.env.BACKEND_SERVER_API + '/file/upload?type=3'
     }
   },
 
@@ -541,7 +541,7 @@ export default {
      * 下载文件
      */
     downloadFile(url) {
-      window.location.href = process.env.VUE_APP_BASE_API + '/file/download/' + 3 + '?url=' + url;
+      window.location.href = process.env.BACKEND_SERVER_API + '/file/download/' + 3 + '?url=' + url;
     },
 
     /**
@@ -779,6 +779,14 @@ audio::-webkit-media-controls-volume-control-container {
   border-radius: 10px;
   background-color: #f0fff3;
   cursor: pointer;
+}
+
+.recall-cls {
+  width: 63%;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+  font-size: 14px;
 }
 
 // ---------------------分割线---------------------
