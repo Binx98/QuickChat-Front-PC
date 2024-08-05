@@ -2,7 +2,8 @@
   <div>
     <el-col style="width: 17.2vw;">
       <div class="div-cls">
-        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)">
+        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)"
+             @contextmenu.prevent="sessionMenu(item)">
           <!-- 头像 -->
           <div class="avatar-cls">
             <el-badge :value="item.unreadCount" :max="99">
@@ -109,7 +110,19 @@ export default {
     },
 
     /**
-     * 右键目录：用户会话菜单
+     * 右键目录：会话菜单
+     */
+    sessionMenu(item) {
+      if (item.type === 1) {
+        this.userSessionMenu();
+      }
+      if (item.type === 2) {
+        this.groupSessionMenu();
+      }
+    },
+
+    /**
+     * 单聊会话菜单那
      */
     userSessionMenu(event) {
       this.$contextmenu({
@@ -128,7 +141,7 @@ export default {
     },
 
     /**
-     * 右键目录：群聊会话菜单
+     * 群聊会话菜单那
      */
     groupSessionMenu(event) {
       this.$contextmenu({
