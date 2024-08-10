@@ -272,7 +272,7 @@ export default {
       voiceInterval: null,
       chatMsgList: [],
       sessionList: [],
-      uploadFileUrl: process.env.BACKEND_SERVER_API + '/file/upload?type=3'
+      uploadFileUrl: process.env.VUE_APP_BACKEND_API + '/file/upload?type=3'
     }
   },
 
@@ -541,7 +541,7 @@ export default {
      * 下载文件
      */
     downloadFile(url) {
-      window.location.href = process.env.BACKEND_SERVER_API + '/file/download/' + 3 + '?url=' + url;
+      window.location.href = process.env.VUE_APP_BACKEND_API + '/file/download/' + 3 + '?url=' + url;
     },
 
     /**
