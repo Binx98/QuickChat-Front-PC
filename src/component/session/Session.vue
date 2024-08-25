@@ -2,8 +2,8 @@
   <div>
     <el-col style="width: 17.2vw;">
       <div class="div-cls">
-        <div class="session-cls" v-for="item in sessionList" @click="chooseSession(item)"
-             @contextmenu.prevent="sessionMenu(item)">
+        <div class="session-cls" v-for="item in sessionList"
+             @click="chooseSession(item)" @contextmenu.prevent="sessionMenu(item)">
           <!-- 头像 -->
           <div class="avatar-cls">
             <el-badge :value="item.unreadCount" :max="99">
@@ -130,7 +130,7 @@ export default {
           {label: "置顶", icon: "el-icon-printer"},
           {label: "标记未读", icon: "el-icon-printer"},
           {label: "消息免打扰", icon: "el-icon-printer"},
-          {label: "删除聊天", icon: "el-icon-printer"},
+          {label: "删除窗口", icon: "el-icon-printer"},
         ],
         event,
         customClass: "custom-class",
@@ -149,7 +149,9 @@ export default {
           {label: "置顶", icon: "el-icon-printer"},
           {label: "标记未读", icon: "el-icon-printer"},
           {label: "消息免打扰", icon: "el-icon-printer"},
-          {label: "删除聊天", icon: "el-icon-printer"},
+          {label: "消息免打扰", icon: "el-icon-printer"},
+          {label: "消息免打扰", icon: "el-icon-printer"},
+          {label: "删除窗口", icon: "el-icon-printer"},
         ],
         event,
         customClass: "custom-class",
