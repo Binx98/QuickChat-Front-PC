@@ -16,11 +16,8 @@ export default {
      */
     updateReadTime(sessionId) {
         return axios({
-            url: `/session/updateReadTime`,
+            url: `/session/updateReadTime/${sessionId}`,
             method: 'post',
-            params: {
-                sessionId: sessionId
-            }
         })
     }
 }

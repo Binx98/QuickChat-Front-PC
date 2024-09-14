@@ -20,13 +20,8 @@ export default {
      */
     getByRelationId(relationId, current, size) {
         return axios({
-            url: `/msg/getByRelationId`,
-            method: 'get',
-            params: {
-                relationId: relationId,
-                current: current,
-                size: size
-            }
+            url: `/msg/getByRelationId/${relationId}/${current}/${size}`,
+            method: 'get'
         })
     },
 
