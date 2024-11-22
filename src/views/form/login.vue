@@ -3,18 +3,14 @@
     <div class="form-container">
       <el-image class="img-cls" :src="require('@/assets/logo/logo.png')"/>
       <div style="margin-top: -12%" @keyup.enter="login()">
-        <!--  账号密码  -->
         <el-input class="input-cls" placeholder="请输入账号" v-model="loginForm.accountId"/>
         <el-input class="input-cls" placeholder="请输入密码" v-model="loginForm.passWord" show-password/>
-        <!--  验证码  -->
         <div style="display: flex; justify-content: center;">
           <el-input class="input-cls" style="margin-right: 1%;width: 13vw;"
                     placeholder="请输入验证码" v-model="loginForm.verifyCode"/>
           <img class="captcha-cls" :src="captchaUrl" @click="captcha()"/>
         </div>
-        <!--  登录按钮  -->
         <button class="btn-cls" @click="login()">登录</button>
-        <!--   注册账号、找回密码   -->
         <div style="font-size: 14px">
           <span class="form-font">没有账号？</span>
           <span class="go-register" @click="clickGoRegister()">去注册></span>
@@ -32,10 +28,7 @@ export default {
   name: "login",
   data() {
     return {
-      // 图片验证码
       captchaUrl: '',
-
-      // 登录表单
       loginForm: {
         accountId: '',
         passWord: '',
@@ -50,24 +43,13 @@ export default {
   },
 
   methods: {
-    /**
-     * 生成验证码
-     */
     captcha() {
       this.captchaUrl = process.env.VUE_APP_BACKEND_API + '/user/captcha' + '?' + Math.random()
     },
-
-    /**
-     * 点击：去注册
-     */
     clickGoRegister() {
       this.loginForm = '';
       this.$router.push('/register')
     },
-
-    /**
-     * 登录
-     */
     login() {
       userApi.login(this.loginForm).then(res => {
         localStorage.setItem("token", res.data.data.token)
