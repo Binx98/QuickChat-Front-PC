@@ -277,25 +277,18 @@ export default {
   },
 
   created() {
-    // 组件传值：登录用户信息
     EventBus.$on('loginUser', loginUser => {
       this.loginUser = loginUser;
     });
-
-    // 组件传值：发送聊天信息
     EventBus.$on('sendMsgEvent', msg => {
       if (msg.relationId) {
         this.getByRelationId(msg.relationId)
       }
     });
-
-    // 组件传值：点击会话
     EventBus.$on('sessionInfo', sessionInfo => {
       this.curSession = sessionInfo;
       this.scrollBottom('window-id')
     });
-
-    // 组件传值：查询会话列表
     EventBus.$on('sessionList', sessionList => {
       this.sessionList = sessionList;
       this.getChatMsgList()
@@ -303,9 +296,6 @@ export default {
   },
 
   methods: {
-    /**
-     * 鼠标按住：展示音频波浪，开始录音
-     */
     holdDown() {
       this.canvasFlag = true;
       this.startRecordAudio();
@@ -315,9 +305,6 @@ export default {
       }, 1000);
     },
 
-    /**
-     * 鼠标松开：关闭音频波浪，结束录音，上传录音文件
-     */
     holdUp() {
       this.canvasFlag = false;
       this.stopRecordAudio();
@@ -330,9 +317,6 @@ export default {
       }
     },
 
-    /**
-     * 开始录音
-     */
     startRecordAudio() {
       Recorder.getPermission().then(
           () => {
@@ -350,16 +334,10 @@ export default {
       );
     },
 
-    /**
-     * 停止录音
-     */
     stopRecordAudio() {
       this.recorder.stop();
     },
 
-    /**
-     * 上传wav录音文件
-     */
     uploadAudio() {
       let wavBlob = this.recorder.getWAVBlob();
       let formData = new FormData()
@@ -394,9 +372,6 @@ export default {
       });
     },
 
-    /**
-     * 绘制波浪图-录音
-     */
     drawRecord() {
       this.drawRecordId = requestAnimationFrame(this.drawRecord);
       this.drawWave({
@@ -418,38 +393,27 @@ export default {
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       const bufferLength = dataArray.length;
-      // 一个点占多少位置，共有bufferLength个点要绘制
       const sliceWidth = canvas.width / bufferLength;
-      // 绘制点的x轴位置
       let x = 0;
-      // 波形图样式
       ctx.fillStyle = bgcolor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.lineWidth = lineWidth;
       ctx.strokeStyle = lineColor;
       ctx.beginPath();
-
       for (let i = 0; i < bufferLength; i++) {
         const v = dataArray[i] / 128;
         const y = (v * canvas.height) / 2;
         if (i === 0) {
-          // 第一个点
           ctx.moveTo(x, y);
         } else {
-          // 剩余的点
           ctx.lineTo(x, y);
         }
-        // 依次平移，绘制所有点
         x += sliceWidth;
       }
-      // 最后一个点
       ctx.lineTo(canvas.width, canvas.height / 2);
       ctx.stroke();
     },
 
-    /**
-     * 成功回调：上传文件
-     */
     handleSuccess(res, file) {
       this.fileMsg.extraInfo.name = file.raw.name;
       this.fileMsg.extraInfo.size = file.raw.size;
@@ -467,17 +431,11 @@ export default {
       })
     },
 
-    /**
-     * 失败回调：上传文件
-     */
     handleError(err, file, fileList) {
       console.log('上传文件失败回调.....')
       this.$message.error(err)
     },
 
-    /**
-     * 查询会话列表聊天信息列表
-     */
     getChatMsgList() {
       let relationIds = [];
       for (let i = 0; i < this.sessionList.length; i++) {
@@ -490,9 +448,6 @@ export default {
       })
     },
 
-    /**
-     * 查询双方聊天记录
-     */
     getByRelationId(relationId) {
       let current = 0;
       let limit = 30;
@@ -502,15 +457,9 @@ export default {
       })
     },
 
-    /**
-     * 发送按钮（文字 + Emoji）
-     */
     sendMsg() {
-      // 不允许发送空白消息
       let msgIsNull = this.checkMsgIsNull();
       if (msgIsNull) return;
-
-      // 发送消息
       this.chatMsg.fromId = this.loginUser.accountId;
       this.chatMsg.toId = this.curSession.toId;
       this.chatMsg.relationId = this.curSession.relationId;
@@ -525,9 +474,6 @@ export default {
       })
     },
 
-    /**
-     * 校验输入框是否为空
-     */
     checkMsgIsNull() {
       let content = this.chatMsg.content;
       if (content.length === 0 || content.split(" ").join("").length === 0) {
@@ -537,26 +483,16 @@ export default {
       }
     },
 
-    /**
-     * 下载文件
-     */
     downloadFile(url) {
       window.location.href = process.env.VUE_APP_BACKEND_API + '/file/download/' + 3 + '?url=' + url;
     },
 
-    /**
-     * 上传文件消息头
-     */
     fileHeaders() {
       return {
         'token': localStorage.getItem('token')
       }
     },
 
-    /**
-     * 滑动到div最底部
-     * 注意：使用setTimeout延迟操作DOM，否则不是可能出现不是最底部情况
-     */
     scrollBottom(id) {
       setTimeout(() => {
         let divCls = document.getElementById(id);
@@ -566,16 +502,10 @@ export default {
       }, 0)
     },
 
-    /**
-     * 点击Emoji
-     */
     insertEmoji(emoji) {
       this.chatMsg.content += emoji
     },
 
-    /**
-     * 右键目录：文字消息
-     */
     fontMenu(event) {
       this.$contextmenu({
         items: [
@@ -593,9 +523,6 @@ export default {
       return false;
     },
 
-    /**
-     * 右键目录：语音消息
-     */
     audioMenu(event) {
       this.$contextmenu({
         items: [

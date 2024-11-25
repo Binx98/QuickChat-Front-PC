@@ -35,7 +35,6 @@ export default {
   name: "register",
   data() {
     return {
-      // 注册表单
       registerForm: {
         accountId: '',
         password1: '',
@@ -43,8 +42,6 @@ export default {
         toEmail: '',
         emailCode: '',
       },
-
-      // 发送验证码按钮
       sendButtonMsg: '发送验证',
       isGetting: false,
       count: 60,
@@ -53,17 +50,11 @@ export default {
   },
 
   methods: {
-    /**
-     * 点击：去登录
-     */
     clickGoLogin() {
       this.registerForm = '';
       this.$router.push('/login')
     },
 
-    /**
-     * 发送邮件
-     */
     sendEmail() {
       let email = this.registerForm.toEmail;
       if (email == null || email == '') {
@@ -82,9 +73,6 @@ export default {
       })
     },
 
-    /**
-     * 发送倒计时
-     */
     countDown() {
       let countDown = setInterval(() => {
         if (this.count < 1) {
@@ -101,9 +89,6 @@ export default {
       }, 1000);
     },
 
-    /**
-     * 注册账号
-     */
     register() {
       userApi.register(this.registerForm).then(res => {
         this.$message.success("注册成功")

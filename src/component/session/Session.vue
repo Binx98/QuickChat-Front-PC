@@ -4,18 +4,15 @@
       <div class="div-cls">
         <div class="session-cls" v-for="item in sessionList"
              @click="chooseSession(item)" @contextmenu.prevent="sessionMenu(item)">
-          <!-- 头像 -->
           <div class="avatar-cls">
             <el-badge :value="item.unreadCount" :max="99">
               <img class="avatar-img" :src="item.avatar"/>
             </el-badge>
           </div>
-          <!-- 昵称、时间 -->
           <div class="session-item-cls">
             <span class="session-name-cls">{{ item.sessionName }}</span>
             <span class="session-time-cls">2024-02-02</span>
           </div>
-          <!-- 聊天内容 -->
           <div class="session-item-cls">
             <span class="session-msg-cls">哈哈</span>
           </div>
@@ -39,24 +36,13 @@ export default {
   },
 
   created() {
-    /**
-     * 查询会话列表
-     */
     this.getSessionList(true);
-
-    /**
-     * 组件传值：发送聊天信息
-     */
     EventBus.$on('sendMsgEvent', msg => {
       if (msg.relationId !== '') {
         this.getSessionList(false);
         this.speakNotice('滴滴')
       }
     });
-
-    /**
-     * 组件传值：会话未读数清 0
-     */
     EventBus.$on('readCount0Event', sessionInfo => {
       this.updateReadTime(sessionInfo.sessionId)
       for (let i = 0; i < this.sessionList.length; i++) {
@@ -69,9 +55,6 @@ export default {
   },
 
   methods: {
-    /**
-     * 点击选中会话
-     */
     chooseSession(item) {
       EventBus.$emit('sessionInfo', item)
       if (item.unreadCount) {
@@ -80,9 +63,6 @@ export default {
       }
     },
 
-    /**
-     * 查询会话列表
-     */
     getSessionList(isFirst) {
       sessionApi.getSessionList().then(res => {
         this.sessionList = res.data.data;
@@ -94,24 +74,15 @@ export default {
       })
     },
 
-    /**
-     * 更新已读时间
-     */
     updateReadTime(sessionId) {
       sessionApi.updateReadTime(sessionId)
     },
 
-    /**
-     * 来消息语音提示
-     */
     speakNotice(msg) {
       const utterThis = new window.SpeechSynthesisUtterance(msg);
       window.speechSynthesis.speak(utterThis);
     },
 
-    /**
-     * 右键目录：会话菜单
-     */
     sessionMenu(item) {
       if (item.type === 1) {
         this.userSessionMenu();
@@ -121,9 +92,6 @@ export default {
       }
     },
 
-    /**
-     * 单聊会话菜单那
-     */
     userSessionMenu(event) {
       this.$contextmenu({
         items: [
@@ -140,9 +108,6 @@ export default {
       return false;
     },
 
-    /**
-     * 群聊会话菜单那
-     */
     groupSessionMenu(event) {
       this.$contextmenu({
         items: [

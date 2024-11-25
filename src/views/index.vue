@@ -43,8 +43,6 @@ export default {
         location: '',
         createTime: ''
       },
-
-      // 用户信息（当前会话）
       sessionUser: {
         avatar: '',
         nickName: '',
@@ -52,8 +50,6 @@ export default {
         email: '',
         phone: '',
       },
-
-      // 会话列表
       sessionList: [],
     }
   },
@@ -64,22 +60,16 @@ export default {
 
   methods: {
     /**
-     * WebSocket客户端初始化
+     * WebSocket连接初始化
      */
     initWebSocket() {
       let ws = new WebSocket(process.env.VUE_APP_WEBSOCKET_API);
-
-      // 建立连接
       ws.onopen = evt => {
         ws.send(this.loginUser.accountId);
       };
-
-      // 获取 Channel 消息，根据类型分别处理
       ws.onmessage = msg => {
         this.handleWsPushMsg(msg);
       };
-
-      // 关闭连接
       ws.onclose = evt => {
         console.log("Connection closed.");
       };
@@ -89,7 +79,6 @@ export default {
      * 根据推送消息类型，分别进行处理
      */
     handleWsPushMsg(wsMsg) {
-      // 获取消息类型、消息体
       let msg = JSON.parse(wsMsg.data);
       let pushType = msg.pushType;
       let message = msg.message;

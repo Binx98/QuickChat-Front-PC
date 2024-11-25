@@ -2,15 +2,12 @@
   <div>
     <el-col style="width: 5vw;">
       <div class="div-cls">
-        <!-- 头像 -->
         <div class="div-item-cls" style="padding-top: 2vh;">
           <el-avatar :src=loginUser.avatar class="avatar-cls" :size="48" shape="square"/>
         </div>
-        <!-- 会话 -->
         <div class="div-item-cls">
           <div class="iconfont el-icon-chat-dot-round"/>
         </div>
-        <!-- 通讯录 -->
         <div class="div-item-cls">
           <span class="iconfont el-icon-user"/>
         </div>
@@ -40,9 +37,6 @@ export default {
   },
 
   created() {
-    /**
-     * 组件传值：登录用户信息
-     */
     EventBus.$on('loginUser', loginUser => {
       this.loginUser = loginUser;
     });
